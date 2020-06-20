@@ -1,0 +1,16 @@
+<mat-card class="advert-card"  >
+  <mat-card-header>    
+    <mat-card-title>{{advert.title}}</mat-card-title>
+    <mat-card-subtitle>{{advert.postDate}}</mat-card-subtitle>
+  </mat-card-header>
+  <img  (click)="gotoItemPage(advert)" mat-card-image [src]="advert.imgmain">
+  <mat-card-content>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab color="primary" *ngIf='myAd' (click)="deleteAdvert(advert)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-button  *ngIf='!myAd' (click)="addToKart(advert)">Kupi</button>    
+  </mat-card-actions>
+</mat-card>

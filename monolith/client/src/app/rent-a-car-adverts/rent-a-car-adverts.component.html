@@ -1,0 +1,8 @@
+<div>
+  <app-search-adverts-bar></app-search-adverts-bar>
+  <div fxLayout="row" fxLayoutAlign="start center" class="adverts-panel">
+    <div *ngFor="let advert of advertList">
+      <app-advert-card [advert]='advert' [myAd] = 'false'></app-advert-card>
+    </div>
+  </div>
+</div>

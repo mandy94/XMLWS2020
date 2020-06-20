@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: Agenstska aplikacija - monolith
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /agency/credentials:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-credentials
+      description: ''
+    post:
+      summary: ''
+      operationId: post-agency-credentials
+      responses:
+        '200':
+          description: OK
+      description: |-
+        Upit za kredencijale koje korisnik unosi u login formu za agencije.
+        Vraca rezultat u zavisnosti da li postoji agencija sa tim korisnickim imenom i lozinkom.
+  '/agency/{name}':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name
+  '/agency/{name}/profile':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-profile
+  '/agency/{name}/ads':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-ads
+  '/agency/{name}/ad/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-ad-id
+  '/agency/{name}/pricelists':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-pricelist
+  '/agency/{name}/messages':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      operationId: get-agency-name-messages
+      description: Vraca sve poruke za poredjane u threadove.
+  '/agency/{name}/rating':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-rates
+      description: |
+        Vraca sve ocene korisnika.
+  '/agency/{name}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-comments
+      description: |
+        Vraca sve komentare
+  '/agency/{name}/ad/{id}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-ad-id-comments
+      description: Vraca komentare za dati oglas
+  '/agency/{name}/ad/{id}/ratings':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-ad-id-ratings
+      description: |
+        Vraca listu ocena za odlas pod ID-om.
+  '/agency/{name}/price-lists':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-price-lists
+  '/agency/{name}/discounts':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-agency-name-discounts
+components:
+  schemas: {}

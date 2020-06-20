@@ -1,0 +1,83 @@
+<h1>{{advert.title}}</h1>
+<div fxLayout="row" fxLayoutAlign="space-around  center">
+    <img [src]="advert.imgmain" height="500px">
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around  center">
+    <h2> Rezervisi {{advert.title}}</h2>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around  center">
+
+    <mat-form-field>
+        <mat-label>Datum preuzimanja</mat-label>
+        <input matInput [matDatepicker]="dp1" [formControl]="date1" (dateChange)="updateDate('rent', $event)">
+        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+        <mat-datepicker touchUi  #dp1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Vreme preuzimanja</mat-label>
+        <mat-select [(value)]="selectedRentingTime">
+            <mat-option *ngFor="let time of timeList" [value]="time.value">
+                {{time.value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Datum vracanja</mat-label>
+        <input matInput [matDatepicker]="dp" [formControl]="date"  (dateChange)="updateDate('return', $event)">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker touchUi  #dp></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Vreme vracanja</mat-label>
+        <mat-select  [(value)]="selectedReturnTime">
+            <mat-option *ngFor="let time of timeList" [value]="time.value">
+                {{time.value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <button mat-raised-button (click) = "submit()">Pronadji vozilo</button>
+
+</div>
+
+<div *ngIf="false">
+    <div class="container row">
+        <div class="col-md-12">
+            <h1>Upload Image</h1>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col-md-6">
+            <input type="file" (change)="onFileChanged($event)">
+        </div>
+        <div class="col-md-6">
+            <input type="button" (click)="onUpload()" value="upload">
+        </div>
+    </div>
+    <hr />
+    <div class="container row">
+        <div class="col-md-12">
+            <div *ngIf=message>{{message}}</div>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+                name="name" />
+        </div>
+        <div class="col-md-6">
+            <input type="button" (click)="getImage()" value="Get Image">
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col-md-12">
+            <div *ngIf=retrievedImage>
+
+                <img [src]="retrievedImage">
+            </div>
+        </div>
+    </div>
+</div>

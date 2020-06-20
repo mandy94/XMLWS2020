@@ -1,0 +1,44 @@
+
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf='codes'>
+<mat-list role="list">
+  <h2>Sifrarnik za goriva</h2>
+  <div *ngFor="let fuel of codes.fuels">
+    {{fuel.title}}
+  </div>
+  <mat-divider></mat-divider>
+  <input>
+  <button (click)='addFuelType()' aria-label="Example icon button with a plus one icon">+</button>
+  
+</mat-list>
+
+<mat-list role="list">
+  <h2>Sifrarnik za modele</h2>
+  <div *ngFor="let model of codes.models">
+    {{model.title}}
+  </div>
+  <mat-divider></mat-divider>
+  <input>
+  <button  aria-label="Example icon button with a plus one icon">+</button>
+</mat-list>
+
+<mat-list role="list">
+  <h2>Sifrarnik za proizvodjace</h2>
+  <div *ngFor="let manu of codes.manufacturers">
+    {{manu.title}}
+  </div>
+  <mat-divider></mat-divider>
+  <input>
+  <button  aria-label="Example icon button with a plus one icon">+</button>
+</mat-list>
+
+<mat-list role="list">
+  <h2>Sifrarnik za gradove</h2>
+  
+  <div *ngFor="let manu of codes.cities">
+    {{manu.title}}
+  </div>
+  <mat-divider></mat-divider>
+  <input>
+  <button  aria-label="Example icon button with a plus one icon">+</button>
+</mat-list>
+</div>

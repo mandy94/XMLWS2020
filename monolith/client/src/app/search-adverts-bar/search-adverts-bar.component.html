@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-title> Nadji oglas:</mat-card-title>
+  <mat-card-content>
+    <form  (ngSubmit)="(submitSearchForm())" class="search-form">
+     <mat-form-field>
+        <mat-label>Mesto oglasa:</mat-label>
+        <mat-select [formControl]="cityList" [(value)]="selected" multiple>         
+          <mat-option *ngFor="let city of cities" [value]="city">{{city.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  <button mat-button type="submit">Trazi</button>    
+      
+    
+    </form>
+    
+  </mat-card-content>
+</mat-card>

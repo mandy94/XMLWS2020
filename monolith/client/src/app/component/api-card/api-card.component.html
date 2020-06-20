@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><b>{{title}}</b></mat-card-title>
+    <mat-card-subtitle> <br> </mat-card-subtitle>
+  </mat-card-header>
+
+  <form #loginForm="ngForm">
+    <button (click)="onButtonClick()" mat-raised-button>
+      <img [src]="imgUrl" mat-card-image>
+      <br>
+
+    </button>
+  </form>
+
+
+</mat-card>
