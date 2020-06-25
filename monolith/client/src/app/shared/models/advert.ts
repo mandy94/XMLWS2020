@@ -7,7 +7,21 @@ export class Advert{
     id: number;
     title: string;
     description: string;
-    model: string;
-    fuel: string;
+    model: any;
+    fuel: any;
+    gear: any;
     user_id:0;
+    imgmain : string;
+    cdwprotection: boolean;
+    numberOfKidsSeat: number;
+    kidsSeat: boolean;
+    cclass:any;
+    milage:number;
+    priceList = new PriceList()
+
+
+}
+
+export class PriceList{
+
 }

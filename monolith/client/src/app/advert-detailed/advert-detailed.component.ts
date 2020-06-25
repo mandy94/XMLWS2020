@@ -54,6 +54,7 @@ export class AdvertDetailedComponent implements OnInit {
     ) { }
     private ngUnsubscribe: Subject<void> = new Subject<void>();
     selectedFile: File;  
+    selectedCity: string;
     retrievedImage: any;  
     base64Data: any;  
     retrieveResonse: any; 
@@ -61,16 +62,17 @@ export class AdvertDetailedComponent implements OnInit {
     imageName: any;
     advert: any;
     timeList: any; 
+    cityList: any;
 
   ngOnInit() {
     this.timeList = [ {value : "08:00"},{ value:"09:00"}, {value:"10:00"}];
-
+    this.apiService.get(this.conf.get_cities_url).subscribe((data)=> this.cityList = data);
     this.route.params
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((advert: any) => {
       this.advert = advert;
-      console.log(advert)
-    });
+      });
+
   }
  
 
@@ -124,10 +126,10 @@ selectedReturnTime:any;
 submit(){
   this.userService.getMyInfo().subscribe(()=>{
     this.newUserRequest.rentingTime = this.selectedRentingTime;
-    this.newUserRequest.returningDate = this.selectedReturnTime;
+    // this.newUserRequest.returningDate = this.selectedReturnDate;
     this.newUserRequest.advertid = this.advert.id;
     this.newUserRequest.user_id = this.userService.currentUser.id;
-    //  console.log(this.userService.currentUser)
+    
     console.log(this.newUserRequest);
 
     this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=>this.newUserRequest = null);}

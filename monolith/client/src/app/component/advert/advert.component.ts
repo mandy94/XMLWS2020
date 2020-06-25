@@ -11,38 +11,59 @@ import { Advert } from 'app/shared/models/advert';
 export class AdvertComponent implements OnInit {
 
   constructor(
-    private advertService:AdvertService,    
+    private advertService: AdvertService,
     private userService: UserService) { }
+    
   currentUser: any;
   usersAdverts: Advert[];
   new_advert: Advert;
-  
+  message:string;
+
   ngOnInit() {
     //Bitan redosled jer se u novi_oglas referencira id korisnika.
-    this.new_advert = new Advert();  
-    this.new_advert.user_id;      
-    this.showMyAdverts();    
+    this.new_advert = new Advert();
+    this.new_advert.user_id;
+    this.showMyAdverts();
     this.getMyInfo();
-    
+
   }
   //Metoda za vracanja celog objekta korisnika/agencije/admina i referenciranje svakog novog entiteta ka njemu*
-  getMyInfo(){
+  getMyInfo() {
     this.userService.getMyInfo()
-    .subscribe(data => {this.currentUser = data,
-                        this.new_advert.user_id = this.currentUser.id});
+      .subscribe(data => {
+        this.currentUser = data,
+        this.new_advert.user_id = this.currentUser.id
+      });
 
   }
   //Prikaz svih oglasa od ulogovanog usera
-  showMyAdverts(){
+  showMyAdverts() {
     this.advertService.getAdvertsFrom()
-    .subscribe( data => this.usersAdverts = data);   
-  } 
-  
+      .subscribe(data => {
+        this.usersAdverts = data;
+
+      });
+  }
+  isAddingDisabled() {
+
+    if (this.userService.amIUser()) {
+      if (this.usersAdverts.length >= 3) {
+       
+        return true;
+      }
+    }
+    return false;
+  }
   //Dodavanje novog oglasa  
-  submitAddForm(){    
-   this.advertService.postNewAdvert(this.new_advert).subscribe((data)=> {       
-      this.usersAdverts = data});
-      return true;
-  }    
- 
+  submitAddForm() {
+    if(this.isAddingDisabled())
+    {
+      this.message = "Objavili ste 3 oglasa. Nemate pravo na vise.";
+      
+    }
+    this.advertService.postNewAdvert(this.new_advert)
+      .subscribe(() => { this.showMyAdverts() });
+
+  }
+
 }

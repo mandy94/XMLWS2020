@@ -36,6 +36,7 @@ import { SearchAdvertsBarComponent } from './search-adverts-bar/search-adverts-b
 import { AdvertCardComponent } from './component/advert-card/advert-card.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
 import { KartComponent } from './kart/kart.component';
+import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { KartComponent } from './kart/kart.component';
     SearchAdvertsBarComponent,
     AdvertCardComponent,
     AdvertDetailedComponent,
-    KartComponent
+    KartComponent,
+    RequestsComponent
   
   ],
   imports: [

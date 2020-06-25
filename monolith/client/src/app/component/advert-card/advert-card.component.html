@@ -1,16 +1,23 @@
-<mat-card class="advert-card"  >
-  <mat-card-header>    
-    <mat-card-title>{{advert.title}}</mat-card-title>
-    <mat-card-subtitle>{{advert.postDate}}</mat-card-subtitle>
-  </mat-card-header>
-  <img  (click)="gotoItemPage(advert)" mat-card-image [src]="advert.imgmain">
-  <mat-card-content>
-    
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-fab color="primary" *ngIf='myAd' (click)="deleteAdvert(advert)">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-button  *ngIf='!myAd' (click)="addToKart(advert)">Kupi</button>    
-  </mat-card-actions>
-</mat-card>
+<div fxLayout="row" fxLayoutAlign="space-between stretch"  class="adverts-panel" class="outliner" *ngIf="finishedLoading">
+  <!-- <div> {{advert.id}}.</div> -->
+  <div fxLayout="row" fxLayoutAlign="center center" >
+   
+    <div>
+    <img (click)="gotoItemPage(advert)" mat-card-image [src]="advert.imgmain" class="image">
+  </div>
+  </div>
+  
+  <div fxLayout="column" fxLayoutAlign="center start"  *ngIf="advert">
+    <span>{{advert.title}}</span>
+  
+    {{advert.gear}}
+  </div>
+    <div fxLayout="row" fxLayoutAlign="center center" >
+
+    <button mat-button *ngIf='myAd' color="primary"  (click)="deleteAdvert(advert)">Obrisi </button>
+    <button mat-button *ngIf='!myAd' (click)="addToKart(advert)">Pogledaj detalje</button>
+    <button mat-button *ngIf='!myAd' color="primary"  (click)="addToKart(advert)">Kupi</button>
+
+  </div>
+ 
+</div>

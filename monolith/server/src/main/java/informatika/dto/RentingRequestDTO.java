@@ -6,6 +6,7 @@ public class RentingRequestDTO {
 	String returningDate;
 	String rentingTime;
 	String returningTime;
+	
 	Long advertid;
 	Long user_id;
 	public String getRentingDate() {

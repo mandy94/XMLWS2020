@@ -29,9 +29,9 @@ public class Model {
  
 	@Column(name = "title")
     private String title;
-	@OneToMany(mappedBy = "model", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Advert> adverts = new ArrayList<Advert>();
+//	@OneToMany(mappedBy = "model", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Advert> adverts = new ArrayList<Advert>();
 	@Override
 	public String toString() {
 		return "Model [id=" + id + ", title=" + title + "]";
@@ -53,12 +53,12 @@ public class Model {
 		this.title = title;
 	}
 
-	public List<Advert> getAdverts() {
-		return adverts;
-	}
-
-	public void setAdverts(List<Advert> adverts) {
-		this.adverts = adverts;
-	}
-	
+//	public List<Advert> getAdverts() {
+//		return adverts;
+//	}
+//
+//	public void setAdverts(List<Advert> adverts) {
+//		this.adverts = adverts;
+//	}
+//	
 }

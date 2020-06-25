@@ -44,7 +44,7 @@ export const routes: Routes = [
   {
     path: 'advert-page',
     component: AdvertDetailedComponent,
-    pathMatch: 'prefix'
+    // pathMatch: 'prefix'
     
   },
   {

@@ -74,9 +74,13 @@ public class AdvertController {
 	@PostMapping(value = "/add",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Advert> addAdvert(@RequestBody Advert ad) throws AccessDeniedException{		
-		adservice.save(ad);
-		return adservice.findAll(ad.getUser_id());
+	public void addAdvert(@RequestBody Advert ad) throws AccessDeniedException{		
+		Advert a = new Advert();
+		a.setTitle("TEST");
+		a.setUser_id(ad.getUser_id());
+		
+		adservice.save(a);
+	
 	}
 	
 

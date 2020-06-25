@@ -19,7 +19,7 @@ import informatika.service.RentingRequestService;
 import informatika.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/renting/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/request/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RentingRequestController {
 
 	@Autowired
@@ -33,6 +33,7 @@ public class RentingRequestController {
 	List<RentingRequest> getUserKart(@PathVariable String username){
 		return reqService.findByUsername(username);
 	}
+	
 	@PostMapping(value="/new-request")
 	void createNewRequest(@RequestBody RentingRequestDTO data) {
 		RentingRequest req = new RentingRequest();

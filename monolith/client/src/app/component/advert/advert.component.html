@@ -1,20 +1,26 @@
-<div>
+<div fxLayout="column" fxLayoutAlign="start stretch" >
   <h1>Moji oglasi</h1>
 
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div >
     <div *ngFor="let advert of usersAdverts">
-      <app-advert-card [advert]='advert' myAd='true'></app-advert-card>
+     {{advert | json}}
+     <!-- <app-advert-card [advert]='advert' myAd='true'></app-advert-card> -->
     </div>
   </div>
 
 
-  <h3> Dodaj novi oglas</h3>
-  <form (ngSubmit)="(submitAddForm())" class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Naslov oglasa</mat-label>
-      <input [(ngModel)]="new_advert.title" name="title" matInput maxlength="256"
-        placeholder="Model, serija, godiste...">
-    </mat-form-field>
-    <button type="submit">Ok</button>
-  </form>
+<div *ngIf="isAddingDisabled()">
+  <h2>{{message}} </h2>
+</div>
+  <div *ngIf="!isAddingDisabled()" >
+    <h3> Dodaj novi oglas</h3>
+    <form (ngSubmit)="(submitAddForm())" class="example-form" >
+      <mat-form-field [disabled]="isAddingDisabled()" class="example-full-width">
+        <mat-label>Naslov oglasa</mat-label>
+        <input  [(ngModel)]="new_advert.title" name="title" matInput maxlength="256"
+          placeholder="Model, serija, godiste...">
+      </mat-form-field>
+      <button  [disabled]="isAddingDisabled()" type="submit">Ok</button>
+    </form>
+  </div>
 </div>

@@ -12,10 +12,13 @@ export class ConfigService {
   private _refresh_token_url = this._api_url + '/refresh';
 
   get new_request():string{
-    return this._api_url + "/renting/new-request";
+    return this._api_url + "/request/new-request";
   }
   get kart_url():string{
     return this._api_url + "/kart";
+  }
+  get requests_url():string{
+    return this._api_url + "/request";
   }
   get refresh_token_url(): string {
     return this._refresh_token_url;

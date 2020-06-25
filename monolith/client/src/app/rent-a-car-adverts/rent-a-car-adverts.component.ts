@@ -10,11 +10,13 @@ export class RentACarAdvertsComponent implements OnInit {
 
   constructor(private adService: AdvertService) { }
   advertList: any;
+  finishedLoading = false;
   ngOnInit() {
-    this.loadAdverts();
+    // this.loadAdverts();
   }
 
-  loadAdverts(){
-    this.adService.getAllAdverts().subscribe(data => this.advertList = data);
+
+  load(){
+    this.adService.getAllAdverts().subscribe(data => {  this.advertList = data; this.finishedLoading = true;});
   }
 }

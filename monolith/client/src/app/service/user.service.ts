@@ -34,6 +34,13 @@ export class UserService {
     this.currentUser = user;
   }
 
+  public advertUploadCount(){
+    
+    console.log(this.amIUser())
+    if(this.amIUser())
+     return 3;
+  }
+
   getMyId(){
     return this.currentUser != null? this.currentUser.id : null;
    
@@ -50,6 +57,24 @@ export class UserService {
       var auths = this.currentUser.authorities;
       for(var auth of auths)
         if(auth.authority === "ROLE_ADMIN")
+          return true;
+      return false;
+    }
+  }
+  amIAgancy(){
+    if(this.currentUser != null){
+      var auths = this.currentUser.authorities;
+      for(var auth of auths)
+        if(auth.authority === "ROLE_AGENCY")
+          return true;
+      return false;
+    }
+  }
+  amIUser(){
+    if(this.currentUser != null){
+      var auths = this.currentUser.authorities;
+      for(var auth of auths)
+        if(auth.authority === "ROLE_USER")
           return true;
       return false;
     }

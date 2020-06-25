@@ -21,7 +21,7 @@ export class ApiService {
 
   headers = new HttpHeaders({
     'Authorization' : localStorage.getItem("token"),
-    'Access-Control-Allow-Origin' : 'http://localhost:8080',
+    'Access-Control-Allow-Origin' : '*',
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   });

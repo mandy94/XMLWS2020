@@ -40,13 +40,14 @@ public class Advert {
 		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    public Pricelist priceList;
 		
+	
 		@ManyToOne
 		@JoinColumn(name="manufacturer_id")
 		private Manufacturer manufacturer;
 		
-		@ManyToOne
-		@JoinColumn(name="model_id")	
-		private Model model;
+//		@ManyToOne
+//		@JoinColumn(name="model_id")	
+		private String model;
 		
 		@ManyToOne
 		@JoinColumn(name="gear_id")	
@@ -160,11 +161,11 @@ public class Advert {
 			this.gear = gear;
 		}
 
-		public Model getModel() {
+		public String getModel() {
 			return model;
 		}
 
-		public void setModel(Model model) {
+		public void setModel(String model) {
 			this.model = model;
 		}
 

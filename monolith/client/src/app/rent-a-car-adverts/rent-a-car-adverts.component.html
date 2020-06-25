@@ -1,7 +1,10 @@
 <div>
-  <app-search-adverts-bar></app-search-adverts-bar>
-  <div fxLayout="row" fxLayoutAlign="start center" class="adverts-panel">
-    <div *ngFor="let advert of advertList">
+  <!-- <app-search-adverts-bar></app-search-adverts-bar> -->
+  <h1> Oglasi </h1>
+  <button (click)= "load()">dovuci oglase</button>
+  
+  <div fxLayout="column" fxLayoutAlign="space-between stretch"  class="adverts-panel"  >
+    <div *ngFor="let advert of advertList" >
       <app-advert-card [advert]='advert' [myAd] = 'false'></app-advert-card>
     </div>
   </div>

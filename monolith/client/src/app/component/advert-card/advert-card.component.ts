@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Advert } from 'app/shared/models/advert';
 import { AdvertService } from 'app/service/advert.service';
 import { Router } from '@angular/router';
+import { AdvertDTO } from '.';
 
 
 @Component({
@@ -10,19 +11,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./advert-card.component.css']
 })
 export class AdvertCardComponent implements OnInit {
-  @Input() advert: any;
+  @Input() advert = new Advert();
   @Input() myAd: boolean;
+  finishedLoading = false;
   currAdvert : any;
-  usersAdverts: Advert[];
-  constructor(private advertService: AdvertService,private router: Router) { }
+  usersAdverts = new Array<Advert>();
+  constructor(private advertService: AdvertService,private router: Router) { 
+    this.showMyAdverts(); 
+  }
 
   ngOnInit() {
-      this.showMyAdverts();
+    
+      // this.showMyAdverts();
     }
 
   showMyAdverts(){
     this.advertService.getAdvertsFrom()
-    .subscribe( data => this.usersAdverts = data);   
+    .subscribe( data => {
+      this.usersAdverts = data ;
+      this.finishedLoading = true;});  
   } 
   
    //Brisanje oglasa
@@ -38,7 +45,9 @@ addToKart(advertId){
 }
 
 gotoItemPage(advert){
-  this.router.navigate(['/advert-page', advert]);
+  let advertDTO = new AdvertDTO(advert);
+  
+  this.router.navigate(['/advert-page', advertDTO]);
   }
 
 

@@ -1,13 +1,30 @@
-<h1>{{advert.title}}</h1>
-<div fxLayout="row" fxLayoutAlign="space-around  center">
-    <img [src]="advert.imgmain" height="500px">
+<div fxLayout="column" fxLayoutAlign="center  stretch">
+    <h1>{{advert.title}}</h1>
+    <div fxLayout="row" fxLayoutAlign="space-around  center">
+        <img [src]="advert.img" height="300px">
+        <div>
+        <h3> Opste infomacije o automobilu</h3>
+        
+        <mat-list> Tip menjaca: {{advert.gear}}     </mat-list>
+        <mat-list> Vrsta goriva </mat-list>
+        <mat-list> Klasa automobila {{advert.cclass}}</mat-list>
+        <mat-list> Da li postoji opvija CDW : {{advert.CDW}} </mat-list>
+        <mat-list> Cenevnik </mat-list>
+    </div>
+    </div>
 </div>
-
 <div fxLayout="row" fxLayoutAlign="space-around  center">
-    <h2> Rezervisi {{advert.title}}</h2>
+    <h2> Rezervisi automobil.</h2>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-around  center">
-
+    <mat-form-field>
+        <mat-label>Mesto preuzimanja</mat-label>
+        <mat-select [(value)]="selectedCity">
+            <mat-option *ngFor="let city of cityList" [value]="city.id">
+                {{city.code}} - {{city.title}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <mat-form-field>
         <mat-label>Datum preuzimanja</mat-label>
         <input matInput [matDatepicker]="dp1" [formControl]="date1" (dateChange)="updateDate('rent', $event)">
