@@ -5,11 +5,17 @@ import {Injectable} from '@angular/core';
 })
 export class ConfigService {
  
-  private _api_url = 'http://localhost:8080/api';
-  private _auth_url = 'http://localhost:8080/auth';
-  private _user_url = this._api_url + '/user';
+  private _api_gateway = "http://localhost:8180";
+  private _users_and_agancy_ms = this._api_gateway + "/uaamicroservice/api";
+  private _advert_ms = this._api_gateway + "adservice";
+  //--------------------------------------------------------
+  private _api_url =  this._users_and_agancy_ms;
 
-  private _refresh_token_url = this._api_url + '/refresh';
+  private _auth_url = this._users_and_agancy_ms  + "/auth";
+
+  private _user_url = this._users_and_agancy_ms + '/user';
+
+  private _refresh_token_url = this._users_and_agancy_ms + '/refresh';
 
   get new_request():string{
     return this._api_url + "/request/new-request";

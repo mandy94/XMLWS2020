@@ -43,7 +43,8 @@ export class ApiCardComponent implements OnInit {
     
     this.authService.login(this.user)
       .subscribe(data => {
-          this.userService.getMyInfo().subscribe();
+     
+          this.userService.getMyInfo().subscribe(x => console.log(x));
           this.router.navigate(['/']);
         });      
   }
