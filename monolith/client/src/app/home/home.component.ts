@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfigService, FooService, UserService} from '../service';
-import { Console } from 'console';
+
 
 @Component({
   selector: 'app-home',
@@ -28,14 +28,14 @@ export class HomeComponent implements OnInit {
   }
 
   isSignedIn(){
-    // console.log(this.userService.currentUser)
+    
     if(this.userService.currentUser != null)
     return true;
       else  
     return false;
   }
   makeRequest(path) {
-    console.log(path);
+    
     if (this.config.foo_url.endsWith(path)) {
       this.fooService.getFoo()
         .subscribe(res => {

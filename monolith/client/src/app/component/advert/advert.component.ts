@@ -46,12 +46,12 @@ export class AdvertComponent implements OnInit {
   }
   isAddingDisabled() {
 
-    if (this.userService.amIUser()) {
-      if (this.usersAdverts.length >= 3) {
+    // if (this.userService.amIUser()) {
+    //   if (this.usersAdverts.length >= 3) {
        
-        return true;
-      }
-    }
+    //     return true;
+    //   }
+    // }
     return false;
   }
   //Dodavanje novog oglasa  

@@ -4,9 +4,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import informatika.model.RentingRequest;
-
+@Repository
 public interface RentingRequestRepository extends JpaRepository<RentingRequest, Long> {
 
 	@Query("Select u from RentingRequest u where u.whoasked = :un")

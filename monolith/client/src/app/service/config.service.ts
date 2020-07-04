@@ -7,7 +7,8 @@ export class ConfigService {
  
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/uaamicroservice/api";
-  private _advert_ms = this._api_gateway + "adservice";
+  private _advert_ms = this._api_gateway + "/admicroservice/advert";
+  private _requests_ms = this._api_gateway + "/renting-requests/request"
   //--------------------------------------------------------
   private _api_url =  this._users_and_agancy_ms;
 
@@ -18,13 +19,13 @@ export class ConfigService {
   private _refresh_token_url = this._users_and_agancy_ms + '/refresh';
 
   get new_request():string{
-    return this._api_url + "/request/new-request";
+    return this._requests_ms + "/new-request";
   }
   get kart_url():string{
     return this._api_url + "/kart";
   }
   get requests_url():string{
-    return this._api_url + "/request";
+    return this._requests_ms;
   }
   get refresh_token_url(): string {
     return this._refresh_token_url;
@@ -66,27 +67,23 @@ export class ConfigService {
     return this._signup_url;
   }
 
-  private _advert_url = this._api_url +  '/advert';
 
-  get advert_url(): string{
-    return this._advert_url;
-  }
-  private _add_advert_url = this.advert_url + '/add';
+  private _add_advert_url = this._advert_ms + '/add';
 
   get add_advert_url(): string{
     return this._add_advert_url;
   }
-  private _users_adverts_url = this._advert_url + '/me/all';
+  private _users_adverts_url = this._advert_ms + '/me';
 
   get users_adverts_url(): string{
     
     return this._users_adverts_url;
   }
-  private _all_adverts = this._advert_url + '/all';
+  private _all_adverts = this._advert_ms + '/all';
   get all_adverts(): string{
     return this._all_adverts;
   }
-  private _delete_advert_url = this._advert_url + '/delete';
+  private _delete_advert_url = this._advert_ms + '/delete';
 
   get delete_advert_url(): string{
     return this._delete_advert_url;
