@@ -22,7 +22,7 @@ export class AdvertComponent implements OnInit {
   ngOnInit() {
     //Bitan redosled jer se u novi_oglas referencira id korisnika.
     this.new_advert = new Advert();
-    this.new_advert.user_id;
+    
     this.showMyAdverts();
     this.getMyInfo();
 
@@ -32,7 +32,7 @@ export class AdvertComponent implements OnInit {
     this.userService.getMyInfo()
       .subscribe(data => {
         this.currentUser = data,
-        this.new_advert.user_id = this.currentUser.id
+        this.new_advert.user = this.currentUser
       });
 
   }

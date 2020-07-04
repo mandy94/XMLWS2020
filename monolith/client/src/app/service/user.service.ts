@@ -41,9 +41,13 @@ export class UserService {
   }
 
   getMyId(){
-    return this.currentUser != null? this.currentUser.id : null;
-   
+    return this.currentUser != null? this.currentUser.id : null;   
   }
+  
+  getMyUsername(){
+    return this.currentUser != null? this.currentUser.username : null;
+  }
+   
   getMyInfo() {
     return this.apiService.get(this.config.whoami_url)
       .pipe(map(user => {

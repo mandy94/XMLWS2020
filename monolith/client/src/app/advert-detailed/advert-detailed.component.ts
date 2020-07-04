@@ -11,6 +11,8 @@ import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { UserRequest } from '.';
 import { ApiService, ConfigService, UserService } from 'app/service';
+import { Advert } from 'app/shared/models/advert';
+import { AdvertDTO } from 'app/component/advert-card';
 
 export const MY_FORMATS = {
   parse: {
@@ -60,7 +62,7 @@ export class AdvertDetailedComponent implements OnInit {
     retrieveResonse: any; 
     message: string;  
     imageName: any;
-    advert: any;
+    advert: AdvertDTO;
     timeList: any; 
     cityList: any;
 
@@ -69,7 +71,7 @@ export class AdvertDetailedComponent implements OnInit {
     this.apiService.get(this.conf.get_cities_url).subscribe((data)=> this.cityList = data);
     this.route.params
     .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe((advert: any) => {
+    .subscribe((advert: AdvertDTO) => {
       this.advert = advert;
       });
 
@@ -127,12 +129,12 @@ submit(){
   this.userService.getMyInfo().subscribe(()=>{
     this.newUserRequest.rentingTime = this.selectedRentingTime;
     // this.newUserRequest.returningDate = this.selectedReturnDate;
-    this.newUserRequest.advertid = this.advert.id;
-    this.newUserRequest.user_id = this.userService.currentUser.id;
+    this.newUserRequest.advertid = Number(this.advert.id);
+    this.newUserRequest.user_id = Number(this.userService.currentUser.id);
     
     console.log(this.newUserRequest);
 
-    this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=>this.newUserRequest = null);}
+    this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = null);}
     );
 
 }

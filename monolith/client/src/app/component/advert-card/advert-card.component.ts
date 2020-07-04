@@ -45,6 +45,8 @@ addToKart(advertId){
 }
 
 gotoItemPage(advert){
+  
+  console.log(advert)
   let advertDTO = new AdvertDTO(advert);
   
   this.router.navigate(['/advert-page', advertDTO]);

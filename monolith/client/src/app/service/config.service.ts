@@ -6,9 +6,9 @@ import {Injectable} from '@angular/core';
 export class ConfigService {
  
   private _api_gateway = "http://localhost:8180";
-  private _users_and_agancy_ms = this._api_gateway + "/uaamicroservice/api";
-  private _advert_ms = this._api_gateway + "/admicroservice/advert";
-  private _requests_ms = this._api_gateway + "/renting-requests/request"
+  private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
+  private _advert_ms = this._api_gateway + "/adverts-ms/api";
+  private _requests_ms = this._api_gateway + "/requests-ms/api"
   //--------------------------------------------------------
   private _api_url =  this._users_and_agancy_ms;
 
@@ -22,7 +22,7 @@ export class ConfigService {
     return this._requests_ms + "/new-request";
   }
   get kart_url():string{
-    return this._api_url + "/kart";
+    return this._requests_ms + "/user-kart";
   }
   get requests_url():string{
     return this._requests_ms;
@@ -88,12 +88,12 @@ export class ConfigService {
   get delete_advert_url(): string{
     return this._delete_advert_url;
   }
-  private _get_codebook_url = this._api_url + '/codebook/all';
+  private _get_codebook_url = this._advert_ms + '/codebook/all';
 
   get get_codebook_url(): string{
     return this._get_codebook_url;
   }
-  private _get_cities_url = this._api_url + '/codebook/cities';
+  private _get_cities_url = this._advert_ms + '/codebook/cities';
 
   get get_cities_url(): string{
     return this._get_cities_url;

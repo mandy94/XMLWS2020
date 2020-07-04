@@ -10,12 +10,11 @@
   <div fxLayout="column" fxLayoutAlign="center start"  *ngIf="advert">
     <span>{{advert.title}}</span>
   
-    {{advert.gear}}
   </div>
     <div fxLayout="row" fxLayoutAlign="center center" >
 
     <button mat-button *ngIf='myAd' color="primary"  (click)="deleteAdvert(advert)">Obrisi </button>
-    <button mat-button *ngIf='!myAd' (click)="addToKart(advert)">Pogledaj detalje</button>
+    <button mat-button *ngIf='!myAd' (click)="gotoItemPage(advert)">Pogledaj detalje</button>
     <button mat-button *ngIf='!myAd' color="primary"  (click)="addToKart(advert)">Kupi</button>
 
   </div>

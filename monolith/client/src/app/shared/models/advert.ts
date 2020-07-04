@@ -1,16 +1,16 @@
+import { User } from './models';
+
 export class Advert{
     
    
-    set_owner_id(user_id: any) {
-     this.user_id = user_id;
-    }
     id: number;
     title: string;
     description: string;
+    manufacturer: any;
     model: any;
     fuel: any;
     gear: any;
-    user_id:0;
+    user: User; // owner
     imgmain : string;
     cdwprotection: boolean;
     numberOfKidsSeat: number;

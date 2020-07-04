@@ -12,7 +12,7 @@ export class RentACarAdvertsComponent implements OnInit {
   advertList: any;
   finishedLoading = false;
   ngOnInit() {
-    // this.loadAdverts();
+    this.load();
   }
 
 
