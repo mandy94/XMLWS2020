@@ -7,7 +7,7 @@ export class ConfigService {
  
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
-  private _advert_ms = this._api_gateway + "/adverts-ms/api";
+  private _advert_ms = this._api_gateway + "/adverts-ms/api";cd
   private _requests_ms = this._api_gateway + "/requests-ms/api"
   //--------------------------------------------------------
   private _api_url =  this._users_and_agancy_ms;
@@ -23,6 +23,9 @@ export class ConfigService {
   }
   get kart_url():string{
     return this._requests_ms + "/user-kart";
+  }
+  get my_request():string{
+    return this._requests_ms + "/my-requests";
   }
   get requests_url():string{
     return this._requests_ms;
@@ -54,7 +57,9 @@ export class ConfigService {
   get users_url(): string {
     return this._users_url;
   }
-
+  get user_url(): string {
+    return this._user_url;
+  }
   private _foo_url = this._api_url + '/foo';
 
   get foo_url(): string {

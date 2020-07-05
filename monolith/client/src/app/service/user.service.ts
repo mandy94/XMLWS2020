@@ -40,11 +40,14 @@ export class UserService {
      return 3;
   }
 
-  getMyId(){
-    return this.currentUser != null? this.currentUser.id : null;   
+  getUserById(id){
+    return   this.apiService.get(this.config.user_url + "/" + id);
+  }
+  getMyId():number{
+    return this.currentUser != null ? this.currentUser.id : null;   
   }
   
-  getMyUsername(){
+  getMyUsername():number{
     return this.currentUser != null? this.currentUser.username : null;
   }
    

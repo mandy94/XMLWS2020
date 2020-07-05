@@ -1,4 +1,5 @@
 import { Advert } from 'app/shared/models/advert';
+import { UserDTO } from 'app/advert-detailed';
 
 
 export class AdvertDTO{
@@ -16,10 +17,12 @@ export class AdvertDTO{
         this.kidsSeat=  data.kidsSeat;
         this.cclass= data.cclass.title;
         this.milage= data.milage;
-     
         
+              
     }
- 
+    owner_id:number;
+    owner_username:string;
+    owner: UserDTO;
     id: number;
     title: string;
     description: string;

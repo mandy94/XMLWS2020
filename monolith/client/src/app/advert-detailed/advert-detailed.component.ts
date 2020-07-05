@@ -129,12 +129,14 @@ submit(){
   this.userService.getMyInfo().subscribe(()=>{
     this.newUserRequest.rentingTime = this.selectedRentingTime;
     // this.newUserRequest.returningDate = this.selectedReturnDate;
-    this.newUserRequest.advertid = Number(this.advert.id);
-    this.newUserRequest.user_id = Number(this.userService.currentUser.id);
+    this.newUserRequest.advert.id= Number(this.advert.id);
+    this.newUserRequest.client.id = Number(this.userService.currentUser.id);
+    // this.newUserRequest.owner = this.advert.;
+  
     
     console.log(this.newUserRequest);
 
-    this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = null);}
+    this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = new UserRequest());}
     );
 
 }

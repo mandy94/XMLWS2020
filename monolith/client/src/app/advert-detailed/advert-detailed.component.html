@@ -1,10 +1,11 @@
 <div fxLayout="column" fxLayoutAlign="center  stretch">
     <h1>{{advert.title}}</h1>
+    <h4>Vlasnik: {{advert.owner_username}}</h4>
     <div fxLayout="row" fxLayoutAlign="space-around  center">
         <img [src]="advert.img" height="300px">
         <div>
             
-        <h3> Opste infomacije o automobilu</h3>
+        <h2> Opste infomacije o automobilu</h2>
         <mat-list> Proizvodjac: <strong>  {{advert.manufacturer}} </strong>  </mat-list>
         <mat-list> Model : <strong> {{advert.model}}</strong> </mat-list>
         <mat-list> Tip menjaca: <strong> {{advert.gear}}   </strong>  </mat-list>
@@ -14,9 +15,12 @@
         <mat-list *ngIf="!advert.kidsSeat">Nema decijih sedista na raspolaganju. </mat-list>       
         <mat-list> Da li postoji opvija CDW :<strong>  {{advert.CDW}} </strong></mat-list>
         <mat-list> Presao do sad: <strong>{{ advert.milage }} km </strong></mat-list>
-        <mat-list> Cenovnik: </mat-list>
+
     </div>
     </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around  center">
+    <h2> Cenovnik</h2>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-around  center">
     <h2> Rezervisi automobil.</h2>

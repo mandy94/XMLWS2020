@@ -10,11 +10,17 @@ export class RequestsComponent implements OnInit {
 
   constructor(private apiService: ApiService,
     private config: ConfigService,) { }
-
-    myRequests = Array<Request>();
+    
+    displayedColumns: string[] = [ 'title','img','city','renta','returning','status', 'actions'];
+   
+    myRequests = new Array<any>();
   ngOnInit() {
-    this.apiService.get(this.config.requests_url)
+    this.apiService.get(this.config.my_request)
     .subscribe(data=> {this.myRequests = data;})
+  }
+
+  hasRequests(){
+    return this.myRequests.length === 0 ? false : true;
   }
 
 }

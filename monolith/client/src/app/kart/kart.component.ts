@@ -13,18 +13,21 @@ export class KartComponent implements OnInit {
     private userService: UserService) { }
 
     itemRequests: any;
-    displayedColumns: string[] = ['id','img', 'title','status'];
+    displayedColumns: string[] = [ 'title','img','city','renta','returning','status', 'actions'];
    
   ngOnInit() {
  
 
-    if(this.userService.getMyId() == null)
+    if(this.userService.getMyId() == null){
+      
+
     this.userService.getMyInfo().subscribe(()=>{
-    this.apiService.get(this.conf.kart_url +"/" + this.userService.getMyId() )
-                .subscribe((data) => this.itemRequests = data);
+      console.log(this.userService.getMyId());
+    this.apiService.get(this.conf.kart_url +"/" + this.userService.getMyId().toString() )
+                .subscribe((data) => {this.itemRequests = data});
     });
-  else{
-    this.apiService.get(this.conf.kart_url +"/" + this.userService.getMyId() )
+  }else{
+    this.apiService.get(this.conf.kart_url +"/" + this.userService.getMyId().toString() )
                 .subscribe((data) => this.itemRequests = data);
   }
 }

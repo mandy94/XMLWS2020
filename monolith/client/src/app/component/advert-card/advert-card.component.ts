@@ -3,6 +3,7 @@ import { Advert } from 'app/shared/models/advert';
 import { AdvertService } from 'app/service/advert.service';
 import { Router } from '@angular/router';
 import { AdvertDTO } from '.';
+import { UserService } from 'app/service';
 
 
 @Component({
@@ -11,18 +12,21 @@ import { AdvertDTO } from '.';
   styleUrls: ['./advert-card.component.css']
 })
 export class AdvertCardComponent implements OnInit {
-  @Input() advert = new Advert();
+  @Input() advert = new Advert();  
   @Input() myAd: boolean;
   finishedLoading = false;
   currAdvert : any;
   usersAdverts = new Array<Advert>();
-  constructor(private advertService: AdvertService,private router: Router) { 
+  constructor(private advertService: AdvertService,
+              private userService:UserService,
+              private router: Router) { 
     this.showMyAdverts(); 
   }
 
   ngOnInit() {
     
       // this.showMyAdverts();
+    
     }
 
   showMyAdverts(){
@@ -41,15 +45,21 @@ export class AdvertCardComponent implements OnInit {
      );      
    }
 addToKart(advertId){
-  console.log(advertId);
+  // console.log(advertId);
 }
 
 gotoItemPage(advert){
   
-  console.log(advert)
   let advertDTO = new AdvertDTO(advert);
+  this.userService.getUserById(advert.user_id)
+  .subscribe((owner)=>{
+    advertDTO.owner_id = owner.id;
+    advertDTO.owner_username = owner.username;
+    this.router.navigate(['/advert-page', advertDTO]);
+
+  })
+
   
-  this.router.navigate(['/advert-page', advertDTO]);
   }
 
 
