@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+        
             "outputPath": "dist/testAngular",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,6 +25,7 @@
             ],
             "styles": [
               "src/styles.css"
+              
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -85,7 +87,7 @@
           }
         }
       }
-    },
+    }
   },
   "defaultProject": "testAngular"
 }

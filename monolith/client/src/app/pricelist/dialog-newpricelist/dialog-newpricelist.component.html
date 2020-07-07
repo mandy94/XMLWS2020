@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Napravi novi cenovnik</h1>
+<div fxLayout="column" fxLayoutAlign="strech" mat-dialog-content>  
+  <mat-form-field>
+    <mat-label>Naziv cenovnika</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cena po danu</mat-label>
+    <input matInput [(ngModel)]="data.pricePerDay">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cena zasvaki naredni kilometar</mat-label>
+    <input matInput [(ngModel)]="data.pricePerKm">
+  </mat-form-field> 
+
+  <mat-form-field>
+    <mat-label>Iznos CDW</mat-label>
+    <input matInput [(ngModel)]="data.cdw">
+
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"> Odustani </button>
+  <button mat-button (click)="create(data)" cdkFocusInitial>Napravi</button>
+</div>

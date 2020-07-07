@@ -39,6 +39,7 @@ export class ApiCardComponent implements OnInit {
     this.user = new User({
       username : this.username,
       password : this.password,
+      id: 0,
     });
     
     this.authService.login(this.user)

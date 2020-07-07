@@ -72,7 +72,7 @@ export class ConfigService {
     return this._signup_url;
   }
 
-
+//------------------ ADVERTS, PRICELISTS AND CODEBOOK -------------------
   private _add_advert_url = this._advert_ms + '/add';
 
   get add_advert_url(): string{
@@ -93,6 +93,25 @@ export class ConfigService {
   get delete_advert_url(): string{
     return this._delete_advert_url;
   }
+  // PRICELIST PART
+  private _pricelist_url = this._advert_ms + '/pricelist';
+
+  get pricelist_url():string{
+    return this._pricelist_url;
+  }
+  get my_pricelist_url():string{
+    return this._pricelist_url + '/me';
+  }
+  get new_pricelist_url():string{
+    return this._pricelist_url + '/new';
+  }
+  get update_pricelist_url():string{
+    return this._pricelist_url + '/update';
+  }
+  get all_pricelist_url():string{
+    return this._pricelist_url+'/all';
+  }
+  // CODE-BOOK PART
   private _get_codebook_url = this._advert_ms + '/codebook/all';
 
   get get_codebook_url(): string{

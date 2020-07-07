@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Unos novog cenonvika</h1>
+<div fxLayout="column" fxLayoutAlign="strech" mat-dialog-content>  
+  <mat-form-field class="invisible example-full-width">
+    <input matInput [(ngModel)]= "data.id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Naziv cenovnika</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Cena po danu</mat-label>
+    <input matInput [(ngModel)]="data.pricePerDay">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cena zasvaki naredni kilometar</mat-label>
+    <input matInput [(ngModel)]="data.pricePerKm">
+  </mat-form-field>
+  <section class="example-section">
+    <mat-checkbox class="example-margin" [(ngModel)]="hasCDW">Da li postoji CDW </mat-checkbox>
+  </section>
+
+  <mat-form-field>
+    <mat-label>Iznos CDW</mat-label>
+    <input matInput [(ngModel)]="data.cdw">
+
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"> Odustani od promena</button>
+  <button mat-button (click)="update(data)" cdkFocusInitial>Izmeni</button>
+</div>

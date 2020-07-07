@@ -23,6 +23,7 @@ import {AngularMaterialModule} from './angular-material/angular-material.module'
 import {MatIconRegistry} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
@@ -37,9 +38,11 @@ import { AdvertCardComponent } from './component/advert-card/advert-card.compone
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
 import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
+import { DialogOverviewComponent } from './pricelist/dialog-overview/dialog-overview.component';
+import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dialog-newpricelist.component';
 
 @NgModule({
-  declarations: [
+  declarations: [    
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -62,7 +65,9 @@ import { RequestsComponent } from './requests/requests.component';
     AdvertCardComponent,
     AdvertDetailedComponent,
     KartComponent,
-    RequestsComponent
+    RequestsComponent,
+    DialogOverviewComponent,
+    DialogNewpricelistComponent
   
   ],
   imports: [
@@ -75,7 +80,9 @@ import { RequestsComponent } from './requests/requests.component';
     ReactiveFormsModule,
     MatTabsModule,
     FlexLayoutModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    MatDialogModule
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -95,6 +102,7 @@ import { RequestsComponent } from './requests/requests.component';
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewComponent, DialogNewpricelistComponent]
 })
 export class AppModule {
 }

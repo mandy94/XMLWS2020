@@ -17,11 +17,24 @@ export class Advert{
     kidsSeat: boolean;
     cclass:any;
     milage:number;
-    priceList = new PriceList()
+    priceList = new Pricelist()
 
 
 }
 
-export class PriceList{
+export class Pricelist{
+    id:number;
+    name:string;
+    pricePerDay: number;
+    pricePerKm: number;
+    cdw:number;
+}
 
+export interface PricelistInterface{
+    name:string;
+    pricePerDay: number;
+    pricePerKm: number;
+    cdw:number;
+    id:number;
+    
 }
