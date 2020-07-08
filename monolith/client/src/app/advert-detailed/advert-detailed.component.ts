@@ -67,7 +67,7 @@ export class AdvertDetailedComponent implements OnInit {
     cityList: any;
 
   ngOnInit() {
-    this.timeList = [ {value : "08:00"},{ value:"09:00"}, {value:"10:00"}];
+    this.timeList = [ {value : "08:00"},{ value:"10:00"}, {value:"12:00"}, {value:"14:00"},{value:"16:00"},{value:"18:00"}];
     this.apiService.get(this.conf.get_cities_url).subscribe((data)=> this.cityList = data);
     this.route.params
     .pipe(takeUntil(this.ngUnsubscribe))
@@ -77,6 +77,11 @@ export class AdvertDetailedComponent implements OnInit {
 
   }
  
+  myAdvert(){
+    console.log(this.advert);
+    console.log(this.userService.getMyId());
+    return Number(this.userService.getMyId()) == this.advert.owner_id ? true : false;
+  }
 
 //Gets called when the user selects an image
 public onFileChanged(event) {
@@ -125,17 +130,15 @@ onUpload() {
 newUserRequest= new UserRequest();
 selectedRentingTime:any;
 selectedReturnTime:any;
+selectedReturnDate:any;
 submit(){
   this.userService.getMyInfo().subscribe(()=>{
     this.newUserRequest.rentingTime = this.selectedRentingTime;
-    // this.newUserRequest.returningDate = this.selectedReturnDate;
+    this.newUserRequest.returningDate = this.selectedReturnDate;
     this.newUserRequest.advert.id= Number(this.advert.id);
     this.newUserRequest.client.id = Number(this.userService.currentUser.id);
     // this.newUserRequest.owner = this.advert.;
   
-    
-    console.log(this.newUserRequest);
-
     this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = new UserRequest());}
     );
 
@@ -149,6 +152,5 @@ updateDate(type:string, event:any){
     this.newUserRequest.returningDate = formatedDate;
   }
   
-  console.log(this.newUserRequest);
 }
 }

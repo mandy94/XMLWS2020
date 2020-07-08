@@ -1,5 +1,5 @@
 <div *ngFor="let items of itemRequests">
- <h2> Poruceno od korisnika: {{items.owner.fullName}}</h2>
+ <h2> Porucili ste od : {{items.owner.fullName}}</h2>
     <table mat-table  [dataSource]="items.content" class="mat-elevation-z8">    
 
       <ng-container matColumnDef="img">
@@ -34,7 +34,7 @@
       
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Akcije</th>
-        <td mat-cell *matCellDef="let item"> <button> Prihvati zahtevi</button> ili <Button> Odbi zahtev</Button></td>
+        <td mat-cell *matCellDef="let item"> <button> Ponisti zahtev</button></td>
       </ng-container>
   
       

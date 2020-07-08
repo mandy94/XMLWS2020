@@ -12,6 +12,7 @@ import {AdvertComponent} from './component/advert';
 import { CodeBookComponent } from './code-book/code-book.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
 import { KartComponent } from './kart/kart.component';
+import { RequestsComponent } from './requests/requests.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,14 @@ export const routes: Routes = [
   {
     path: 'kart',
     component: KartComponent
+  },
+  {
+    path: 'my-ads',
+    component: AdvertComponent
+  },
+  {
+    path: 'my-requests',
+    component: RequestsComponent
   },
   {
     path: '404',

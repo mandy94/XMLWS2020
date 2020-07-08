@@ -65,7 +65,7 @@
     </mat-form-field>
 
 
-    <button mat-raised-button (click) = "submit()">Pronadji vozilo</button>
+    <button mat-raised-button (click) = "submit()" *ngIf="!myAdvert()">Pronadji vozilo</button>
 
 </div>
 
