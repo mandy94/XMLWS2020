@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Izmeni {{data.item}}</h1>
+<div mat-dialog-content>
+  <p>Promeni sadrzaj u</p>
+  <mat-form-field>
+    <mat-label>Tekst</mat-label>
+    <input matInput [(ngModel)]="data.title">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Otkazi promeni</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

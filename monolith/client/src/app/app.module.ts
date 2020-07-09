@@ -41,6 +41,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { DialogOverviewComponent } from './pricelist/dialog-overview/dialog-overview.component';
 import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dialog-newpricelist.component';
 import { ContentTableComponent } from './code-book/content-table/content-table.component';
+import { EditItemDialogComponent } from './code-book/content-table/edit-item-dialog/edit-item-dialog.component';
 
 @NgModule({
   declarations: [    
@@ -69,7 +70,8 @@ import { ContentTableComponent } from './code-book/content-table/content-table.c
     RequestsComponent,
     DialogOverviewComponent,
     DialogNewpricelistComponent,
-    ContentTableComponent
+    ContentTableComponent,
+    EditItemDialogComponent
   
   ],
   imports: [
@@ -104,7 +106,7 @@ import { ContentTableComponent } from './code-book/content-table/content-table.c
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewComponent, DialogNewpricelistComponent]
+  entryComponents: [DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }

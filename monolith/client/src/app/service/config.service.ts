@@ -94,6 +94,12 @@ export class ConfigService {
   get delete_advert_url(): string{
     return this._delete_advert_url;
   }
+  
+  private _search_advert_url = this._advert_ms + '/search';
+
+  get search_advert_url(): string{
+    return this._search_advert_url;
+  }
   // PRICELIST PART
   private _pricelist_url = this._advert_ms + '/pricelist';
 
