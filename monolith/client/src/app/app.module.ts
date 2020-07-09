@@ -40,6 +40,7 @@ import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
 import { DialogOverviewComponent } from './pricelist/dialog-overview/dialog-overview.component';
 import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dialog-newpricelist.component';
+import { ContentTableComponent } from './code-book/content-table/content-table.component';
 
 @NgModule({
   declarations: [    
@@ -67,7 +68,8 @@ import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dia
     KartComponent,
     RequestsComponent,
     DialogOverviewComponent,
-    DialogNewpricelistComponent
+    DialogNewpricelistComponent,
+    ContentTableComponent
   
   ],
   imports: [

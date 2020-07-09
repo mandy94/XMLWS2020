@@ -19,7 +19,7 @@
       <button *ngIf="hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-requests">
         <span>Zahtevi </span>      
       </button>
-
+      <button *ngIf = "ifAdmin()" label="Sifrarnici" mat-button   routerLink="/codebook" > Sifrarnici</button>
       <button *ngIf="hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
         <span>Korpa </span>      
       </button>

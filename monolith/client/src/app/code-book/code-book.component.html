@@ -1,44 +1,44 @@
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <h2> Administratorski sifrarnici</h2>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-evenly start" *ngIf='codes'>
 
-<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf='codes'>
-<mat-list role="list">
-  <h2>Sifrarnik za goriva</h2>
-  <div *ngFor="let fuel of codes.fuels">
-    {{fuel.title}}
-  </div>
-  <mat-divider></mat-divider>
-  <input>
-  <button (click)='addFuelType()' aria-label="Example icon button with a plus one icon">+</button>
+ <app-content-table
+ [ENTITY_DATA] = "codes.fuels"
+ [typeNames] = "'goriva'"
+ [serverUrl] = "'/fuel'"
+  ></app-content-table>
+
+<app-content-table
+ [ENTITY_DATA] = "codes.models"
+ [typeNames] = "'modele'"
+ [serverUrl] = "'/model'"
+  ></app-content-table>
   
-</mat-list>
+<app-content-table
+[ENTITY_DATA] = "codes.manufacturers"
+[typeNames] = "'proizvodjace'"
+[serverUrl] = "'/manufacturer'"
+ ></app-content-table>
 
-<mat-list role="list">
-  <h2>Sifrarnik za modele</h2>
-  <div *ngFor="let model of codes.models">
-    {{model.title}}
-  </div>
-  <mat-divider></mat-divider>
-  <input>
-  <button  aria-label="Example icon button with a plus one icon">+</button>
-</mat-list>
+ <app-content-table
+ [ENTITY_DATA] = "codes.cclass"
+ [typeNames] = "'klase'"
+ [serverUrl] = "'/cclass'"
+  ></app-content-table>
+ 
+ <app-content-table
+[ENTITY_DATA] = "codes.cities"
+[typeNames] = "'gradove'"
+[serverUrl] = "'/city'"
+ ></app-content-table>
 
-<mat-list role="list">
-  <h2>Sifrarnik za proizvodjace</h2>
-  <div *ngFor="let manu of codes.manufacturers">
-    {{manu.title}}
-  </div>
-  <mat-divider></mat-divider>
-  <input>
-  <button  aria-label="Example icon button with a plus one icon">+</button>
-</mat-list>
-
-<mat-list role="list">
-  <h2>Sifrarnik za gradove</h2>
+ <app-content-table
+ [ENTITY_DATA] = "codes.gearType"
+ [typeNames] = "'menjace'"
+ [serverUrl] = "'/gear'"
+  ></app-content-table>
+ 
   
-  <div *ngFor="let manu of codes.cities">
-    {{manu.title}}
-  </div>
-  <mat-divider></mat-divider>
-  <input>
-  <button  aria-label="Example icon button with a plus one icon">+</button>
-</mat-list>
+ 
 </div>

@@ -24,10 +24,11 @@ export class SearchAdvertsBarComponent implements OnInit {
   
   showCities(){
     
-    this.cbservice.getCities().subscribe(data => this.cities = data);
+    this.cbservice.getCities().subscribe(data => {this.cities = data});
   }
   submitSearchForm(){
     this.searchAttributes.setCitySearch(this.selected);
    //  this.adservice.getFilteredAdverts(this.searchAttributes).subcribe();
   }
+
 }

@@ -15,10 +15,10 @@ export class CodebookService {
     codebook;
   
     getCodebook() {
-      return this.apiService.get(this.config.get_codebook_url);
+      return this.apiService.get(this.config.all_codebook_url);
     }
     getCities(){
-      return this.apiService.get(this.config.get_cities_url);
+      return this.apiService.get(this.config.cities_url);
     }
     addFuelType( fuel : any){
       return this.apiService.post(this.config.add_fuel, fuel);

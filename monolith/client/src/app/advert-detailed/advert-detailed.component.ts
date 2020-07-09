@@ -68,7 +68,7 @@ export class AdvertDetailedComponent implements OnInit {
 
   ngOnInit() {
     this.timeList = [ {value : "08:00"},{ value:"10:00"}, {value:"12:00"}, {value:"14:00"},{value:"16:00"},{value:"18:00"}];
-    this.apiService.get(this.conf.get_cities_url).subscribe((data)=> this.cityList = data);
+    this.apiService.get(this.conf.cities_url).subscribe((data)=> this.cityList = data);
     this.route.params
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((advert: AdvertDTO) => {

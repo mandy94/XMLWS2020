@@ -19,7 +19,7 @@ export class CodeBookComponent implements OnInit {
   
   
   showCodes(){
-    this.cbservice.getCodebook().subscribe(data => this.codes = data);
+    this.cbservice.getCodebook().subscribe(data =>{ this.codes = data,  console.log(data)});
   }
 
   addFuelType(){

@@ -41,7 +41,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [GuestGuard]
-  },
+  },{
+    path: 'codebook',
+    component: CodeBookComponent
+  }
+  ,
   {
     path: 'advert-page',
     component: AdvertDetailedComponent,

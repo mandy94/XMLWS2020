@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
- 
+
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
   private _advert_ms = this._api_gateway + "/adverts-ms/api";cd
@@ -113,17 +113,23 @@ export class ConfigService {
     return this._pricelist_url+'/all';
   }
   // CODE-BOOK PART
-  private _get_codebook_url = this._advert_ms + '/codebook/all';
+  private _get_codebook_url = this._advert_ms + '/codebook';
 
-  get get_codebook_url(): string{
+  get codebook_url(): string{
     return this._get_codebook_url;
   }
-  private _get_cities_url = this._advert_ms + '/codebook/cities';
+  
+  get all_codebook_url(): string{
+    return this._get_codebook_url + '/all';
+  }
+  private _get_cities_url = this._get_codebook_url + '/cities';
 
-  get get_cities_url(): string{
+  get cities_url(): string{
     return this._get_cities_url;
   }
-  get add_fuel(): string{
-    return '/add/fuel';
+ get add_fuel():string{
+    return this._get_codebook_url+"nesto";
   }
+ 
+
 }
