@@ -1,9 +1,27 @@
 .image{
-  width: 300px;
+  /* width: 300px; */
+  height: 200px;
+  align-items: center;
+  object-fit: scale-down;
+  
 }
 
 .outliner{
   /* outline: solid; */
   margin: 1px;
   padding:5px;
+}
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  
+}
+.mat-card{
+  border: 1px solid darkgray;
+  margin-left: 4px;
+  margin-bottom: 2px;
 }

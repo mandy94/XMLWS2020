@@ -1,11 +1,12 @@
 .mat-form-field + .mat-form-field {
     margin-left: 8px;
+    /* min-width: 200px; */
+  }
+  .mat-radio-button ~ .mat-radio-button , .radio-btn{
+    margin-left: 16px;
+    margin-right: 16px;
   }
 
-  .advert-card {
-    max-width: 200px;
-    margin-left: 25px;
-  }
   
   .advert-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
@@ -16,4 +17,27 @@
   }
   .show{
     visibility:visible;
+  }
+  .mat-card{
+    /* border: 1px solid darkgray; */
+    margin-left: 4px;
+    margin-bottom: 2px;
+  }
+
+  .first{
+    min-width: 40%;
+    margin: 15px;
+  }
+  
+  .second{
+    min-width: 60%;
+    margin: 15px;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+  .moveRight{
+    margin-left: 10px;
+    max-width: 80px;
   }

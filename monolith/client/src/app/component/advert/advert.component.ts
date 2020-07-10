@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdvertService } from 'app/service/advert.service';
-import { UserService } from 'app/service';
+import { UserService, ApiService, ConfigService } from 'app/service';
 import { Advert } from 'app/shared/models/advert';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-advert',
@@ -12,28 +13,82 @@ export class AdvertComponent implements OnInit {
 
   constructor(
     private advertService: AdvertService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private apiService:ApiService,
+    private config: ConfigService) { }
     
-  currentUser: any;
   usersAdverts: Advert[];
-  new_advert: Advert;
-  message:string;
+  // Formcontrols
+  newAdvert = new Advert();
 
+  descCtr = new FormControl();
+  manufacturers = new FormControl();
+  models = new FormControl();
+  fuels = new FormControl();
+  gears = new FormControl();
+  cclasses= new FormControl();
+  pricelist= new FormControl();  
+  milageCtr = new FormControl();
+  seatCtr = new FormControl();
+  cdwCtr = new FormControl();
+  // lists
+  manufacturersList : any;
+  modelList: any;
+  fuelList: any;
+  gearList: any;
+  cclassList: any;
+  priceList:any
+ 
+  
+  //selected vals
+  description:any;
+  manufacturer: any;
+  model: any;
+  fuel: any;
+  gear: any;
+  cclass: any;
+  selpricelist:any;
+  milage=''; // koliko je ogranicenje
+  kidsSeat= '';// koiko sedista
+  cdw='';
+
+  // vals for radio buttons
+    isLimit:any;
+    isCDW:any;
+    isSeat:any    
+
+    finished(){
+      if(this.description != '')
+        return false;      
+
+    }
+  form: FormGroup;
   ngOnInit() {
-    //Bitan redosled jer se u novi_oglas referencira id korisnika.
-    this.new_advert = new Advert();
-    
+  
     this.showMyAdverts();
-    this.getMyInfo();
-
+    this.loadResources();
+  
   }
-  //Metoda za vracanja celog objekta korisnika/agencije/admina i referenciranje svakog novog entiteta ka njemu*
-  getMyInfo() {
-    this.userService.getMyInfo()
-      .subscribe(data => {
-        this.currentUser = data,
-        this.new_advert.user = this.currentUser
-      });
+  hasLimit(param){this.isLimit = param;}
+  hasCDW(param){this.isCDW = param}
+  hasBseat(param){this.isSeat = param;}
+
+  submitAddForm(){
+    this.newAdvert.cclass = this.cclass;
+    this.newAdvert.cdwprotection = this.isCDW;
+    this.newAdvert.description = this.description;
+    this.newAdvert.fuel = this.fuel;
+    this.newAdvert.gear = this.gear;
+    this.newAdvert.manufacturer = this.manufacturer;
+    this.newAdvert.model = this.model.title;
+    this.newAdvert.priceList = this.selpricelist;
+    this.newAdvert.milage = Number(this.milage);
+
+    console.log(this.newAdvert);
+    this.apiService.post(this.config.add_advert_url, this.newAdvert)
+                    .subscribe(data => {
+                      this.usersAdverts= data;
+                    })
 
   }
   //Prikaz svih oglasa od ulogovanog usera
@@ -41,29 +96,24 @@ export class AdvertComponent implements OnInit {
     this.advertService.getAdvertsFrom()
       .subscribe(data => {
         this.usersAdverts = data;
-
       });
   }
-  isAddingDisabled() {
-
-    // if (this.userService.amIUser()) {
-    //   if (this.usersAdverts.length >= 3) {
-       
-    //     return true;
-    //   }
-    // }
-    return false;
+  loadResources(){
+    
+    this.apiService.get(this.config.all_codebook_url)
+        .subscribe(data=>{
+          this.manufacturersList = data.manufacturers;      
+          this.modelList = data.models;
+          this.fuelList = data.fuels;
+          this.cclassList = data.cclass;
+          this.gearList = data.gearType;
+    });   
+    this.apiService.get(this.config.my_pricelist_url)
+    .subscribe(data =>{      
+      this.priceList = data;
+    });
+   
   }
-  //Dodavanje novog oglasa  
-  submitAddForm() {
-    if(this.isAddingDisabled())
-    {
-      this.message = "Objavili ste 3 oglasa. Nemate pravo na vise.";
-      
-    }
-    this.advertService.postNewAdvert(this.new_advert)
-      .subscribe(() => { this.showMyAdverts() });
-
-  }
+ 
 
 }

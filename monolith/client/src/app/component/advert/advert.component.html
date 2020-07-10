@@ -1,26 +1,129 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" >
-  <h1>Moji oglasi</h1>
+ <div fxLayout="row" fxLayoutAlign="start stretch">
+  
+  <div class="first">
+    <mat-card>
+      <mat-card-title>Dodaj oglas</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="(submitAddForm())" class="search-form" >
+          
+          <p>Upoznajte klijente sa vasim vozilom uz mali opis</p>
+          <mat-form-field class="example-full-width">
+            <mat-label>Detalji</mat-label>
+            <textarea matInput  [formControl]=descCtr  [(value)]="description"></textarea>
+          </mat-form-field>
+          <p> Unesite opste informacije o vozilu</p>
+          <mat-form-field>
+            <mat-label>Odaberite marku automobila</mat-label>
+            <mat-select [formControl]="manufacturers" [(value)]="manufacturer">
+              <mat-option *ngFor="let item of manufacturersList" [value]="item">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-  <div >
-    <div *ngFor="let advert of usersAdverts">
-     {{advert | json}}
-     <!-- <app-advert-card [advert]='advert' myAd='true'></app-advert-card> -->
-    </div>
+          <mat-form-field>
+            <mat-label>Odaberite model automobila</mat-label>
+            <mat-select  [formControl]="models" [(value)]="model">
+              <mat-option *ngFor="let item of modelList" [value]="item">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Odaberite gorivo</mat-label>
+            <mat-select  [formControl]="fuels" [(value)]="fuel">
+              <mat-option *ngFor="let item of fuelList" [value]="item">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Odaberite vrstu menjaca</mat-label>
+            <mat-select  [formControl]="gears" [(value)]="gear">
+              <mat-option *ngFor="let item of gearList" [value]="item">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Odaberite klasu automobila</mat-label>
+            <mat-select  [formControl]="cclasses" [(value)]="cclass">
+              <mat-option *ngFor="let item of cclassList" [value]="item">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p> Odaberite cenovnik po kojem ce se obracunavati zaduzenje</p>
+
+          <mat-form-field>
+            <mat-label>Cenovnik</mat-label>
+            <mat-select [formControl]="pricelist" [(value)]="selpricelist">
+              <mat-option *ngFor="let item of priceList" [value]="item">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p>
+          Predjenja dosadanjsa kilometraza
+          <mat-form-field class="moveRight">            
+            <input matInput placeholder="Presao"  [formControl]=milageCtr  [(value)]="milage">
+          </mat-form-field> km
+        </p>
+            Da li postoji ogranicena kilometraza prilikom iznajmljivanja?
+            <mat-radio-group class="radio-btn">
+              <mat-radio-button  value="false" (click)="hasLimit(false)">Ne</mat-radio-button>
+              <mat-radio-button  value="true" (click)="hasLimit(true)">Da</mat-radio-button>
+            </mat-radio-group>
+            <div *ngIf="isLimit" v fxLayout="row" fxLayoutAlign="center center"> 
+              Ogranicen na 
+              <mat-form-field class="moveRight">            
+                <input matInput [formControl]=milageCtr  [(value)]="milage">
+              </mat-form-field> km
+            </div>
+            <p>
+            Da li ima sedista za decu?
+            <mat-radio-group class="radio-btn" >
+              <mat-radio-button value="false"  (click)="hasBseat(false)">Ne</mat-radio-button>
+              <mat-radio-button value="true" (click)="hasBseat(true)">Da</mat-radio-button>
+            </mat-radio-group>
+          </p>
+            <div *ngIf="isSeat" v fxLayout="row" fxLayoutAlign="center center"> 
+              Unesi koliko ima sedista
+              <mat-form-field class="moveRight">            
+                <input matInput [formControl]=seatCtr  [(value)]="kidsSeat">
+              </mat-form-field>
+            </div>
+          
+            
+            Da li postoji opcija kupovine CDW-a?
+            <mat-radio-group class="radio-btn"  >
+              <mat-radio-button value="false" (click)="hasCDW(false)">Ne</mat-radio-button>
+              <mat-radio-button value="true"  (click)="hasCDW(true)">Da</mat-radio-button>
+            </mat-radio-group>
+            <div *ngIf="isCDW" v fxLayout="row" fxLayoutAlign="center center"> 
+              Unesite iznos protekcije
+              <mat-form-field class="moveRight">            
+                <input matInput [formControl]=cdwCtr  [(value)]="cdw">
+              </mat-form-field>
+            </div>
+          
+            
+          
+        </form>
+      </mat-card-content>
+      <mat-card-actions> 
+        <div fxLayout="row" fxLayoutAlign="center center" >
+          <button mat-button [disabled]="finished()" (click)="submitAddForm()">Zavrsi dodavanje</button>      
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
   </div>
 
+  <div fxLayout="column" fxLayoutAlign="start stretch" class="second">
 
-<div *ngIf="isAddingDisabled()">
-  <h2>{{message}} </h2>
-</div>
-  <div *ngIf="!isAddingDisabled()" >
-    <h3> Dodaj novi oglas</h3>
-    <form (ngSubmit)="(submitAddForm())" class="example-form" >
-      <mat-form-field [disabled]="isAddingDisabled()" class="example-full-width">
-        <mat-label>Naslov oglasa</mat-label>
-        <input  [(ngModel)]="new_advert.title" name="title" matInput maxlength="256"
-          placeholder="Model, serija, godiste...">
-      </mat-form-field>
-      <button  [disabled]="isAddingDisabled()" type="submit">Ok</button>
-    </form>
+    <mat-card>
+      <mat-card-title>Moji oglasi</mat-card-title>
+      <mat-card-content>
+        <div *ngIf="!usersAdverts"> Nemate nijedan oglas do sad.</div>
+        <mat-grid-list cols="3" rowHeight="464px">
+          <div *ngFor="let advert of usersAdverts">
+            <mat-grid-tile>
+              <app-advert-card [advert]='advert' myAd='true'></app-advert-card>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+
   </div>
 </div>

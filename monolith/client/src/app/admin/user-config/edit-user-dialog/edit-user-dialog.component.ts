@@ -16,7 +16,16 @@ export class EditUserDialogComponent {
   
       authorities = new FormControl();
       authList = ['Agencija', 'Korisnik', 'Administrator'];
+
     onNoClick(): void {
       this.dialogRef.close();
     }
+    
+    activate(id:number){
+      this.apiSevice.put(this.config.user_url + "/activate", id).subscribe();
+    }
+    block(id:number){
+      this.apiSevice.put(this.config.user_url + "/block", id).subscribe();
+    }
+    
 }

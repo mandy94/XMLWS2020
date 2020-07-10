@@ -24,22 +24,15 @@ export class UserConfigComponent implements OnInit {
     })
   }
  
-  showAuthDialog(user){ 
-    console.log(user);
+  showAuthDialog(user){     
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
     width: '450px',
     data: {user: user}
   });
 
   dialogRef.afterClosed().subscribe(result => {    
-    // this.animal = result;
+    
   });
-}
-activate(id:number){
-  this.apiSevice.put(this.config.user_url + "/activate", id).subscribe(data => this.dataSource = data);
-}
-block(id:number){
-  this.apiSevice.put(this.config.user_url + "/block", id).subscribe(data => this.dataSource = data);
 }
 
 }

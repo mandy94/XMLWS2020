@@ -12,54 +12,55 @@ import { UserService } from 'app/service';
   styleUrls: ['./advert-card.component.css']
 })
 export class AdvertCardComponent implements OnInit {
-  @Input() advert = new Advert();  
+  @Input() advert = new Advert();
   @Input() myAd: boolean;
+  
   finishedLoading = false;
-  currAdvert : any;
+  currAdvert: any;
   usersAdverts = new Array<Advert>();
   constructor(private advertService: AdvertService,
-              private userService:UserService,
-              private router: Router) { 
-    this.showMyAdverts(); 
+    private userService: UserService,
+    private router: Router) {
+    this.showMyAdverts();
   }
 
   ngOnInit() {
-    
-      // this.showMyAdverts();
-    
-    }
 
-  showMyAdverts(){
+    // this.showMyAdverts();
+
+  }
+
+  showMyAdverts() {
     this.advertService.getAdvertsFrom()
-    .subscribe( data => {
-      this.usersAdverts = data ;
-      this.finishedLoading = true;});  
-  } 
-  
-   //Brisanje oglasa
-   deleteAdvert(advert: Advert)
-   {
-     this.advertService.deleteAdvert(advert.id)
-     .subscribe(
-       res => this.showMyAdverts()
-     );      
-   }
-addToKart(advertId){
-  // console.log(advertId);
-}
+      .subscribe(data => {
+        this.usersAdverts = data;
+        this.finishedLoading = true;
+      });
+  }
 
-gotoItemPage(advert){
-  
-  let advertDTO = new AdvertDTO(advert);
-  this.userService.getUserById(advert.user_id)
-  .subscribe((owner)=>{
-    advertDTO.owner_id = owner.id;
-    advertDTO.owner_username = owner.username;
-    this.router.navigate(['/advert-page', advertDTO]);
+  //Brisanje oglasa
+  deleteAdvert(advert: Advert) {
+    this.advertService.deleteAdvert(advert.id)
+      .subscribe(
+        res => this.showMyAdverts()
+      );
+  }
+  addToKart(advertId) {
+    // console.log(advertId);
+  }
 
-  })
+  gotoItemPage(advert) {
 
-  
+    let advertDTO = new AdvertDTO(advert);
+    this.userService.getUserById(advert.user_id)
+      .subscribe((owner) => {
+        advertDTO.owner_id = owner.id;
+        advertDTO.owner_username = owner.username;
+        this.router.navigate(['/advert-page', advertDTO]);
+
+      })
+
+
   }
 
 

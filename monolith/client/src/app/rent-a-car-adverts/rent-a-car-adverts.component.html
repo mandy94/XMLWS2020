@@ -1,5 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="space-between none" >
-  <!-- <app-search-adverts-bar></app-search-adverts-bar> -->
+<div fxLayout="column" fxLayoutAlign="space-between none" >  
   
     <mat-card>
       <mat-card-title> Nadji oglas:</mat-card-title>
@@ -66,13 +65,13 @@
       </mat-card-content>
     </mat-card>
     
-    
   
-    <mat-card>
-  <div fxLayout="column" fxLayoutAlign="space-between stretch"  class="adverts-panel"  >
+    <mat-grid-list cols="3" rowHeight="454px">
     <div *ngFor="let advert of advertList" >
-      <app-advert-card [advert]='advert' [myAd] = 'false'></app-advert-card>
+      <mat-grid-tile>
+        <app-advert-card [advert]='advert' [myAd] = 'false'></app-advert-card>
+      </mat-grid-tile>
     </div>
-  </div>
-</mat-card>
+  </mat-grid-list>
+  
 </div>

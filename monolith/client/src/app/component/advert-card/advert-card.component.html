@@ -1,22 +1,46 @@
-<div fxLayout="row" fxLayoutAlign="space-between stretch"  class="adverts-panel" class="outliner" *ngIf="finishedLoading">
-  <!-- <div> {{advert.id}}.</div> -->
-  <div fxLayout="row" fxLayoutAlign="center center" >
-   
+<!-- <div fxLayout="row" fxLayoutAlign="space-between stretch" class="adverts-panel" class="outliner"
+  *ngIf="finishedLoading">
+  
+  <div fxLayout="row" fxLayoutAlign="center center">
+
     <div>
-    <img (click)="gotoItemPage(advert)" mat-card-image [src]="advert.imgmain" class="image">
+      <img (click)="gotoItemPage(advert)" mat-card-image [src]="advert.imgmain" class="image">
+    </div>
   </div>
-  </div>
-  
-  <div fxLayout="column" fxLayoutAlign="center start"  *ngIf="advert">
+
+  <div fxLayout="column" fxLayoutAlign="center start" *ngIf="advert">
     <span>{{advert.title}}</span>
-  
-  </div>
-    <div fxLayout="row" fxLayoutAlign="center center" >
 
-    <button mat-button *ngIf='myAd' color="primary"  (click)="deleteAdvert(advert)">Obrisi </button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+
+    <button mat-button *ngIf='myAd' color="primary" (click)="deleteAdvert(advert)">Obrisi </button>
     <button mat-button *ngIf='!myAd' (click)="gotoItemPage(advert)">Pogledaj detalje</button>
-    <button mat-button *ngIf='!myAd' color="primary"  (click)="addToKart(advert)">Kupi</button>
+    <button mat-button *ngIf='!myAd' color="primary" (click)="addToKart(advert)">Kupi</button>
 
   </div>
- 
-</div>
+
+</div> -->
+
+<mat-card class="example-card" width = "300px" >
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{advert.title}}</mat-card-title>
+    <mat-card-subtitle>{{advert.manufacturer.title}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="advert.imgmain" alt="Photo of a Shiba Inu" class="image">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button  (click)="gotoItemPage(advert)">Pogledaj detalje</button>
+    <button mat-button *ngIf='myAd' color="primary" (click)="deleteAdvert(advert)">Izmeni </button>
+    <button mat-button *ngIf='myAd' color="primary" (click)="deleteAdvert(advert)">Obrisi </button>
+    <button mat-button *ngIf='!myAd' color="primary" (click)="addToKart(advert)">Kupi</button>
+
+  </mat-card-actions>
+</mat-card>
