@@ -1,44 +1,31 @@
-<div fxLayout="row" fxLayoutAlign="center center" >
-  <h2> Administratorski sifrarnici</h2>
-</div>
-<div fxLayout="row" fxLayoutAlign="space-evenly start" *ngIf='codes'>
+<div fxLayout="row" fxLayoutAlign="start start">
 
- <app-content-table
- [ENTITY_DATA] = "codes.fuels"
- [typeNames] = "'goriva'"
- [serverUrl] = "'/fuel'"
-  ></app-content-table>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
 
-<app-content-table
- [ENTITY_DATA] = "codes.models"
- [typeNames] = "'modele'"
- [serverUrl] = "'/model'"
-  ></app-content-table>
-  
-<app-content-table
-[ENTITY_DATA] = "codes.manufacturers"
-[typeNames] = "'proizvodjace'"
-[serverUrl] = "'/manufacturer'"
- ></app-content-table>
+    <!-- <mat-list role="list"> -->
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/fuel','goriva')">Sifrarnici za goriva</mat-card>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/model', 'modele')">Sifrarnici za modele</mat-card>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/manufacturer', 'proizvodjace')">Sifrarnici za proizvodjace</mat-card>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/cclass', 'klase')">Sifrarnici za klase </mat-card>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/city','gradove')">Sifrarnici za gradove</mat-card>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <mat-card (click)="show('/gear', 'menjace')">Sifrarnici za menjace</mat-card>
+    </mat-list-item>
+    <!-- </mat-list> -->
+  </div>
 
- <app-content-table
- [ENTITY_DATA] = "codes.cclass"
- [typeNames] = "'klase'"
- [serverUrl] = "'/cclass'"
-  ></app-content-table>
- 
- <app-content-table
-[ENTITY_DATA] = "codes.cities"
-[typeNames] = "'gradove'"
-[serverUrl] = "'/city'"
- ></app-content-table>
+  <div fxLayout="row" fxLayoutAlign="space-evenly start">
 
- <app-content-table
- [ENTITY_DATA] = "codes.gearType"
- [typeNames] = "'menjace'"
- [serverUrl] = "'/gear'"
-  ></app-content-table>
- 
-  
- 
+    <app-content-table [typeNames]="typeName" [serverUrl]="link"  *ngIf='showResult'></app-content-table>
+  </div>
 </div>

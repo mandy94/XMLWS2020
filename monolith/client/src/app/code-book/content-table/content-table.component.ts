@@ -11,10 +11,10 @@ import { EditItemDialogComponent } from './edit-item-dialog/edit-item-dialog.com
   styleUrls: ['./content-table.component.css']
 })
 export class ContentTableComponent implements OnInit {
-  @Input()  ENTITY_DATA : any;  
   @Input()  typeNames: string;  
   @Input() serverUrl:string;
   
+  ENTITY_DATA : any;  
   displayedColumns: string[] = [ 'name', 'action'];
   codebookTitle: string;
   dataSource:any;
@@ -23,8 +23,14 @@ export class ContentTableComponent implements OnInit {
     ) { }
   
   ngOnInit() {
-    this.codebookTitle = "Sifrarnici za "+ this.typeNames;    
-    this.dataSource = this.ENTITY_DATA;
+    this.codebookTitle = "Sifrarnici za "+ this.typeNames;        
+    
+    this.apiSevice.get(this.config.codebook_url + this.serverUrl + "/all")
+          .subscribe(data=>{
+            this.refreshTablesWith(data);         
+        
+          })
+    
   }
 edit(element){
   const dialogRef = this.dialog.open(EditItemDialogComponent, {

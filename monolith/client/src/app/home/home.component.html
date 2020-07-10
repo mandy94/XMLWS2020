@@ -52,5 +52,7 @@
     <!-- <mat-tab label="Profil"><app-user-profile></app-user-profile></mat-tab> -->
     <!-- <mat-tab *ngIf = "ifAdmin()" label="Sifrarnici" ><app-code-book></app-code-book></mat-tab> -->
     <!-- </mat-tab-group>  -->
-  <app-rent-a-car-adverts ></app-rent-a-car-adverts>
+    <div *ngIf="!ifAdmin()"><app-rent-a-car-adverts ></app-rent-a-car-adverts></div>
+    <div *ngIf="ifAdmin()"><app-admin></app-admin></div>
+  
 </div>

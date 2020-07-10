@@ -43,6 +43,10 @@ import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dia
 import { ContentTableComponent } from './code-book/content-table/content-table.component';
 import { EditItemDialogComponent } from './code-book/content-table/edit-item-dialog/edit-item-dialog.component';
 
+import { UserConfigComponent } from './admin/user-config/user-config.component';
+import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
+import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/edit-user-dialog.component';
+
 @NgModule({
   declarations: [    
     AppComponent,
@@ -71,7 +75,10 @@ import { EditItemDialogComponent } from './code-book/content-table/edit-item-dia
     DialogOverviewComponent,
     DialogNewpricelistComponent,
     ContentTableComponent,
-    EditItemDialogComponent
+    EditItemDialogComponent,
+    AdminStatisticsComponent,
+    UserConfigComponent,
+    EditUserDialogComponent
   
   ],
   imports: [
@@ -106,7 +113,7 @@ import { EditItemDialogComponent } from './code-book/content-table/edit-item-dia
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
+  entryComponents: [EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }

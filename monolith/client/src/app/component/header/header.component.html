@@ -1,6 +1,6 @@
 <mat-toolbar class="app-navbar" color="primary">
   <button mat-button mat-ripple routerLink="/">
-    <img alt="Angular-Spring-Starter" class="app-angular-logo" src="assets/image/angular-white-transparent.svg">
+    <img alt="Angular-Spring-Starter" class="app-angular-logo" src="assets/image/logo.png">
     <span>Rent-a-car prodavnica</span>
   </button>
 
@@ -12,15 +12,16 @@
       <button *ngIf="!hasSignedIn()" mat-button mat-ripple routerLink="/login">
         <span>Loguj se</span>
       </button>
-      <button *ngIf="hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-ads">
+      <button *ngIf="!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-ads">
         <span>Moji oglasi </span>      
       </button>
     
-      <button *ngIf="hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-requests">
+      <button *ngIf="!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-requests">
         <span>Zahtevi </span>      
       </button>
-      <button *ngIf = "ifAdmin()" label="Sifrarnici" mat-button   routerLink="/codebook" > Sifrarnici</button>
-      <button *ngIf="hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
+      <button *ngIf = "ifAdmin()" label="Statistike" mat-button   routerLink="/statistic" > STATISTIKE</button>
+      <button *ngIf = "ifAdmin()" label="Sifrarnici" mat-button   routerLink="/codebook" > SIFRARNICI</button>
+      <button *ngIf = "!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
         <span>Korpa </span>      
       </button>
       <button

@@ -13,6 +13,8 @@ import { CodeBookComponent } from './code-book/code-book.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
 import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
+import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
+import { UserConfigComponent } from './admin/user-config/user-config.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,12 @@ export const routes: Routes = [
   },{
     path: 'codebook',
     component: CodeBookComponent
+  },{
+    path:'statistic',
+    component: AdminStatisticsComponent
+  },{
+    path:'user-config',
+    component: UserConfigComponent
   }
   ,
   {

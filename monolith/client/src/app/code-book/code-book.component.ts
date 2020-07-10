@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CodebookService } from 'app/service/codebook.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-code-book',
@@ -8,24 +9,27 @@ import { CodebookService } from 'app/service/codebook.service';
 })
 export class CodeBookComponent implements OnInit {
 
-  constructor( private cbservice : CodebookService) { }
+  constructor( private cbservice : CodebookService,  private router: Router) { }
 
   ngOnInit() {
+   
+  }
+ 
+  passData:any;
+  typeName:string;
+  link:string;
+  showResult = false;
+
+  show(link:string, des:string){    
+    this.showResult = false;    
+    console.log(this.showResult);
+    this.typeName = des;
+    this.link = link;
+    setTimeout(() => {
+      this.showResult = true;
+    });
     
-    this.showCodes();
-  }
-
-  private codes: any;
-  
-  
-  showCodes(){
-    this.cbservice.getCodebook().subscribe(data =>{ this.codes = data,  console.log(data)});
-  }
-
-  addFuelType(){
-    let fuel;
-
-    this.cbservice.addFuelType(fuel);
+    
   }
 
 }

@@ -1,3 +1,10 @@
-<p>
-  This is admin page!
-</p>
+<div fxLayout="row" fxLayoutAlign="start start">
+  <div fxLayout="column" fxLayoutAlign="space-around center" >
+  <!-- <mat-list role="list"> -->
+    <mat-list-item role="listitem"><mat-card (click)="gotoUsers()">Rad sa registrovanim korisnicima</mat-card></mat-list-item>
+    <mat-list-item role="listitem"><mat-card (click)="gotoCodebook()">Rad sa sifrarnikom</mat-card></mat-list-item>
+    <mat-list-item role="listitem"><mat-card (click)="gotoStats()">Statistike</mat-card></mat-list-item>
+  <!-- </mat-list> -->
+  </div>
+<div></div>
+</div>
