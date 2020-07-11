@@ -15,17 +15,27 @@ import { tick } from '@angular/core/src/render3';
 
 export class PricelistComponent implements OnInit {
   
- 
+ // vals
+ my_bonuses: any;
   constructor(public dialog: MatDialog,
               private apiSrvice: ApiService,
-              private config : ConfigService) {}
+              private config : ConfigService) {
+              
+              }
  
+
+  getBonuses(){
+    this.apiSrvice.get(this.config.my_bonuses_url).subscribe(data => this.my_bonuses);    
+  }            
   openCreateDialog():void{
+    this.getBonuses();
     const  createDialog =  this.dialog.open(DialogNewpricelistComponent, {
-      width: '550px'           
+      width: '550px',      
+
+      
     });
     createDialog.afterClosed().subscribe(result => {
-      // this.create(result);
+      this.loadPriceList(); 
     });
   }
 
@@ -36,7 +46,7 @@ export class PricelistComponent implements OnInit {
     });
     
     updateDialog.afterClosed().subscribe(result => {
-      // this.refreshTableWith()
+      this.loadPriceList(); 
       
     });  
     
@@ -48,6 +58,7 @@ export class PricelistComponent implements OnInit {
 
   ngOnInit() {
    this.loadPriceList();    
+   this.getBonuses();
   }
 
   hasPricelists(){
@@ -67,13 +78,14 @@ export class PricelistComponent implements OnInit {
 loadPriceList(){
   this.apiSrvice.get(this.config.my_pricelist_url)
                 .subscribe((data) =>{
-                  this.displayedColumns = ['id', 'name','pricePerDay', 'pricePerKm','cdw', 'actions'];                    
+                  this.displayedColumns = ['id', 'name','pricePerDay', 'pricePerKm','cdw','bonus', 'actions'];                    
                   if(data.length != 0 ){
                     this.dataLoaded = true;                    
                     this.refreshTableWith(data);
                   }
                 });
 }
+
 refreshTableWith(data){
   const PRICELIST_TABLE:PricelistInterface[]= data;         
   this.dataSource = PRICELIST_TABLE;

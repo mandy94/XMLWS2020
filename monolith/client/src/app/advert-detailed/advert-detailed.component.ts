@@ -65,21 +65,26 @@ export class AdvertDetailedComponent implements OnInit {
     advert: AdvertDTO;
     timeList: any; 
     cityList: any;
-
+    imgUrl:any;
+    owner_username:string;
   ngOnInit() {
+    let that = this;
     this.timeList = [ {value : "08:00"},{ value:"10:00"}, {value:"12:00"}, {value:"14:00"},{value:"16:00"},{value:"18:00"}];
     this.apiService.get(this.conf.cities_url).subscribe((data)=> this.cityList = data);
     this.route.params
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((advert: AdvertDTO) => {
       this.advert = advert;
+      
+      this.apiService.get(this.conf.user_url+'/'+advert.user_id).subscribe(data => that.owner_username = data.username);
+      that.imgUrl = this.conf.get_img_url + this.advert.img;
       });
 
   }
  
   myAdvert(){
-    console.log(this.advert);
-    console.log(this.userService.getMyId());
+    // console.log(this.advert);
+    // console.log(this.userService.getMyId());
     return Number(this.userService.getMyId()) == this.advert.owner_id ? true : false;
   }
 
@@ -87,45 +92,8 @@ export class AdvertDetailedComponent implements OnInit {
 public onFileChanged(event) {
   this.selectedFile = event.target.files[0];
 }
-onUpload() {
-  console.log(this.selectedFile);
-  //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-  const uploadImageData = new FormData();
-  uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-  //Make a call to the Spring Boot Application to save the image
-  this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, { observe: 'response' })
-    .subscribe((response) => {
-      if (response.status === 200) {
-        this.message = 'Image uploaded successfully';
-      } else {
-        this.message = 'Image not uploaded successfully';
-      }
-    }
-    );
-}
-  //Gets called when the user clicks on retieve image button to get the image from back end
-  getImage() {
-    let type = this.imageName.split('.');
-    console.log("Trazimo sliku: " + this.imageName + " tipa : " + type[1]);
-    
-  //Make a call to Sprinf Boot to get the Image Bytes.
-  this.httpClient.get('http://localhost:8080/image/get/' + this.imageName)
-    .subscribe(
-      res => {
-        console.log(" VRATILI: " + res);
-        if(res != null){
-          this.retrieveResonse = res;
-          this.base64Data = this.retrieveResonse.picByte;
-          let objectUri = 'data:image/jpeg;base64,' + this.base64Data;
-          this.retrievedImage = this.sanitizer.bypassSecurityTrustUrl(objectUri);
-      
-    }else{
-         console.log(" Nema slike");
-     }
-    }
-    );
-}
 
+  
 
 newUserRequest= new UserRequest();
 selectedRentingTime:any;
@@ -137,7 +105,7 @@ submit(){
     this.newUserRequest.returningDate = this.selectedReturnDate;
     this.newUserRequest.advert.id= Number(this.advert.id);
     this.newUserRequest.client.id = Number(this.userService.currentUser.id);
-    // this.newUserRequest.owner = this.advert.;
+   
   
     this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = new UserRequest());}
     );

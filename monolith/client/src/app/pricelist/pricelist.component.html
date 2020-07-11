@@ -32,6 +32,11 @@
     <mat-cell *matCellDef="let element"> {{element.cdw}}.00 din </mat-cell>
   </ng-container>
 
+  <!-- Name Column -->
+  <ng-container matColumnDef="bonus">
+    <mat-header-cell *matHeaderCellDef> Popust na duzi period</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.bonus}} % </mat-cell>
+  </ng-container>
   
 
   <!-- Symbol Column -->

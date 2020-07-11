@@ -9,14 +9,21 @@
     <input matInput [(ngModel)]="data.pricePerDay">
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Cena zasvaki naredni kilometar</mat-label>
+    <mat-label>Cena za svaki naredni kilometar</mat-label>
     <input matInput [(ngModel)]="data.pricePerKm">
   </mat-form-field> 
+  <mat-form-field >
+    <mat-label>Popust pri duzen rentiranju</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let item of my_bonuses" [value]="item">
+        {{item.value}}%
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Iznos CDW</mat-label>
     <input matInput [(ngModel)]="data.cdw">
-
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

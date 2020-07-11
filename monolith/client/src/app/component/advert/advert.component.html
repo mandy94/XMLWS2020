@@ -11,6 +11,13 @@
             <mat-label>Detalji</mat-label>
             <textarea matInput  [formControl]=descCtr  [(value)]="description"></textarea>
           </mat-form-field>
+          <p></p>
+          <button mat-button> Dodaj fotografiju automobila </button>
+          <input type="file" mat-button (change)="onFileChanged($event)">
+          <input type="button" (click)="onUpload()" value="upload">
+          <div *ngIf=imgUrl>
+            <img [src]="imgUrl" height="80px">
+        </div>
           <p> Unesite opste informacije o vozilu</p>
           <mat-form-field>
             <mat-label>Odaberite marku automobila</mat-label>

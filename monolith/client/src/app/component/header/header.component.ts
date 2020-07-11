@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ifAdmin(){
-    return this.userService.amIAdmin();
+    return this.hasSignedIn() && this.userService.amIAdmin();
   }
 
   hasSignedIn() {

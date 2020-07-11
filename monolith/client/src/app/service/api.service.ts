@@ -29,11 +29,21 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  get(path: string, args?: any): Observable<any> {
+  get(path: string, args?: any, isImg?:boolean): Observable<any> {
+    let head;
+    if(isImg){      
+        head = new HttpHeaders({
+        'Authorization' : localStorage.getItem("token"),
+        'Access-Control-Allow-Origin' : '*',   
+        //  'Accept':  'multipart/form-data'   ,
+        // 'Content-type' : 'multipart/form-data'   
+      });        
+    }else{
+      head = this.headers;
+    }
     const options = {
-      headers: this.headers,
+      headers: head,
     };
-
     if (args) {
       options['params'] = serialize(args);
     }
@@ -42,8 +52,8 @@ export class ApiService {
       .pipe(catchError(this.checkError.bind(this)));
   }
 
-  post(path: string, body: any, customHeaders?: HttpHeaders): Observable<any> {
-    console.log(body);
+  post(path: string, body: any, customHeaders?: HttpHeaders): Observable<any> {  
+    
     return this.request(path, body, RequestMethod.Post, customHeaders);
   }
   

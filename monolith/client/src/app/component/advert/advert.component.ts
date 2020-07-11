@@ -3,6 +3,8 @@ import { AdvertService } from 'app/service/advert.service';
 import { UserService, ApiService, ConfigService } from 'app/service';
 import { Advert } from 'app/shared/models/advert';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HttpHeaders } from '@angular/common/http';
+import { AdvertDTO, AdvertDAO } from '../advert-card';
 
 @Component({
   selector: 'app-advert',
@@ -19,7 +21,7 @@ export class AdvertComponent implements OnInit {
     
   usersAdverts: Advert[];
   // Formcontrols
-  newAdvert = new Advert();
+  newAdvert = new AdvertDAO();
 
   descCtr = new FormControl();
   manufacturers = new FormControl();
@@ -41,16 +43,16 @@ export class AdvertComponent implements OnInit {
  
   
   //selected vals
-  description:any;
+  description='';
   manufacturer: any;
   model: any;
   fuel: any;
   gear: any;
   cclass: any;
   selpricelist:any;
-  milage=''; // koliko je ogranicenje
-  kidsSeat= '';// koiko sedista
-  cdw='';
+  milage=0; // koliko je ogranicenje
+  kidsSeat= 0;// koiko sedista
+  cdw=0;
 
   // vals for radio buttons
     isLimit:any;
@@ -74,15 +76,17 @@ export class AdvertComponent implements OnInit {
   hasBseat(param){this.isSeat = param;}
 
   submitAddForm(){
-    this.newAdvert.cclass = this.cclass;
-    this.newAdvert.cdwprotection = this.isCDW;
+    this.newAdvert.cclass = this.cclass.id;
     this.newAdvert.description = this.description;
-    this.newAdvert.fuel = this.fuel;
-    this.newAdvert.gear = this.gear;
-    this.newAdvert.manufacturer = this.manufacturer;
+    this.newAdvert.fuel = this.fuel.id;
+    this.newAdvert.gear = this.gear.id;
+    this.newAdvert.manufacturer = this.manufacturer.id;
     this.newAdvert.model = this.model.title;
-    this.newAdvert.priceList = this.selpricelist;
-    this.newAdvert.milage = Number(this.milage);
+    this.newAdvert.priceList = this.selpricelist.id;
+    this.newAdvert.CDW = this.isCDW === false? 0 : this.cdw;
+    this.newAdvert.milage = this.isLimit === false ? -1 : this.milage;
+    this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.kidsSeat;
+    this.newAdvert.img = this.selectedFile.name;
 
     console.log(this.newAdvert);
     this.apiService.post(this.config.add_advert_url, this.newAdvert)
@@ -114,6 +118,41 @@ export class AdvertComponent implements OnInit {
     });
    
   }
+  selectedFile: any;
+  public onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+  }
+  imgUrl;
+  onUpload() {
+    const that = this;
+    
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    let headers = new HttpHeaders({
+      'Authorization' : localStorage.getItem("token"),
+      'Access-Control-Allow-Origin' : '*',  
+    });  
+    this.apiService.post(this.config.upload_img_url, uploadImageData, headers).subscribe(()=>{
+      that.imgUrl = this.config.get_img_url+this.selectedFile.name;
+      
+    });
+  }
+  retrieveResonse;
+  base64Data;
+  retrievedImage;
+
+
+  // getImage(imageName:string) {
+     
+  //     this.apiService.get(this.config.get_img_url+imageName,null, true)
+  //      .subscribe();
+      
+  // }
+    
+
+
  
 
 }

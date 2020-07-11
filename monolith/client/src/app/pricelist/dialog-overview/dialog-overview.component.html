@@ -17,9 +17,14 @@
     <mat-label>Cena zasvaki naredni kilometar</mat-label>
     <input matInput [(ngModel)]="data.pricePerKm">
   </mat-form-field>
-  <section class="example-section">
-    <mat-checkbox class="example-margin" [(ngModel)]="hasCDW">Da li postoji CDW </mat-checkbox>
-  </section>
+  <mat-form-field >
+    <mat-label>Popust pri duzen rentiranju</mat-label>
+    <mat-select [(ngModel)]="data.bonus">
+      <mat-option *ngFor="let item of my_bonuses"  [value]="item.value">
+        {{item.value}}%
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Iznos CDW</mat-label>

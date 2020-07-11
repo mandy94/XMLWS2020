@@ -5,7 +5,7 @@ export class Advert{
    
     id: number;
     title: string;
-    description: string;
+    description: any;
     manufacturer: any;
     model: any;
     fuel: any;
@@ -18,6 +18,7 @@ export class Advert{
     cclass:any;
     milage:number;
     priceList = new Pricelist()
+    user_id: any;
 
 
 }
@@ -36,5 +37,6 @@ export interface PricelistInterface{
     pricePerKm: number;
     cdw:number;
     id:number;
+    bonus: number;
     
 }

@@ -3,8 +3,8 @@ import { UserDTO } from 'app/advert-detailed';
 
 
 export class AdvertDTO{
-    constructor(data : Advert){
-        console.log(data)
+    constructor(data? : Advert){    
+        if(data != undefined){    
         this.id = data.id;
         this.title = data.title;
         this.model = data.model;
@@ -17,12 +17,14 @@ export class AdvertDTO{
         this.kidsSeat=  data.kidsSeat;
         this.cclass= data.cclass.title;
         this.milage= data.milage;
-        
+        this.user_id = data.user_id;
+
+        }
               
     }
     owner_id:number;
     owner_username:string;
-    owner: UserDTO;
+    owner: UserDTO;    
     id: number;
     title: string;
     description: string;
@@ -30,14 +32,30 @@ export class AdvertDTO{
     fuel: string;
     gear: string;
     img:string;
-    cclass:string;
-
+    cclass:string;    
     user_id: number;
     manufacturer:string;
-
     CDW: boolean;
     numberOfKidsSeat: number;
     kidsSeat: boolean;
     milage:number;
+ 
+}
+// this one for adding 
+export class AdvertDAO{
+    constructor(){}    
+    
+    title: string;
+    description: string;
+    model: String;
+    fuel: number;
+    gear: number;
+    img:string;
+    cclass:number;        
+    manufacturer:number;
+    CDW: number;
+    numberOfKidsSeat: number;    
+    milage:number;
+    priceList:number;
  
 }

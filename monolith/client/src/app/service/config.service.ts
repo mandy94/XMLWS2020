@@ -7,7 +7,7 @@ export class ConfigService {
 
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
-  private _advert_ms = this._api_gateway + "/adverts-ms/api";cd
+  private _advert_ms = this._api_gateway + "/adverts-ms/api";
   private _requests_ms = this._api_gateway + "/requests-ms/api"
   //--------------------------------------------------------
   private _api_url =  this._users_and_agancy_ms;
@@ -102,6 +102,13 @@ export class ConfigService {
   get search_advert_url(): string{
     return this._search_advert_url;
   }
+  get upload_img_url(): string{
+    return this._advert_ms + '/upload';
+  }
+  
+  get get_img_url(): string{
+    return this._advert_ms + '/get-image/';
+  }
   // PRICELIST PART
   private _pricelist_url = this._advert_ms + '/pricelist';
 
@@ -120,6 +127,10 @@ export class ConfigService {
   get all_pricelist_url():string{
     return this._pricelist_url+'/all';
   }
+  get my_bonuses_url():string{
+    return this._pricelist_url+'/bonuses/me';
+  }
+  
   // CODE-BOOK PART
   private _get_codebook_url = this._advert_ms + '/codebook';
 

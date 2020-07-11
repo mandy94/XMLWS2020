@@ -16,16 +16,22 @@ export class DialogOverviewComponent{
     private config:ConfigService,
     public dialogRef: MatDialogRef<DialogOverviewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PricelistInterface) {
-      
+      this.getBonuses();
     }
-
+  
   onNoClick(): void {
     this.dialogRef.close();
-  }
+  } 
+  
+  my_bonuses:any;
+  getBonuses(){
+   this.apiService.get(this.config.my_bonuses_url).subscribe(data => this.my_bonuses = data);    
+ } 
   
 update(data){
   console.log(data);
   this.apiService.put(this.config.update_pricelist_url, data).subscribe();
+  this.dialogRef.close();
 }
 
 

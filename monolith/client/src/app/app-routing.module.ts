@@ -15,6 +15,7 @@ import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
 import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 import { UserConfigComponent } from './admin/user-config/user-config.component';
+import { PricelistComponent } from './pricelist/pricelist.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,9 @@ export const routes: Routes = [
   },{
     path:'user-config',
     component: UserConfigComponent
+  },{
+    path:'my-pricelists',
+    component: PricelistComponent
   }
   ,
   {

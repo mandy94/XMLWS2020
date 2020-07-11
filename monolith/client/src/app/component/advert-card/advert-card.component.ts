@@ -3,7 +3,7 @@ import { Advert } from 'app/shared/models/advert';
 import { AdvertService } from 'app/service/advert.service';
 import { Router } from '@angular/router';
 import { AdvertDTO } from '.';
-import { UserService } from 'app/service';
+import { UserService, ConfigService } from 'app/service';
 
 
 @Component({
@@ -20,17 +20,19 @@ export class AdvertCardComponent implements OnInit {
   usersAdverts = new Array<Advert>();
   constructor(private advertService: AdvertService,
     private userService: UserService,
+    private config: ConfigService,
     private router: Router) {
-    this.showMyAdverts();
-  }
-
+    }
+imgUrl;
   ngOnInit() {
 
-    // this.showMyAdverts();
+    this.showMyAdverts();
+    this.imgUrl = this.config.get_img_url + this.advert.imgmain;
 
   }
 
   showMyAdverts() {
+    console.log("refreshed data")
     this.advertService.getAdvertsFrom()
       .subscribe(data => {
         this.usersAdverts = data;
@@ -40,25 +42,27 @@ export class AdvertCardComponent implements OnInit {
 
   //Brisanje oglasa
   deleteAdvert(advert: Advert) {
+    let that = this;
     this.advertService.deleteAdvert(advert.id)
       .subscribe(
-        res => this.showMyAdverts()
+        (data) => this.showMyAdverts()
       );
   }
   addToKart(advertId) {
     // console.log(advertId);
   }
 
-  gotoItemPage(advert) {
+  gotoItemPage() {
+    
+    let advertDTO = new AdvertDTO(this.advert);
+    this.router.navigate(['/advert-page', advertDTO]);
+    // this.userService.getUserById(this.advert.user_id)
+    //   .subscribe((owner) => {
+    //     advertDTO.owner_id = owner.id;
+    //     advertDTO.owner_username = owner.username;
+    //     this.router.navigate(['/advert-page', advertDTO]);
 
-    let advertDTO = new AdvertDTO(advert);
-    this.userService.getUserById(advert.user_id)
-      .subscribe((owner) => {
-        advertDTO.owner_id = owner.id;
-        advertDTO.owner_username = owner.username;
-        this.router.navigate(['/advert-page', advertDTO]);
-
-      })
+    //   })
 
 
   }
