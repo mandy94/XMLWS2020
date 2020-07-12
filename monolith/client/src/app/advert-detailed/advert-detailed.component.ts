@@ -75,13 +75,22 @@ export class AdvertDetailedComponent implements OnInit {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((advert: AdvertDTO) => {
       this.advert = advert;
-      
+      this.loadPriceList();
       this.apiService.get(this.conf.user_url+'/'+advert.user_id).subscribe(data => that.owner_username = data.username);
-      that.imgUrl = this.conf.get_img_url + this.advert.img;
+           that.imgUrl = this.conf.get_img_url + this.advert.img;
       });
 
   }
- 
+  displayedColumns = ['id', 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus'];
+  dataSource;
+  loadPriceList() {
+    
+    this.apiService.get(this.conf.advert_pricelist_url + this.advert.id + '/pricelist' )
+      .subscribe((data) => {
+        this.dataSource = [data];
+        console.log(data);
+      });
+  }
   myAdvert(){
     // console.log(this.advert);
     // console.log(this.userService.getMyId());

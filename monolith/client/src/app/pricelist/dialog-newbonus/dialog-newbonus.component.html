@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Napravi novog bonusa</h1>
+<div fxLayout="column" fxLayoutAlign="strech" mat-dialog-content>  
+  <mat-form-field>
+    <mat-label>Iznos popusta u %</mat-label>
+    <input matInput [(ngModel)]="value">
+  </mat-form-field>
+ 
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()"> Odustani </button>
+  <button mat-button (click)="create(value)" cdkFocusInitial>Napravi</button>
+</div>

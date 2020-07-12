@@ -20,8 +20,6 @@ export class CodebookService {
     getCities(){
       return this.apiService.get(this.config.cities_url);
     }
-    addFuelType( fuel : any){
-      return this.apiService.post(this.config.add_fuel, fuel);
-    }
+  
     
 }

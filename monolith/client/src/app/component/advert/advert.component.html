@@ -121,7 +121,8 @@
     <mat-card>
       <mat-card-title>Moji oglasi</mat-card-title>
       <mat-card-content>
-        <div *ngIf="!usersAdverts"> Nemate nijedan oglas do sad.</div>
+        
+        <div *ngIf="!hasAds()"> Nemate nijedan oglas do sad.</div>
         <mat-grid-list cols="3" rowHeight="464px">
           <div *ngFor="let advert of usersAdverts">
             <mat-grid-tile>

@@ -1,56 +1,94 @@
+<div>
+  <h2>Predefinisani bonusi </h2>
+  <button (click)="openCreateDialogBonus()"> Napravi novi</button>
+  <div fxLayout="column" fxLayoutAlign=" stretch">
+    <div *ngIf="!hasBonuses()"> Nemate definisane bonuse
+    </div>
+    <div *ngIf="hasBonuses()">
+      <mat-table [dataSource]="dataSourceBonus" class="mat-elevation-z8">
+   
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef> Iznos bonusa</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.value}} %</mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Akcije </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-flat-button (click)="deleteBonus(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-flat-button (click)="openUpdateDialogBonus(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsBonus"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsBonus;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+
 <h2> Lista tvojih cenovnika </h2>
 <button (click)="openCreateDialog()"> Napravi novi</button>
-<div fxLayout="column" fxLayoutAlign=" stretch" >
+<div fxLayout="column" fxLayoutAlign=" stretch">
   <div *ngIf="!hasPricelists()"> Nemate definisane cenovnike
   </div>
   <div *ngIf="hasPricelists()">
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Weight Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-    </ng-container>
-  <!-- Weight Column -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Naziv cenovnika</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-  </ng-container>
-  <!-- Position Column -->
-  <ng-container matColumnDef="pricePerDay">
-    <mat-header-cell *matHeaderCellDef> Osnovna cena </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.pricePerDay}}.00 din </mat-cell>
-  </ng-container>
-<!-- Position Column -->
-<ng-container matColumnDef="pricePerKm">
-  <mat-header-cell *matHeaderCellDef> Cena po predjenom kilometru </mat-header-cell>
-  <mat-cell *matCellDef="let element"> {{element.pricePerKm}}.00 din </mat-cell>
-</ng-container>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Weight Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Naziv cenovnika</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="pricePerDay">
+        <mat-header-cell *matHeaderCellDef> Osnovna cena </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pricePerDay}}.00 din </mat-cell>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="pricePerKm">
+        <mat-header-cell *matHeaderCellDef> Cena po predjenom kilometru </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pricePerKm}}.00 din </mat-cell>
+      </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="cdw">
-    <mat-header-cell *matHeaderCellDef> Odsteta prilikom sudara </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.cdw}}.00 din </mat-cell>
-  </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="cdw">
+        <mat-header-cell *matHeaderCellDef> Odsteta prilikom sudara </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cdw}}.00 din </mat-cell>
+      </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="bonus">
-    <mat-header-cell *matHeaderCellDef> Popust na duzi period</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.bonus}} % </mat-cell>
-  </ng-container>
-  
+      <!-- Name Column -->
+      <ng-container matColumnDef="bonus">
+        <mat-header-cell *matHeaderCellDef> Popust na duzi period</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.bonus}} % </mat-cell>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> Akcije </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-       <button mat-flat-button (click)="delete(element.id)"> <mat-icon>delete</mat-icon></button> 
-       <button mat-flat-button (click)="openUpdateDialog(element)"> <mat-icon>edit</mat-icon></button>
-      </mat-cell>
-  </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-</div>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Akcije </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-flat-button (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-flat-button (click)="openUpdateDialog(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>
 <!-- <button (click)="openDialog()"> test</button> -->

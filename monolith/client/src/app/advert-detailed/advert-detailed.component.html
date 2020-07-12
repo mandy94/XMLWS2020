@@ -19,8 +19,53 @@
     </div>
     </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="space-around  center">
-    <h2> Cenovnik</h2>
+<!-- <div fxLayout="row" fxLayoutAlign="space-around  center"> -->
+    <div fxLayout="column" fxLayoutAlign="center stretch" >
+    <h2> Cenovnik</h2>        
+      <!-- POCETAK CENOVNIKA -->
+      <div>
+      <div fxLayout="column" fxLayoutAlign=" stretch">
+        
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Weight Column -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Naziv cenovnika</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="pricePerDay">
+              <mat-header-cell *matHeaderCellDef> Osnovna cena </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.pricePerDay}}.00 din </mat-cell>
+            </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="pricePerKm">
+              <mat-header-cell *matHeaderCellDef> Cena po predjenom kilometru </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.pricePerKm}}.00 din </mat-cell>
+            </ng-container>
+      
+            <!-- Name Column -->
+            <ng-container matColumnDef="cdw">
+              <mat-header-cell *matHeaderCellDef> Odsteta prilikom sudara </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.cdw}}.00 din </mat-cell>
+            </ng-container>
+      
+            <!-- Name Column -->
+            <ng-container matColumnDef="bonus">
+              <mat-header-cell *matHeaderCellDef> Popust na duzi period</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.bonus}} % </mat-cell>
+            </ng-container>
+      
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+    </div>
+      <!-- KRAJ CENOVNIKA -->
 </div>
 <div fxLayout="row" fxLayoutAlign="space-around  center">
     <h2> Rezervisi automobil.</h2>

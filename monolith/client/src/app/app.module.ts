@@ -46,6 +46,7 @@ import { EditItemDialogComponent } from './code-book/content-table/edit-item-dia
 import { UserConfigComponent } from './admin/user-config/user-config.component';
 import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/edit-user-dialog.component';
+import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newbonus.component';
 
 @NgModule({
   declarations: [    
@@ -78,7 +79,8 @@ import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/ed
     EditItemDialogComponent,
     AdminStatisticsComponent,
     UserConfigComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    DialogNewbonusComponent
   
   ],
   imports: [
@@ -113,7 +115,7 @@ import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/ed
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
+  entryComponents: [DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }

@@ -1,4 +1,7 @@
 
+<div *ngIf="!itemRequests">
+  <h2>Vasa korpa je prazna.</h2>
+</div>
 <div *ngFor="let items of itemRequests">
  <h2> Porucili ste od : {{items.owner.fullName}}</h2>
     <table mat-table  [dataSource]="items.content" class="mat-elevation-z8">    

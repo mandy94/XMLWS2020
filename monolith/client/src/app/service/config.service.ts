@@ -121,6 +121,9 @@ export class ConfigService {
   get new_pricelist_url():string{
     return this._pricelist_url + '/new';
   }
+  get advert_pricelist_url():string{
+    return this._advert_ms + '/advert/';
+  }
   get update_pricelist_url():string{
     return this._pricelist_url + '/update';
   }
@@ -131,6 +134,9 @@ export class ConfigService {
     return this._pricelist_url+'/bonuses/me';
   }
   
+  get new_bonus_url():string{
+    return this._pricelist_url+'/bonus/new';
+  }
   // CODE-BOOK PART
   private _get_codebook_url = this._advert_ms + '/codebook';
 
@@ -141,14 +147,11 @@ export class ConfigService {
   get all_codebook_url(): string{
     return this._get_codebook_url + '/all';
   }
-  private _get_cities_url = this._get_codebook_url + '/cities';
+  private _get_cities_url = this._get_codebook_url + '/city/all';
 
   get cities_url(): string{
     return this._get_cities_url;
   }
- get add_fuel():string{
-    return this._get_codebook_url+"nesto";
-  }
- 
+
 
 }

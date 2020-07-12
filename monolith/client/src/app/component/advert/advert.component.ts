@@ -88,7 +88,6 @@ export class AdvertComponent implements OnInit {
     this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.kidsSeat;
     this.newAdvert.img = this.selectedFile.name;
 
-    console.log(this.newAdvert);
     this.apiService.post(this.config.add_advert_url, this.newAdvert)
                     .subscribe(data => {
                       this.usersAdverts= data;
@@ -101,6 +100,9 @@ export class AdvertComponent implements OnInit {
       .subscribe(data => {
         this.usersAdverts = data;
       });
+  }
+  hasAds(){
+    return this.usersAdverts.length == 0 ? false: true;
   }
   loadResources(){
     
