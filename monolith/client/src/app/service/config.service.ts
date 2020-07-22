@@ -112,6 +112,7 @@ export class ConfigService {
   // PRICELIST PART
   private _pricelist_url = this._advert_ms + '/pricelist';
 
+
   get pricelist_url():string{
     return this._pricelist_url;
   }
@@ -130,6 +131,10 @@ export class ConfigService {
   get all_pricelist_url():string{
     return this._pricelist_url+'/all';
   }
+  get bonus_url():string{
+    return this._pricelist_url + '/bonus';
+  }
+
   get my_bonuses_url():string{
     return this._pricelist_url+'/bonuses/me';
   }

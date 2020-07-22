@@ -1,14 +1,15 @@
 
-<div *ngIf="!itemRequests">
+<div *ngIf="!hasItemRequests()">
   <h2>Vasa korpa je prazna.</h2>
 </div>
 <div *ngFor="let items of itemRequests">
  <h2> Porucili ste od : {{items.owner.fullName}}</h2>
+
     <table mat-table  [dataSource]="items.content" class="mat-elevation-z8">    
 
       <ng-container matColumnDef="img">
         <th mat-header-cell *matHeaderCellDef> Slika </th>
-        <td mat-cell *matCellDef="let item"> <img [src]="item.advert.imgmain"  height="55px"> </td>
+        <td mat-cell *matCellDef="let item"> <img [src]="imgUrl+item.advert.imgmain"  height="55px"></td>
       </ng-container>
 
       <ng-container matColumnDef="title">
@@ -23,22 +24,29 @@
 
       <ng-container matColumnDef="renta">
         <th mat-header-cell *matHeaderCellDef> Preuzimanje</th>
-        <td mat-cell *matCellDef="let item"> {{item.rentingDate}} u {{ item.rentingTime}} </td>
+        <td mat-cell *matCellDef="let item"> {{item.rentingDate}}
+          <span *ngIf="item.rentingTime"> u {{ item.rentingTime}} </span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="returning">
         <th mat-header-cell *matHeaderCellDef>Vracanje</th>
-        <td mat-cell *matCellDef="let item"> {{item.returningDate}} u {{item.returningTime}}</td>
+        <td mat-cell *matCellDef="let item"> {{item.returningDate}} 
+          <span *ngIf="item.returningTime">u {{item.returningTime}}</span></td>
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status</th>
-        <td mat-cell *matCellDef="let item"> {{item.status}} </td>
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let item">
+          <div fxLayout="row" fxLayoutAlign="start center" class="status">
+          {{item.status}}  <mat-spinner diameter="20"></mat-spinner>
+        </div> </td>
       </ng-container>
       
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Akcije</th>
-        <td mat-cell *matCellDef="let item"> <button (click)="delete(item.id)"> Ponisti zahtev</button></td>
+        <td mat-cell *matCellDef="let item"> <button mat-button  color="warn" (click)="delete(item.id)">
+           <mat-icon>cancel</mat-icon></button></td>
       </ng-container>
   
       

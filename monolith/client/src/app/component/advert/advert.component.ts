@@ -19,7 +19,7 @@ export class AdvertComponent implements OnInit {
     private apiService:ApiService,
     private config: ConfigService) { }
     
-  usersAdverts: Advert[];
+  usersAdverts = [];
   // Formcontrols
   newAdvert = new AdvertDAO();
 
@@ -84,7 +84,7 @@ export class AdvertComponent implements OnInit {
     this.newAdvert.model = this.model.title;
     this.newAdvert.priceList = this.selpricelist.id;
     this.newAdvert.CDW = this.isCDW === false? 0 : this.cdw;
-    this.newAdvert.milage = this.isLimit === false ? -1 : this.milage;
+    this.newAdvert.milage = this.isLimit === false ? 0: this.milage;
     this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.kidsSeat;
     this.newAdvert.img = this.selectedFile.name;
 
@@ -102,7 +102,8 @@ export class AdvertComponent implements OnInit {
       });
   }
   hasAds(){
-    return this.usersAdverts.length == 0 ? false: true;
+  
+    return this.usersAdverts.length === 0 ? false: true;
   }
   loadResources(){
     

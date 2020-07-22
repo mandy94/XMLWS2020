@@ -14,8 +14,8 @@
   </mat-form-field> 
   <mat-form-field >
     <mat-label>Popust pri duzen rentiranju</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let item of my_bonuses" [value]="item">
+    <mat-select [(ngModel)]="data.bonus">
+      <mat-option *ngFor="let item of my_bonuses" [value] ="item.value"  >
         {{item.value}}%
       </mat-option>
     </mat-select>

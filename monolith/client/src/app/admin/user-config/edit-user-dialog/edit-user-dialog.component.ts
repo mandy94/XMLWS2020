@@ -22,10 +22,12 @@ export class EditUserDialogComponent {
     }
     
     activate(id:number){
-      this.apiSevice.put(this.config.user_url + "/activate", id).subscribe();
+      this.apiSevice.put(this.config.user_url + "/activate", id).subscribe(()=>{
+        this.data.user.status= 'ACTIVE';
+      });
     }
     block(id:number){
-      this.apiSevice.put(this.config.user_url + "/block", id).subscribe();
+      this.apiSevice.put(this.config.user_url + "/block", id).subscribe(()=>this.data.user.status= 'BLOCK');
     }
     
 }

@@ -45,7 +45,7 @@ imgUrl;
     let that = this;
     this.advertService.deleteAdvert(advert.id)
       .subscribe(
-        (data) => this.showMyAdverts()
+        () => this.showMyAdverts()
       );
   }
   addToKart(advertId) {
@@ -56,13 +56,6 @@ imgUrl;
     
     let advertDTO = new AdvertDTO(this.advert);
     this.router.navigate(['/advert-page', advertDTO]);
-    // this.userService.getUserById(this.advert.user_id)
-    //   .subscribe((owner) => {
-    //     advertDTO.owner_id = owner.id;
-    //     advertDTO.owner_username = owner.username;
-    //     this.router.navigate(['/advert-page', advertDTO]);
-
-    //   })
 
 
   }

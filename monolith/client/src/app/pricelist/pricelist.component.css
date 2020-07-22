@@ -7,3 +7,9 @@
     text-align: center;
     justify-content:center;
   }
+  .firstdiv{
+    width: 28%;
+  }
+  .secdiv{
+    width: 68%;
+  }

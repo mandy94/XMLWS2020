@@ -27,11 +27,7 @@
       <div fxLayout="column" fxLayoutAlign=" stretch">
         
           <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Weight Column -->
-            <ng-container matColumnDef="id">
-              <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-            </ng-container>
+        
             <!-- Weight Column -->
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef> Naziv cenovnika</mat-header-cell>

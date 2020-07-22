@@ -2,8 +2,8 @@
 <div mat-dialog-content>  
   <div fxLayout="row" fxLayoutAlign="space-between center" >
     <p> Promena statusa korisnika</p>
-    <button mat-flat-button color="primary" *ngIf="data.user.status == 'BLOK'"  > Aktiviraj </button> 
-    <button mat-flat-button color="warn"  *ngIf="data.user.status == 'ACTIVE'"  >Blokiraj</button>  
+    <button mat-flat-button color="primary" *ngIf="data.user.status == 'BLOK'" (click)="activate(data.user.id)"> Aktiviraj </button> 
+    <button mat-flat-button color="warn"  *ngIf="data.user.status == 'ACTIVE'" (click)="block(data.user.id)" >Blokiraj</button>  
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center" >
   <p> Promena permisije korisnika</p>

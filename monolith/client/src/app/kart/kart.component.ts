@@ -15,10 +15,17 @@ export class KartComponent implements OnInit {
   itemRequests: any;
   displayedColumns: string[] = ['title', 'img', 'city', 'renta', 'returning', 'status', 'actions'];
 
-
+  imgUrl;
   ngOnInit() {
 
-    this.loadData()
+    this.loadData();
+    this.imgUrl = this.conf.get_img_url;// + this.advert.img;
+  }
+  hasItemRequests(){
+    if( this.itemRequests === undefined || this.itemRequests.length ==0)
+    return false;
+    else
+    return true;
   }
   loadData() {
 

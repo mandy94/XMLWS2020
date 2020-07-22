@@ -81,7 +81,7 @@ export class AdvertDetailedComponent implements OnInit {
       });
 
   }
-  displayedColumns = ['id', 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus'];
+  displayedColumns = [ 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus'];
   dataSource;
   loadPriceList() {
     
@@ -92,8 +92,7 @@ export class AdvertDetailedComponent implements OnInit {
       });
   }
   myAdvert(){
-    // console.log(this.advert);
-    // console.log(this.userService.getMyId());
+    
     return Number(this.userService.getMyId()) == this.advert.owner_id ? true : false;
   }
 

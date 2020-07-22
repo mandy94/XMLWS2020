@@ -36,8 +36,7 @@ export class PricelistComponent implements OnInit {
         this.displayedColumnsBonus = ['value', 'actions'];
         if (data.length != 0) {
           this.my_bonuses = data,
-          this.dataSourceBonus = this.my_bonuses
-          console.log(this.my_bonuses);
+          this.dataSourceBonus = this.my_bonuses;
 
         }
       });
@@ -94,7 +93,10 @@ export class PricelistComponent implements OnInit {
     return this.dataLoaded;
   }
   hasBonuses() {
-    return this.dataSourceBonus;
+    if(this.dataSourceBonus === undefined || this.dataSourceBonus.length === 0)
+    return false;
+    else
+    return true;
   }
   delete(id: number) {
     this.apiSrvice.delete(this.config.pricelist_url + '/' + id)
@@ -106,13 +108,18 @@ export class PricelistComponent implements OnInit {
           this.dataLoaded = false;
       });
   }
-  deleteBonus(id) { }
+  deleteBonus(id) { 
+    this.apiSrvice.delete(this.config.bonus_url + '/' + id)
+    .subscribe((data) => {
+     this.refreshBonusTableWith(data);
+    });
+  }
   openUpdateDialogBonus(bonus) { }
   
   loadPriceList() {
     this.apiSrvice.get(this.config.my_pricelist_url)
       .subscribe((data) => {
-        this.displayedColumns = ['id', 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus', 'actions'];
+        this.displayedColumns = [ 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus', 'actions'];
         if (data.length != 0) {
           this.dataLoaded = true;
           this.refreshTableWith(data);

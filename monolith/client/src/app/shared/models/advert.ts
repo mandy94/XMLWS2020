@@ -29,6 +29,7 @@ export class Pricelist{
     pricePerDay: number;
     pricePerKm: number;
     cdw:number;
+    bonus: number;
 }
 
 export interface PricelistInterface{

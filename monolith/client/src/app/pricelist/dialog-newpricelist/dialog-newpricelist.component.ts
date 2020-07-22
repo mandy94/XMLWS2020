@@ -31,7 +31,7 @@ export class DialogNewpricelistComponent  {
 
   
   create(newObj:PricelistInterface){  
-  
+    console.log(newObj);
     this.apiService.post(this.config.new_pricelist_url, newObj).subscribe();
     this.dialogRef.close();
   }
