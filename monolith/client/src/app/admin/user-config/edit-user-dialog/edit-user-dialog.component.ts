@@ -16,7 +16,7 @@ export class EditUserDialogComponent {
   
       authorities = new FormControl();
       authList = ['Agencija', 'Korisnik', 'Administrator'];
-
+      canPost=true;
     onNoClick(): void {
       this.dialogRef.close();
     }
@@ -27,7 +27,7 @@ export class EditUserDialogComponent {
       });
     }
     block(id:number){
-      this.apiSevice.put(this.config.user_url + "/block", id).subscribe(()=>this.data.user.status= 'BLOCK');
+      this.apiSevice.put(this.config.user_url + "/block", id).subscribe(()=>this.data.user.status = 'BLOCK');
     }
     
 }

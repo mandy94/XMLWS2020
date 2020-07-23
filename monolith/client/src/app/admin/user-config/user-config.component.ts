@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService, ApiService } from 'app/service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { YesNoDialogComponent } from 'app/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-user-config',
@@ -20,13 +21,24 @@ export class UserConfigComponent implements OnInit {
     this.apiSevice.get(this.config.users_url)
     .subscribe(data => {
       this.dataSource = data
-      console.log(data);
+      
     })
   }
- 
+  updatePermision(){
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '300px',
+      height: '350px',
+      data: "Da li ste igurno da ovo zelite?"
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {    
+      
+    });
+  }
   showAuthDialog(user){     
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-    width: '450px',
+    width: '500px',
+    height: '650px',
     data: {user: user}
   });
 

@@ -1,21 +1,33 @@
 <h1 mat-dialog-title> {{data.user.fullName}}</h1>
-<div mat-dialog-content>  
-  <div fxLayout="row" fxLayoutAlign="space-between center" >
+<div mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <p> Promena statusa korisnika</p>
-    <button mat-flat-button color="primary" *ngIf="data.user.status == 'BLOK'" (click)="activate(data.user.id)"> Aktiviraj </button> 
-    <button mat-flat-button color="warn"  *ngIf="data.user.status == 'ACTIVE'" (click)="block(data.user.id)" >Blokiraj</button>  
+    <button mat-flat-button color="primary" [disabled]="data.user.status == 'ACTIVE'" (click)="activate(data.user.id)">
+      Aktiviraj </button>
+    <button mat-flat-button color="warn" [disabled]="data.user.status == 'BLOCK'"
+      (click)="block(data.user.id)">Blokiraj</button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" >
-  <p> Promena permisije korisnika</p>
-  <mat-form-field >
-    <mat-label>Uloga</mat-label>
-    <mat-select [formControl]="authorities" >      
-      <mat-option *ngFor="let auth of authList" [value]="auth">{{auth}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div>
+    Da li korisnik sme da objavljuje oglase? <mat-slide-toggle [(ngModel)]="canPost">
+      <div *ngIf="canPost==false">Ne</div>
+      <div *ngIf="canPost==true">Da</div></mat-slide-toggle>
+  </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
+    <p> Promena permisije korisnika</p>
+    <mat-form-field>
+      <mat-label>Uloga</mat-label>
+      <mat-select [formControl]="authorities">
+        <mat-option *ngFor="let auth of authList" [value]="auth">{{auth}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+  
 </div>
-</div>
-<div fxLayout="row" fxLayoutAlign="end center"mat-dialog-actions >
+
+<div fxLayout="row" fxLayoutAlign="start center " mat-dialog-actions>
+
+  <button mat-stroked-button color="warn" (click)="delete(data.user.id)"> Obrisi korisnika iz sistema</button>
+
   <button mat-button (click)="onNoClick()">Odustani</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>izmeni</button>
 </div>

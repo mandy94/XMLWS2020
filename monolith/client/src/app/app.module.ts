@@ -47,6 +47,7 @@ import { UserConfigComponent } from './admin/user-config/user-config.component';
 import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/edit-user-dialog.component';
 import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newbonus.component';
+import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [    
@@ -80,7 +81,8 @@ import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newb
     AdminStatisticsComponent,
     UserConfigComponent,
     EditUserDialogComponent,
-    DialogNewbonusComponent
+    DialogNewbonusComponent,
+    YesNoDialogComponent
   
   ],
   imports: [
@@ -115,7 +117,7 @@ import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newb
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
+  entryComponents: [YesNoDialogComponent,DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }
