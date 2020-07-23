@@ -57,6 +57,10 @@ export class ConfigService {
 
   private _users_url = this._user_url + '/all';
 
+  private _update_user_url = this._user_url + '/update';
+  get update_user_url():string{
+    return this._update_user_url;
+  }
   get users_url(): string {
     return this._users_url;
   }

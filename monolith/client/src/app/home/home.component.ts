@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) {
   }
+  errMsg:string = "PORUKA"
 
   ngOnInit() {
   }
@@ -36,18 +37,13 @@ export class HomeComponent implements OnInit {
   }
   makeRequest(path) {
     
-    if (this.config.foo_url.endsWith(path)) {
-      this.fooService.getFoo()
-        .subscribe(res => {
-          this.forgeResonseObj(this.fooResponse, res, path);
-        }, err => {
-          this.forgeResonseObj(this.fooResponse, err, path);
-        });
-    } else if (this.config.whoami_url.endsWith(path)) {
+   
+    if (this.config.whoami_url.endsWith(path)) {
       this.userService.getMyInfo()
         .subscribe(res => {
           this.forgeResonseObj(this.whoamIResponse, res, path);
         }, err => {
+          this.loginMsg=err;
           this.forgeResonseObj(this.whoamIResponse, err, path);
         });
     } else {

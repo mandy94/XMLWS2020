@@ -1,33 +1,34 @@
-<h1 mat-dialog-title> {{data.user.fullName}}</h1>
-<div mat-dialog-content>
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <p> Promena statusa korisnika</p>
-    <button mat-flat-button color="primary" [disabled]="data.user.status == 'ACTIVE'" (click)="activate(data.user.id)">
-      Aktiviraj </button>
-    <button mat-flat-button color="warn" [disabled]="data.user.status == 'BLOCK'"
-      (click)="block(data.user.id)">Blokiraj</button>
-  </div>
-  <div>
-    Da li korisnik sme da objavljuje oglase? <mat-slide-toggle [(ngModel)]="canPost">
-      <div *ngIf="canPost==false">Ne</div>
-      <div *ngIf="canPost==true">Da</div></mat-slide-toggle>
-  </div>
-  <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
-    <p> Promena permisije korisnika</p>
+<h1 mat-dialog-title>Izmena korisnickih podataka</h1>
+<div mat-dialog-content >
+ 
+  <form  (ngSubmit)="(submitEditForm())" class="form" fxLayout="column" fxLayoutAlign="space-around stretch" >
+    <!-- {{data.user|json}} -->
     <mat-form-field>
-      <mat-label>Uloga</mat-label>
-      <mat-select [formControl]="authorities">
-        <mat-option *ngFor="let auth of authList" [value]="auth">{{auth}}</mat-option>
-      </mat-select>
+      <mat-label>Ime i prezime</mat-label>
+      <input matInput  [value]="newUserData.fullName" [disabled] = "true" >
     </mat-form-field>
-  </div> -->
-  
+     <mat-form-field>
+      <mat-label>email</mat-label>
+      <input matInput [(ngModel)]="newUserData.email" (change)="hasChanged()" name="newEmail">
+    </mat-form-field>
+    <mat-form-field> 
+      <mat-label>Korisnicko ime</mat-label>
+      <input matInput  [(ngModel)]="newUserData.username" (change)="hasChanged()" name="newUsername">
+    </mat-form-field>
+  </form>
+  <p *ngIf="data.user.role!='ADMINISTRATOR'">Promena statusa korisnika</p>
+  <div  *ngIf="data.user.role!='ADMINISTRATOR'"fxLayout="row" fxLayoutAlign="space-around stretch">
+    <button mat-flat-button color="primary" [disabled]="data.user.status === 'ACTIVE'" (click)="activate(data.user.id)">
+      Aktiviraj korisnika </button>
+    <button mat-flat-button color="warn" [disabled]="data.user.status === 'BLOCK'"
+      (click)="block(data.user.id)">Blokiraj korisnika</button>
+  </div>
 </div>
+<mat-divider></mat-divider>
+<button  *ngIf="data.user.role!='ADMINISTRATOR'" mat-stroked-button color="warn" (click)="delete(data.user.id)" class="longBtn"> Obrisi korisnika iz sistema</button>
+<div fxLayout="row" fxLayoutAlign="end center " mat-dialog-actions>
 
-<div fxLayout="row" fxLayoutAlign="start center " mat-dialog-actions>
-
-  <button mat-stroked-button color="warn" (click)="delete(data.user.id)"> Obrisi korisnika iz sistema</button>
 
   <button mat-button (click)="onNoClick()">Odustani</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>izmeni</button>
+  <button mat-button [mat-dialog-close]="data"  [disabled]="!changed" (click)="update()">Izmeni</button>
 </div>

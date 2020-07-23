@@ -22,6 +22,7 @@ export class ApiCardComponent implements OnInit {
 
   @Output() apiClick: EventEmitter<any> = new EventEmitter();
 
+
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -34,7 +35,7 @@ export class ApiCardComponent implements OnInit {
   
   form : FormGroup;
   user:User;
-
+  errMsg:string;
   onButtonClick() {
     this.user = new User({
       username : this.username,
@@ -45,8 +46,10 @@ export class ApiCardComponent implements OnInit {
     this.authService.login(this.user)
       .subscribe(data => {
      
-          this.userService.getMyInfo().subscribe(x => console.log(x));
+          this.userService.getMyInfo().subscribe();
           this.router.navigate(['/']);
+        },err=>{
+          this.errMsg = "Doslo je do greske. Verovatno je korisnik blokiran. kontaktirajte vaseg administratora.";
         });      
   }
   

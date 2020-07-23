@@ -1,4 +1,6 @@
-Prosledjen tekst
-<p>{{data}}</p>
-<buton> Potvrdi</buton>
-<button> Opozovi</button>
+
+<p>{{data.displayedText}}</p>
+<div fxLayout="row" fxLayoutAlign="end center" >
+<button mat-button (click)="no()"> Odustani</button>
+<button mat-button (click)="yes()" > Potvrdi</button>
+</div>

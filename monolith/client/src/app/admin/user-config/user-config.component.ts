@@ -24,26 +24,29 @@ export class UserConfigComponent implements OnInit {
       
     })
   }
-  updatePermision(){
+  updatePermision(e){
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
-      width: '300px',
-      height: '350px',
-      data: "Da li ste igurno da ovo zelite?"
+      width: '400px',
+      data: { displayedText:"Da li ste sigurno da ovo zelite?"}
     });
   
     dialogRef.afterClosed().subscribe(result => {    
+      
       
     });
   }
   showAuthDialog(user){     
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-    width: '500px',
-    height: '650px',
-    data: {user: user}
+    width: '400px',
+    data: {user:  JSON.parse(JSON.stringify(user))} // deep copy passed
   });
 
   dialogRef.afterClosed().subscribe(result => {    
-    
+    this.apiSevice.get(this.config.users_url)
+    .subscribe(data => {
+      this.dataSource = data
+      
+    })
   });
 }
 

@@ -1,3 +1,9 @@
 .p {
     margin: 16px;
 }
+mat-divider{
+    margin: 15px;
+}
+.longBtn{
+    width: 100%;
+}

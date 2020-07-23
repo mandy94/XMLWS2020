@@ -1,7 +1,9 @@
+
 <div class="content" fxLayout="row" fxLayoutAlign="center none" >
   <div *ngIf="!isSignedIn()"> 
     <app-api-card
-    (apiClick)="makeRequest($event)"    
+    (apiClick)="makeRequest($event)"  
+    loginMsg = "loginMsg"
     username="peraSaKlise"
     password="prvi_korisnik"
     fxFlex
@@ -25,6 +27,7 @@
     username="agnt"
     password="admin123"
     fxFlex
+    loginMsg = "loginMsg"
     imgUrl="https://img.icons8.com/bubbles/200/000000/system-administrator-female.png"
     title='Ovlascena agencija'
   >
