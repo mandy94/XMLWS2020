@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
         .subscribe(res => {
           this.forgeResonseObj(this.whoamIResponse, res, path);
         }, err => {
-          this.loginMsg=err;
           this.forgeResonseObj(this.whoamIResponse, err, path);
         });
     } else {

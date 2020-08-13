@@ -1,6 +1,12 @@
 
-<p>{{data.displayedText}}</p>
-<div fxLayout="row" fxLayoutAlign="end center" >
-<button mat-button (click)="no()"> Odustani</button>
-<button mat-button (click)="yes()" > Potvrdi</button>
-</div>
+    <mat-card-title>{{data.textType}}</mat-card-title>
+    <mat-card-content>
+        <p>{{data.displayedText}}</p>
+        <div *ngFor="let item of data.displayContent"> <ul> <li>{{item.text}}</li></ul></div>        
+    </mat-card-content>
+    <mat-card-footer>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button (click)="no()"> Odustani</button>
+            <button mat-button (click)="yes()"> Potvrdi</button>
+        </div>
+    </mat-card-footer>

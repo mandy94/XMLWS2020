@@ -8,18 +8,14 @@
  
        <ng-container matColumnDef="img">
          <th mat-header-cell *matHeaderCellDef> Slika </th>
-         <td mat-cell *matCellDef="let item"> <img [src]="item.advert.imgmain"  height="55px"> </td>
+         <td mat-cell *matCellDef="let item"> <img [src]="imgUrl+item.advert.imgmain"  height="55px"> </td>
        </ng-container>
  
        <ng-container matColumnDef="title">
          <th mat-header-cell *matHeaderCellDef> Naslov oglasa</th>
          <td mat-cell *matCellDef="let item"> {{item.advert.title}} </td>
        </ng-container>
-       <ng-container matColumnDef="city">
-         <th mat-header-cell *matHeaderCellDef>Grad</th>
-         <td mat-cell *matCellDef="let item"> {{item.city}}</td>
-       </ng-container>
- 
+  
  
        <ng-container matColumnDef="renta">
          <th mat-header-cell *matHeaderCellDef> Preuzimanje</th>
@@ -33,12 +29,15 @@
  
        <ng-container matColumnDef="status">
          <th mat-header-cell *matHeaderCellDef> Status</th>
-         <td mat-cell *matCellDef="let item"> {{item.status}} </td>
+         <td mat-cell *matCellDef="let item"> {{item.status}}  
+            <mat-icon *ngIf="item.conflict.length>0" matTooltip="Konflik sa drugim zahtevima">error_outline</mat-icon>
+            <!-- <div *ngFor="let it of item.conflict"> {{it.id}} {{it.advert.manufacturer.title}}</div> -->
+          </td>
        </ng-container>
        
        <ng-container matColumnDef="actions">
          <th mat-header-cell *matHeaderCellDef> Akcije</th>
-         <td mat-cell *matCellDef="let item"> <button (click)="accept(item.id)" [disabled]="item.status === 'RESERVED' || item.status === 'CANCELED'"> Prihvati zahtevi</button> <button (click)="decline(item.id)" [disabled]="item.status === 'RESERVED' || item.status === 'CANCELED'"> Odbi zahtev</button></td>
+         <td mat-cell *matCellDef="let item"> <button (click)="accept(item)" [disabled]="item.status === 'RESERVED' || item.status === 'CANCELED'"> Prihvati zahtevi</button> <button (click)="decline(item.id)" [disabled]="item.status === 'RESERVED' || item.status === 'CANCELED'"> Odbi zahtev</button></td>
        </ng-container>
    
        
@@ -48,4 +47,7 @@
      </table>
  
    </div>
+
+  
+  
  

@@ -26,10 +26,9 @@ export class EditUserDialogComponent {
 
 
   hasChanged() {
-    // if(this.newUserData.email != this.data.user.email)
-    this.changed = true;
-    console.log(this.newUserData.email);
-    return this.changed;
+    
+    this.changed = true;    
+
   }
   update() {
     this.newUserData.id = this.data.user.id;
@@ -38,10 +37,14 @@ export class EditUserDialogComponent {
   activate(id: number) {
     this.apiSevice.put(this.config.user_url + "/activate", id).subscribe(() => {
       this.data.user.status = 'ACTIVE';
+      this.hasChanged();
     });
   }
   block(id: number) {
-    this.apiSevice.put(this.config.user_url + "/block", id).subscribe(() => this.data.user.status = 'BLOCK');
+    this.apiSevice.put(this.config.user_url + "/block", id).subscribe(() => {
+      this.data.user.status = 'BLOCK';
+      this.hasChanged()
+    });
   }
   delete(id: number) {
    

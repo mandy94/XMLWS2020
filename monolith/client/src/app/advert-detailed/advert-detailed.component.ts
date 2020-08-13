@@ -67,6 +67,7 @@ export class AdvertDetailedComponent implements OnInit {
     cityList: any;
     imgUrl:any;
     owner_username:string;
+    readyToSubmit:boolean;
   ngOnInit() {
     let that = this;
     this.timeList = [ {value : "08:00"},{ value:"10:00"}, {value:"12:00"}, {value:"14:00"},{value:"16:00"},{value:"18:00"}];
@@ -79,7 +80,6 @@ export class AdvertDetailedComponent implements OnInit {
       this.apiService.get(this.conf.user_url+'/'+advert.user_id).subscribe(data => that.owner_username = data.username);
            that.imgUrl = this.conf.get_img_url + this.advert.img;
       });
-
   }
   displayedColumns = [ 'name', 'pricePerDay', 'pricePerKm', 'cdw', 'bonus'];
   dataSource;
@@ -109,8 +109,9 @@ selectedReturnTime:any;
 selectedReturnDate:any;
 submit(){
   this.userService.getMyInfo().subscribe(()=>{
+  
     this.newUserRequest.rentingTime = this.selectedRentingTime;
-    this.newUserRequest.returningDate = this.selectedReturnDate;
+    this.newUserRequest.returningTime = this.selectedReturnTime;
     this.newUserRequest.advert.id= Number(this.advert.id);
     this.newUserRequest.client.id = Number(this.userService.currentUser.id);
    
@@ -118,6 +119,14 @@ submit(){
     this.apiService.post(this.conf.new_request , this.newUserRequest).subscribe(()=> this.newUserRequest = new UserRequest());}
     );
 
+}
+whenReadyToSubmit(){
+  if(this.newUserRequest.rentingDate != '' && this.newUserRequest.returningDate != '')
+  {
+    if(this.selectedRentingTime != null && this.selectedReturnTime != null)
+    return true;
+  }
+  return false;
 }
 updateDate(type:string, event:any){
   
