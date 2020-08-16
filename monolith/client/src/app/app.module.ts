@@ -48,6 +48,7 @@ import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statist
 import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/edit-user-dialog.component';
 import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newbonus.component';
 import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
+import { RequestTableComponent } from './requests/request-table/request-table.component';
 
 @NgModule({
   declarations: [    
@@ -82,7 +83,8 @@ import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
     UserConfigComponent,
     EditUserDialogComponent,
     DialogNewbonusComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    RequestTableComponent
   
   ],
   imports: [

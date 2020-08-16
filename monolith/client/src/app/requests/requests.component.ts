@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, ConfigService } from 'app/service';
 import * as moment from 'moment';
-import { DialogMessage } from 'app/shared/models/display-message';
-import { MatDialog } from '@angular/material';
-import { YesNoDialogComponent } from 'app/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-requests',
@@ -14,30 +11,42 @@ export class RequestsComponent implements OnInit {
 
   constructor(private apiService: ApiService,
     private config: ConfigService,
-    public dialog: MatDialog) { }
+  ) { }
 
   displayedColumns: string[] = ['title', 'img', 'renta', 'returning', 'status', 'actions'];
-  myRequests = new Array<any>();
+  pendingRequests = new Array<any>();
   clicked: boolean;
-  imgUrl: string;
+
   conflictRequests: any;
+  canceledRequests: any;
+  reservedRequests: any;
   ngOnInit() {
     this.clicked = false;
-    this.imgUrl = this.config.get_img_url;// + this.advert.img;
+
     this.getMyRequests();
+
   }
 
+  isDataLoaded = false;
   getMyRequests() {
-    this.apiService.get(this.config.my_request)
+    this.apiService.get(this.config.pending_request)
       .subscribe(data => {
-        this.myRequests = data;
+        this.pendingRequests = data;
         this.checkConflicts();
+        this.apiService.get(this.config.cencel_request)
+          .subscribe(data => {
+            this.canceledRequests = data;
+            this.apiService.get(this.config.accepted_request)
+              .subscribe(data => {
+                this.reservedRequests = data;
+                 this.isDataLoaded = true;
+              });
+          });
 
       });
+
   }
-  hasRequests() {
-    return this.myRequests.length === 0 ? false : true;
-  }
+
   convertToMomentDate(date) {
     let [day, month, year] = date.split('.');
     return moment(new Date(parseInt(day), parseInt(month), parseInt(year)));
@@ -46,17 +55,17 @@ export class RequestsComponent implements OnInit {
     let arrayOfReq = []; // storage array for comparing - history 
     let that = this;
 
-    this.myRequests.forEach(function (bundle) { // initializing dataz
+    this.pendingRequests.forEach(function (bundle) { // initializing dataz
       bundle.content.forEach(element => {
         element.conflict = [];
         arrayOfReq.push(element);
       })
     });
 
-    this.myRequests.forEach(function (bundle) { // returns bundles
+    this.pendingRequests.forEach(function (bundle) { // returns bundles
       bundle.content.forEach(element => { // returns requests         
         arrayOfReq.forEach(function (el) {
-          if (el.id != element.id && that.convertToMomentDate(element.rentingDate).isBetween(that.convertToMomentDate(el.rentingDate), that.convertToMomentDate(el.returningDate), undefined, '[]')) {
+          if (el.id != element.id && el.advert.id == element.advert.id && that.convertToMomentDate(element.rentingDate).isBetween(that.convertToMomentDate(el.rentingDate), that.convertToMomentDate(el.returningDate), undefined, '[]')) {
             element.conflict.push({
               rentingDate: el.rentingDate,
               returningDate: el.returningDate,
@@ -76,41 +85,5 @@ export class RequestsComponent implements OnInit {
       });
     })
   }
-  dialogMsg: DialogMessage;
-  accept(item): void {
-    if (item.conflict.length > 0) {
-      let itemString = [];
-      item.conflict.forEach(function (el) {
-        itemString.push({ text: el.advertManufacturer + " u periodu od  " + el.rentingDate + " " + el.returningDate });
-      })
-      const dialogRef = this.dialog.open(YesNoDialogComponent, {
-        width: '750px',
-        data: {
-          textType: "Obavestenje",
-          displayedText: "Prilikom potvrde ovog zahteva, sistem ce automatski odbiti zahteve ciji se termini poklapaju. U pitanju su sledeci oglasi : ",
-          displayContent: itemString
-        }
-      });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log(item);
-          this.apiService.put(this.config.requests_url + '/accept-request', item).subscribe(() => this.getMyRequests());
-        }
-      });
-    } else {
-      // samo potvrdi
-    }
-  }
-  // accept(item) {
-  // this.clicked = true;
-
-  // this.apiService.put(this.config.requests_url+'/accept-request/',id).subscribe(()=>this.getMyRequests());
-  // this.apiService.get(this.config.requests_url+'/check-cover/'+ id).subscribe((data)=>this.conflictRequests = data);
-
-  // }
-  decline(id) {
-    this.clicked = true;
-    this.apiService.put(this.config.requests_url + '/decline-request/', id).subscribe(() => this.getMyRequests());
-  }
 }

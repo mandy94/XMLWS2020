@@ -1,0 +1,54 @@
+<div *ngIf="!hasRequests()">
+    <h2> Nemate nove zahteve.</h2>
+  </div>
+  
+  <div *ngFor="let items of data">
+    <div *ngIf="items.content.length > 0" fxLayout="column" fxLayoutAlign="space-around none">
+
+      <h2> {{items.owner.fullName}} {{title}}</h2>
+      <table mat-table [dataSource]="items.content" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="img">
+          <th mat-header-cell *matHeaderCellDef> Slika </th>
+          <td mat-cell *matCellDef="let item"> <img [src]="imgUrl+item.advert.imgmain" height="55px"> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Naslov oglasa</th>
+          <td mat-cell *matCellDef="let item"> {{item.advert.title}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="renta">
+          <th mat-header-cell *matHeaderCellDef> Preuzimanje</th>
+          <td mat-cell *matCellDef="let item"> {{item.rentingDate}} u {{ item.rentingTime}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="returning">
+          <th mat-header-cell *matHeaderCellDef>Vracanje</th>
+          <td mat-cell *matCellDef="let item"> {{item.returningDate}} u {{item.returningTime}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status</th>
+          <td mat-cell *matCellDef="let item"> {{item.status}}
+            <mat-icon *ngIf="item.conflict != undefined && item.conflict.length>0 " matTooltip="Konflik sa drugim zahtevima">error_outline</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" *ngIf="reqStatus === 'PENDING'">
+          <th mat-header-cell *matHeaderCellDef> Akcije</th>
+          <td mat-cell *matCellDef="let item">
+            <button mat-raised-button (click)="confirmAccept(item)" > Prihvati <mat-icon class="green">done</mat-icon></button> 
+            <button  mat-raised-button (click)="decline(item)" class="right" > Odbi <mat-icon class="red">clear</mat-icon></button>
+            </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+  </div>

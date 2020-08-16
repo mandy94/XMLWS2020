@@ -21,11 +21,18 @@ export class ConfigService {
   get new_request():string{
     return this._requests_ms + "/new-request";
   }
-  get kart_url():string{
+  get 
+  kart_url():string{
     return this._requests_ms + "/user-kart";
   }
-  get my_request():string{
-    return this._requests_ms + "/my-requests";
+  get pending_request():string{
+    return this._requests_ms + "/pending/requests";
+  }
+  get cencel_request():string{
+    return this._requests_ms + "/canceled/requests";
+  }
+  get accepted_request():string{
+    return this._requests_ms + "/reserved/requests";
   }
   get delete_request():string{
     return this._requests_ms + "/delete-request";
