@@ -1,0 +1,11 @@
+<mat-card-title> Detalji o automobilu {{data.item.advert.title}}</mat-card-title>
+<mat-card-content>
+<form fxLayout="column" fxLayoutAlign="space-around stretch" >
+  <mat-form-field class="example-full-width">
+    <mat-label>Koliko ste kilometara presli?</mat-label>
+    <input matInput [formControl]="dataFormControl">
+  </mat-form-field>
+
+  <button mat-button (click)="submitReport()"> Zavrsi unos</button>
+</form>
+</mat-card-content>

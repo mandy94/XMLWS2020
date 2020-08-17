@@ -50,6 +50,7 @@ import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 import { RequestTableComponent } from './requests/request-table/request-table.component';
 import { MyRequestsComponent } from './requests/my-requests/my-requests.component';
 import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-me.component';
+import { NewStatisticDataDialogComponent } from './requests/request-table/new-statistic-data-dialog/new-statistic-data-dialog.component';
 
 @NgModule({
   declarations: [    
@@ -86,7 +87,8 @@ import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-
     YesNoDialogComponent,
     RequestTableComponent,
     MyRequestsComponent,
-    RequestsForMeComponent
+    RequestsForMeComponent,
+    NewStatisticDataDialogComponent
   
   ],
   imports: [
@@ -121,7 +123,7 @@ import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [YesNoDialogComponent,DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
+  entryComponents: [NewStatisticDataDialogComponent,YesNoDialogComponent,DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }

@@ -4,6 +4,7 @@ import { YesNoDialogComponent } from 'app/yes-no-dialog/yes-no-dialog.component'
 import { MatDialog } from '@angular/material';
 import { ApiService, ConfigService } from 'app/service';
 import { timeout } from 'rxjs/operators';
+import { NewStatisticDataDialogComponent } from './new-statistic-data-dialog/new-statistic-data-dialog.component';
 
 @Component({
   selector: 'app-request-table',
@@ -20,11 +21,7 @@ export class RequestTableComponent implements OnInit {
   @Input() reqType: string;
 
   displayedColumns: string[];
-  // flags for action buttons
-  showSpinner= false;
-  advertsForMe=false;
-  reserved=false;
-  // --------------
+  
   imgUrl: string;
   constructor(private apiService: ApiService,
     private config: ConfigService, public dialog: MatDialog) { }
@@ -89,5 +86,22 @@ export class RequestTableComponent implements OnInit {
     });
   }
   
-
+  addRentingAnalyze(item):void {
+    let statisticData = {
+      item : item,
+      advertId : item.advert.id,
+      milage: 0
+    };
+      const dialogRef = this.dialog.open(NewStatisticDataDialogComponent, {
+        width: '550px',
+        data: statisticData
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        
+        this.apiService.post(this.config.add_statistic_data, statisticData).subscribe();
+      });
+    }
+  
+  
 }

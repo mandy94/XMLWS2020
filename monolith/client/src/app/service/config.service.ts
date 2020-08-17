@@ -36,6 +36,10 @@ export class ConfigService {
   get_reserved_request(prefix: any): string {
     return this._requests_ms + '/' + prefix + "/reserved/requests";
   }
+  get add_statistic_data():string{
+    return this._requests_ms +"/statistic/add";
+  }
+
 
   get delete_request(): string {
     return this._requests_ms + "/delete-request";
@@ -171,6 +175,5 @@ export class ConfigService {
   get cities_url(): string {
     return this._get_cities_url;
   }
-
 
 }
