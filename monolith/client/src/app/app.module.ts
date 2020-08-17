@@ -36,7 +36,6 @@ import { RentACarAdvertsComponent } from './rent-a-car-adverts/rent-a-car-advert
 import { SearchAdvertsBarComponent } from './search-adverts-bar/search-adverts-bar.component';
 import { AdvertCardComponent } from './component/advert-card/advert-card.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
-import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
 import { DialogOverviewComponent } from './pricelist/dialog-overview/dialog-overview.component';
 import { DialogNewpricelistComponent } from './pricelist/dialog-newpricelist/dialog-newpricelist.component';
@@ -49,6 +48,8 @@ import { EditUserDialogComponent } from './admin/user-config/edit-user-dialog/ed
 import { DialogNewbonusComponent } from './pricelist/dialog-newbonus/dialog-newbonus.component';
 import { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
 import { RequestTableComponent } from './requests/request-table/request-table.component';
+import { MyRequestsComponent } from './requests/my-requests/my-requests.component';
+import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-me.component';
 
 @NgModule({
   declarations: [    
@@ -73,7 +74,6 @@ import { RequestTableComponent } from './requests/request-table/request-table.co
     SearchAdvertsBarComponent,
     AdvertCardComponent,
     AdvertDetailedComponent,
-    KartComponent,
     RequestsComponent,
     DialogOverviewComponent,
     DialogNewpricelistComponent,
@@ -84,7 +84,9 @@ import { RequestTableComponent } from './requests/request-table/request-table.co
     EditUserDialogComponent,
     DialogNewbonusComponent,
     YesNoDialogComponent,
-    RequestTableComponent
+    RequestTableComponent,
+    MyRequestsComponent,
+    RequestsForMeComponent
   
   ],
   imports: [

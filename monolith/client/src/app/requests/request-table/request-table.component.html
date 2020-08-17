@@ -51,7 +51,7 @@
               <button mat-raised-button (click)="decline(item)" *ngIf="reqType === 'waitingForAcceptDecline'" class="right"> Odbi <mat-icon class="red">clear</mat-icon></button>
             </div>
             <button mat-raised-button (click)="addRentingAnalyze(item)" *ngIf="reqType === 'waitingToEndReservation'" class="right"> Unesi utiske posle voznje</button>
-           
+            <div  *ngIf="reqType === 'waitingToEndRent'" > Cekamo ....<mat-spinner diameter="23"> </mat-spinner> </div>
             <button mat-button (click)="delete(item.id)" color="warn"  *ngIf="reqType === 'waitingToConfirm'"> Ponisti zahtev  <mat-icon>cancel</mat-icon></button>
             </td>
         </ng-container>

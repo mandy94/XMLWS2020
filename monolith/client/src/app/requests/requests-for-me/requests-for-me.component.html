@@ -1,0 +1,36 @@
+<mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+  <mat-tab label="Zahtevi na cekanju">   
+    <ng-template matTabContent>
+      <app-request-table *ngIf="isDataLoaded" 
+        [data]="pendingRequestsForMe" 
+        title="Zahtevi od: "           
+        reqStatus="PENDING"
+        reqType="waitingForAcceptDecline"
+        [serverUrl]="config.get_img_url" 
+        (refreshData)="getPendingRequests()">
+      </app-request-table>
+    </ng-template>
+  
+  </mat-tab>
+  <mat-tab label="Odbijeni zahtevi">
+    
+    <app-request-table *ngIf="isDataLoaded"
+    [data]="cencelRequestForMe" 
+    [serverUrl]="config.get_img_url"
+    title=" odbijeni zahtevi" 
+    reqStatus="CANCELED"
+  ></app-request-table> 
+  </mat-tab>
+  
+  <mat-tab label="Potvrdjeni zahtevi">
+    <ng-template matTabContent>
+      <app-request-table *ngIf="isDataLoaded" 
+        [data]="reservedRequestsForMe"
+        [serverUrl]="config.get_img_url"
+        title="Rezervisani zahtevi " 
+        reqStatus="RESERVED"
+        reqType="waitingToEndRent"
+        ></app-request-table>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

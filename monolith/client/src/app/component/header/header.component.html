@@ -19,14 +19,18 @@
         <span>Moji cenovnici </span>      
       </button>
     
-      <button *ngIf="!ifAdmin() && hasSignedIn()"  class="greeting-button" mat-button  mat-ripple routerLink="/my-requests">
+      <button *ngIf="!ifAdmin() && hasSignedIn()"  [matMenuTriggerFor]="menu" class="greeting-button" mat-button  mat-ripple >
         <span>Zahtevi </span>      
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/requests-for-me" >Zahtevi za moje oglase</button>
+        <button mat-menu-item routerLink="/my-requests">Moji zahtevi</button>
+      </mat-menu>
       <button *ngIf = "ifAdmin()" label="Statistike" mat-button   routerLink="/statistic" > STATISTIKE</button>
+    
       <button *ngIf = "ifAdmin()" label="Sifrarnici" mat-button   routerLink="/codebook" > SIFRARNICI</button>
-      <!-- <button *ngIf = "!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
-        <span>Korpa </span>      
-      </button> -->
+      
+   
       <button
         *ngIf="hasSignedIn()"
         [matMenuTriggerFor]="accountMenu"
@@ -52,6 +56,3 @@
     </div>
   </div>
 </mat-toolbar>
-<p>
-{{ifAdmin()|json}}
-</p>

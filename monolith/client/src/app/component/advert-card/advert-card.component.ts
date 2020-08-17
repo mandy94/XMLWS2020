@@ -48,9 +48,7 @@ imgUrl;
         () => this.showMyAdverts()
       );
   }
-  addToKart(advertId) {
-    // console.log(advertId);
-  }
+
 
   gotoItemPage() {
     

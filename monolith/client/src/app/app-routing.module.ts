@@ -11,11 +11,12 @@ import {SignupComponent} from './signup';
 import {AdvertComponent} from './component/advert';
 import { CodeBookComponent } from './code-book/code-book.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
-import { KartComponent } from './kart/kart.component';
 import { RequestsComponent } from './requests/requests.component';
 import { AdminStatisticsComponent } from './admin/admin-statistics/admin-statistics.component';
 import { UserConfigComponent } from './admin/user-config/user-config.component';
 import { PricelistComponent } from './pricelist/pricelist.component';
+import { MyRequestsComponent } from './requests/my-requests/my-requests.component';
+import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-me.component';
 
 export const routes: Routes = [
   {
@@ -60,9 +61,7 @@ export const routes: Routes = [
   ,
   {
     path: 'advert-page',
-    component: AdvertDetailedComponent,
-    // pathMatch: 'prefix'
-    
+    component: AdvertDetailedComponent,    
   },
   {
     path: 'change-password',
@@ -75,16 +74,16 @@ export const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
-    path: 'kart',
-    component: KartComponent
-  },
-  {
     path: 'my-ads',
     component: AdvertComponent
   },
   {
     path: 'my-requests',
-    component: RequestsComponent
+    component: MyRequestsComponent
+  },
+  {
+    path: 'requests-for-me',
+    component: RequestsForMeComponent
   },
   {
     path: '404',
