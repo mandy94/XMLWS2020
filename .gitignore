@@ -1,4 +1,4 @@
-monolith\client\node_modules\**
+monolith/client/node_modules/**
 monolith/client/node_modules/font-awesome/scss/font-awesome.scss
 monolith/client/node_modules/font-awesome/.npmignore
 monolith/client/node_modules/font-awesome/css/font-awesome.css
