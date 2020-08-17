@@ -7,3 +7,16 @@
 .red{
     color: red;
 }
+.blue{
+    color: darkblue;
+  }
+  .green{
+      font-size: medium;
+      font-weight: 500;
+      
+    color: green;
+
+  }
+  mat-spinner{
+    margin-left: 15px;
+  }

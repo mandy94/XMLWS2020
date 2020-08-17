@@ -1,22 +1,92 @@
-<mat-tab-group>
+<mat-tab-group animationDuration="0ms" mat-align-tabs="center">
   <mat-tab label="Zahtevi na cekanju">
-    <app-request-table  *ngIf="isDataLoaded" title=" se interesuje za vase oglase" 
-     [data]="pendingRequests"
-     reqStatus="PENDING"
-     [serverUrl]="config.get_img_url"
-     (refreshData)="getMyRequests()"></app-request-table>
+    <ng-container *ngTemplateOutlet="zahteviNaCekanju"></ng-container>
   </mat-tab>
-
   <mat-tab label="Odbijeni zahtevi">
-    <app-request-table *ngIf="isDataLoaded"  title=" odbijeni zahtevi"
-     [data]="canceledRequests"
-     reqStatus="CANCELED"
-     [serverUrl]="config.get_img_url"></app-request-table>
+    <ng-container *ngTemplateOutlet="odbijeniZahtevi"></ng-container>  
   </mat-tab>
-  <mat-tab label="Potvrdjeni zahtevi"> 
-    <app-request-table *ngIf="isDataLoaded"  title="Rezervisani zahtevi "
-    [data]="reservedRequests"
-    reqStatus="RESERVED"
-    [serverUrl]="config.get_img_url"></app-request-table>
+  <mat-tab label="Potvrdjeni zahtevi">
+    <ng-container *ngTemplateOutlet="potvrdjeniZahtevi"></ng-container>
   </mat-tab>
 </mat-tab-group>
+
+
+<ng-template #odbijeniZahtevi>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Zahtevi koje su vam odbili">      
+        <ng-template matTabContent>
+          <app-request-table *ngIf="isDataLoaded"
+            [data]="myCencelRequests" 
+            [serverUrl]="config.get_img_url"
+            title=" odbijeni zahtevi" 
+            reqStatus="CANCELED"
+            ></app-request-table>      
+        </ng-template>        
+    </mat-tab>
+    <mat-tab label="Zahtevi koje ste vi odbili drugima">      
+      <ng-template matTabContent>
+        <app-request-table *ngIf="isDataLoaded"
+          [data]="cencelRequestForMe" 
+          [serverUrl]="config.get_img_url"
+          title=" odbijeni zahtevi" 
+          reqStatus="CANCELED"
+          ></app-request-table>      
+      </ng-template>        
+  </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #potvrdjeniZahtevi>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Zahtevi koje ste vi uputili drugima">
+      <ng-template matTabContent>
+        <app-request-table *ngIf="isDataLoaded" 
+          [data]="myReservedRequests"
+          [serverUrl]="config.get_img_url"
+          title="Rezervisani zahtevi "
+          reqStatus="RESERVED"
+          ></app-request-table>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Zahtevi koji su drugi rezervisali za vas">
+      <ng-template matTabContent>
+        <app-request-table *ngIf="isDataLoaded" 
+          [data]="reservedRequestsForMe"
+          [serverUrl]="config.get_img_url"
+          title="Rezervisani zahtevi " 
+          reqStatus="RESERVED"
+          reqType="waitingToEndReservation"
+          ></app-request-table>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #zahteviNaCekanju>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Zahtevi koje ste vi rezervisali za druge">
+      <ng-template matTabContent>
+        <app-request-table *ngIf="isDataLoaded"
+          [data]="myPendingRequests" 
+          [serverUrl]="config.get_img_url"
+          title="Trazili ste od: " 
+          reqStatus="PENDING" 
+          reqType="waitingToConfirm"
+          (refreshData)="getPendingRequests()">
+        </app-request-table>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Zahtevi koji su drugi upitili vama">
+      <ng-template matTabContent>
+        <app-request-table *ngIf="isDataLoaded" 
+          [data]="pendingRequestsForMe" 
+          title="Zahtevi od: "           
+          reqStatus="PENDING"
+          reqType="waitingForAcceptDecline"
+          [serverUrl]="config.get_img_url" 
+          (refreshData)="getPendingRequests()">
+        </app-request-table>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>

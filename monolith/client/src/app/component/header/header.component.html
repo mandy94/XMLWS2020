@@ -24,9 +24,9 @@
       </button>
       <button *ngIf = "ifAdmin()" label="Statistike" mat-button   routerLink="/statistic" > STATISTIKE</button>
       <button *ngIf = "ifAdmin()" label="Sifrarnici" mat-button   routerLink="/codebook" > SIFRARNICI</button>
-      <button *ngIf = "!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
+      <!-- <button *ngIf = "!ifAdmin()"  class="greeting-button" mat-button  mat-ripple routerLink="/kart">
         <span>Korpa </span>      
-      </button>
+      </button> -->
       <button
         *ngIf="hasSignedIn()"
         [matMenuTriggerFor]="accountMenu"

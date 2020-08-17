@@ -1,43 +1,46 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
 
+
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
   private _advert_ms = this._api_gateway + "/adverts-ms/api";
   private _requests_ms = this._api_gateway + "/requests-ms/api"
   //--------------------------------------------------------
-  private _api_url =  this._users_and_agancy_ms;
+  private _api_url = this._users_and_agancy_ms;
 
-  private _auth_url = this._users_and_agancy_ms  + "/auth";
+  private _auth_url = this._users_and_agancy_ms + "/auth";
 
   private _user_url = this._users_and_agancy_ms + '/user';
 
   private _refresh_token_url = this._users_and_agancy_ms + '/refresh';
 
-  get new_request():string{
+  get new_request(): string {
     return this._requests_ms + "/new-request";
   }
-  get 
-  kart_url():string{
+  get
+    kart_url(): string {
     return this._requests_ms + "/user-kart";
   }
-  get pending_request():string{
-    return this._requests_ms + "/pending/requests";
+
+  get_pending_request(prefix: any): string {
+    return this._requests_ms + '/' + prefix + "/pending/requests";
   }
-  get cencel_request():string{
-    return this._requests_ms + "/canceled/requests";
+  get_cencel_request(prefix: any): string {
+    return this._requests_ms + '/' + prefix + "/canceled/requests";
   }
-  get accepted_request():string{
-    return this._requests_ms + "/reserved/requests";
+  get_reserved_request(prefix: any): string {
+    return this._requests_ms + '/' + prefix + "/reserved/requests";
   }
-  get delete_request():string{
+
+  get delete_request(): string {
     return this._requests_ms + "/delete-request";
   }
-  get requests_url():string{
+  get requests_url(): string {
     return this._requests_ms;
   }
   get refresh_token_url(): string {
@@ -65,7 +68,7 @@ export class ConfigService {
   private _users_url = this._user_url + '/all';
 
   private _update_user_url = this._user_url + '/update';
-  get update_user_url():string{
+  get update_user_url(): string {
     return this._update_user_url;
   }
   get users_url(): string {
@@ -86,86 +89,86 @@ export class ConfigService {
     return this._signup_url;
   }
 
-//------------------ ADVERTS, PRICELISTS AND CODEBOOK -------------------
+  //------------------ ADVERTS, PRICELISTS AND CODEBOOK -------------------
   private _add_advert_url = this._advert_ms + '/add';
 
-  get add_advert_url(): string{
+  get add_advert_url(): string {
     return this._add_advert_url;
   }
   private _users_adverts_url = this._advert_ms + '/me';
 
-  get users_adverts_url(): string{
-    
+  get users_adverts_url(): string {
+
     return this._users_adverts_url;
   }
   private _all_adverts = this._advert_ms + '/all';
-  get all_adverts(): string{
+  get all_adverts(): string {
     return this._all_adverts;
   }
   private _delete_advert_url = this._advert_ms + '/delete';
 
-  get delete_advert_url(): string{
+  get delete_advert_url(): string {
     return this._delete_advert_url;
   }
-  
+
   private _search_advert_url = this._advert_ms + '/search';
 
-  get search_advert_url(): string{
+  get search_advert_url(): string {
     return this._search_advert_url;
   }
-  get upload_img_url(): string{
+  get upload_img_url(): string {
     return this._advert_ms + '/upload';
   }
-  
-  get get_img_url(): string{
+
+  get get_img_url(): string {
     return this._advert_ms + '/get-image/';
   }
   // PRICELIST PART
   private _pricelist_url = this._advert_ms + '/pricelist';
 
 
-  get pricelist_url():string{
+  get pricelist_url(): string {
     return this._pricelist_url;
   }
-  get my_pricelist_url():string{
+  get my_pricelist_url(): string {
     return this._pricelist_url + '/me';
   }
-  get new_pricelist_url():string{
+  get new_pricelist_url(): string {
     return this._pricelist_url + '/new';
   }
-  get advert_pricelist_url():string{
+  get advert_pricelist_url(): string {
     return this._advert_ms + '/advert/';
   }
-  get update_pricelist_url():string{
+  get update_pricelist_url(): string {
     return this._pricelist_url + '/update';
   }
-  get all_pricelist_url():string{
-    return this._pricelist_url+'/all';
+  get all_pricelist_url(): string {
+    return this._pricelist_url + '/all';
   }
-  get bonus_url():string{
+  get bonus_url(): string {
     return this._pricelist_url + '/bonus';
   }
 
-  get my_bonuses_url():string{
-    return this._pricelist_url+'/bonuses/me';
+  get my_bonuses_url(): string {
+    return this._pricelist_url + '/bonuses/me';
   }
-  
-  get new_bonus_url():string{
-    return this._pricelist_url+'/bonus/new';
+
+  get new_bonus_url(): string {
+    return this._pricelist_url + '/bonus/new';
   }
   // CODE-BOOK PART
   private _get_codebook_url = this._advert_ms + '/codebook';
 
-  get codebook_url(): string{
+  get codebook_url(): string {
     return this._get_codebook_url;
   }
-  
-  get all_codebook_url(): string{
+
+  get all_codebook_url(): string {
     return this._get_codebook_url + '/all';
   }
   private _get_cities_url = this._get_codebook_url + '/city/all';
 
-  get cities_url(): string{
+  get cities_url(): string {
     return this._get_cities_url;
   }
 

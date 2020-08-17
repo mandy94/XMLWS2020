@@ -14,16 +14,24 @@ export class RequestTableComponent implements OnInit {
 
   @Input() data: any;
   @Input() title: any;
+  @Input() subtitle: any;
   @Input() serverUrl: string;
-  @Input() reqStatus: string;
+  @Input() reqStatus: string;  
+  @Input() reqType: string;
 
   displayedColumns: string[];
-
+  // flags for action buttons
+  showSpinner= false;
+  advertsForMe=false;
+  reserved=false;
+  // --------------
   imgUrl: string;
   constructor(private apiService: ApiService,
     private config: ConfigService, public dialog: MatDialog) { }
   hasRequests() {
-    if (this.data === undefined || this.data.length === 0)
+    if (this.data === undefined || this.data === null)
+      return false;
+    if( this.data.length === 0)
       return false;
     else
       return true;
@@ -31,13 +39,13 @@ export class RequestTableComponent implements OnInit {
   ngOnInit() {
     this.imgUrl = this.serverUrl;
     
-    if (this.reqStatus === "PENDING")
-      this.displayedColumns = ['title', 'img', 'renta', 'returning', 'status', 'actions'];
-    else
-      this.displayedColumns = ['title', 'img', 'renta', 'returning', 'status'];
+    this.displayedColumns = ['title', 'img', 'renta', 'returning', 'status', 'actions'];
+    
+    
   }
   dialogMsg: DialogMessage;
-  confirmAccept(item): void {
+  accept(item): void {
+    if(item.conflict === undefined) item.conflict = [];
     if (item.conflict.length > 0) {
       let itemString = [];
       item.conflict.forEach(function (el) {
@@ -54,15 +62,15 @@ export class RequestTableComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-         this.accept(item);
+         this.saveAccept(item);
         }
       });
     } else {
-      this.accept(item);
+      this.saveAccept(item);
     }
   }
 
-  accept(item){
+  saveAccept(item){
     this.apiService.put(this.config.requests_url + '/accept-request', item)
     .subscribe(() => {
       item.status = "RESERVED";

@@ -14,55 +14,88 @@ export class RequestsComponent implements OnInit {
   ) { }
 
   displayedColumns: string[] = ['title', 'img', 'renta', 'returning', 'status', 'actions'];
-  pendingRequests = new Array<any>();
+  myPendingRequests = new Array<any>();
+  pendingRequestsForMe = new Array<any>();
+
+  myReservedRequests = new Array<any>();
+  reservedRequestsForMe = new Array<any>();
+  
+  myCencelRequests = new Array<any>();
+  cencelRequestForMe = new Array<any>();
+
   clicked: boolean;
+  loadedData = false;
 
   conflictRequests: any;
   canceledRequests: any;
-  reservedRequests: any;
+  
   ngOnInit() {
     this.clicked = false;
-
-    this.getMyRequests();
-
+    this.getPendingRequests();
+    this.getResevedRequests();
+    this.getCancelRequests();
   }
 
   isDataLoaded = false;
-  getMyRequests() {
-    this.apiService.get(this.config.pending_request)
+
+  getPendingRequests() {
+    this.apiService.get(this.config.get_pending_request('my'))
       .subscribe(data => {
-        this.pendingRequests = data;
+        this.myPendingRequests = data;
         this.checkConflicts();
-        this.apiService.get(this.config.cencel_request)
-          .subscribe(data => {
-            this.canceledRequests = data;
-            this.apiService.get(this.config.accepted_request)
-              .subscribe(data => {
-                this.reservedRequests = data;
-                 this.isDataLoaded = true;
-              });
-          });
-
       });
-
+      this.apiService.get(this.config.get_pending_request('for-me'))
+      .subscribe(data => {
+        this.pendingRequestsForMe = data;        
+        this.isDataLoaded = true;
+      });
+  } 
+  getResevedRequests() {
+    this.isDataLoaded = false;
+    this.apiService.get(this.config.get_reserved_request('my'))
+      .subscribe(data => {
+        this.myReservedRequests = data;
+        this.checkConflicts();
+      });
+      this.apiService.get(this.config.get_reserved_request('for-me'))
+      .subscribe(data => {
+        this.reservedRequestsForMe = data;
+        
+        this.isDataLoaded = true;
+      });    
+      
   }
+  getCancelRequests() {
+    this.isDataLoaded = false;
+    this.apiService.get(this.config.get_cencel_request('my'))
+      .subscribe(data => {
+        this.myCencelRequests = data;
+      });
+      this.apiService.get(this.config.get_cencel_request('for-me'))
+      .subscribe(data => {
+        this.cencelRequestForMe = data;
+        this.isDataLoaded = true;
+      });
+  }
+
 
   convertToMomentDate(date) {
     let [day, month, year] = date.split('.');
     return moment(new Date(parseInt(day), parseInt(month), parseInt(year)));
   }
+
   checkConflicts() {
     let arrayOfReq = []; // storage array for comparing - history 
     let that = this;
 
-    this.pendingRequests.forEach(function (bundle) { // initializing dataz
+    this.pendingRequestsForMe.forEach(function (bundle) { // initializing dataz
       bundle.content.forEach(element => {
         element.conflict = [];
         arrayOfReq.push(element);
       })
     });
 
-    this.pendingRequests.forEach(function (bundle) { // returns bundles
+    this.pendingRequestsForMe.forEach(function (bundle) { // returns bundles
       bundle.content.forEach(element => { // returns requests         
         arrayOfReq.forEach(function (el) {
           if (el.id != element.id && el.advert.id == element.advert.id && that.convertToMomentDate(element.rentingDate).isBetween(that.convertToMomentDate(el.rentingDate), that.convertToMomentDate(el.returningDate), undefined, '[]')) {
