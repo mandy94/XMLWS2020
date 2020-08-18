@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DialogMessage } from 'app/shared/models/display-message';
 import { YesNoDialogComponent } from 'app/yes-no-dialog/yes-no-dialog.component';
 import { MatDialog } from '@angular/material';
-import { ApiService, ConfigService } from 'app/service';
+import { ApiService, ConfigService, UserService } from 'app/service';
 import { timeout } from 'rxjs/operators';
 import { NewStatisticDataDialogComponent } from './new-statistic-data-dialog/new-statistic-data-dialog.component';
 
@@ -24,7 +24,9 @@ export class RequestTableComponent implements OnInit {
   
   imgUrl: string;
   constructor(private apiService: ApiService,
-    private config: ConfigService, public dialog: MatDialog) { }
+              private config: ConfigService,
+              public dialog: MatDialog,
+              public userService:UserService) { }
   hasRequests() {
     if (this.data === undefined || this.data === null)
       return false;
@@ -90,6 +92,7 @@ export class RequestTableComponent implements OnInit {
     let statisticData = {
       item : item,
       advertId : item.advert.id,
+      ownerId: this.userService.getMyId(),
       milage: 0
     };
       const dialogRef = this.dialog.open(NewStatisticDataDialogComponent, {
