@@ -23,16 +23,17 @@ export class AdvertComponent implements OnInit {
   // Formcontrols
   newAdvert = new AdvertDAO();
 
-  descCtr = new FormControl();
-  manufacturers = new FormControl();
-  models = new FormControl();
-  fuels = new FormControl();
-  gears = new FormControl();
-  cclasses= new FormControl();
-  pricelist= new FormControl();  
-  milageCtr = new FormControl();
-  seatCtr = new FormControl();
-  cdwCtr = new FormControl();
+  descCtr = new FormControl('');
+  manufacturersCtr = new FormControl('');
+  modelsCtr = new FormControl('');
+  fuelsCtr = new FormControl('');
+  gearsCtr = new FormControl('');
+  cclassesCtr = new FormControl('');
+  pricelistCtr= new FormControl('');  
+  milageCtr = new FormControl('');
+  limitMilageCtr= new FormControl('');
+  seatCtr = new FormControl('');
+  cdwCtr = new FormControl('');
   // lists
   manufacturersList : any;
   modelList: any;
@@ -41,26 +42,15 @@ export class AdvertComponent implements OnInit {
   cclassList: any;
   priceList:any
  
-  
-  //selected vals
-  description='';
-  manufacturer: any;
-  model: any;
-  fuel: any;
-  gear: any;
-  cclass: any;
-  selpricelist:any;
-  milage=0; // koliko je ogranicenje
-  kidsSeat= 0;// koiko sedista
-  cdw=0;
+
 
   // vals for radio buttons
     isLimit:any;
-    isCDW:any;
+    isCDW;
     isSeat:any    
 
     finished(){
-      if(this.description != '')
+      if(this.descCtr.value != '')
         return false;      
 
     }
@@ -76,18 +66,22 @@ export class AdvertComponent implements OnInit {
   hasBseat(param){this.isSeat = param;}
 
   submitAddForm(){
-    this.newAdvert.cclass = this.cclass.id;
-    this.newAdvert.description = this.description;
-    this.newAdvert.fuel = this.fuel.id;
-    this.newAdvert.gear = this.gear.id;
-    this.newAdvert.manufacturer = this.manufacturer.id;
-    this.newAdvert.model = this.model.title;
-    this.newAdvert.priceList = this.selpricelist.id;
-    this.newAdvert.CDW = this.isCDW === false? 0 : this.cdw;
-    this.newAdvert.milage = this.isLimit === false ? 0: this.milage;
-    this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.kidsSeat;
+    this.newAdvert.cclass = this.cclassesCtr.value.id;
+    this.newAdvert.description = this.descCtr.value;
+    this.newAdvert.fuel = this.fuelsCtr.value.id;
+    this.newAdvert.gear = this.gearsCtr.value.id;
+    this.newAdvert.manufacturer = this.manufacturersCtr.value.id;
+    this.newAdvert.model = this.modelsCtr.value.title;
+    this.newAdvert.priceList = this.pricelistCtr.value.id;
+    this.newAdvert.milage = this.milageCtr.value;
+    this.newAdvert.limitMilage =  this.isLimit === true ? -1 :this.limitMilageCtr.value;
+    this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.seatCtr.value;
     this.newAdvert.img = this.selectedFile.name;
+    this.newAdvert.CDW = this.isCDW === false? 0 : this.cdwCtr.value;
 
+  
+    
+    console.log(this.newAdvert);
     this.apiService.post(this.config.add_advert_url, this.newAdvert)
                     .subscribe(data => {
                       this.usersAdverts= data;

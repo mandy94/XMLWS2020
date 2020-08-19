@@ -56,6 +56,7 @@ export class AdvertDAO{
     CDW: number;
     numberOfKidsSeat: number;    
     milage:number;
+    limitMilage:number;
     priceList:number;
  
 }
