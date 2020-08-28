@@ -29,11 +29,11 @@
       <th mat-header-cell *matHeaderCellDef> Statusa korisnika </th>
       <td mat-cell *matCellDef="let element">
        
-        <button mat-button color="primary" *ngIf="element.status == 'ACTIVE'"
+        <span class="blue" *ngIf="element.status == 'ACTIVE'"
           (click)="activate(data.user.id)">
-          Aktiviran </button>
-        <button mat-button color="warn" *ngIf="element.status == 'BLOCK'"
-          (click)="block(data.user.id)">Blokiran</button>
+          Aktiviran </span>
+        <span mat-button class="red" *ngIf="element.status == 'BLOCK'"
+          (click)="block(data.user.id)">Blokiran</span>
         
       </td>
     </ng-container>
@@ -46,12 +46,21 @@
 
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="auth">
-      <th mat-header-cell *matHeaderCellDef> </th>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Osnovno  </th>
       <td mat-cell *matCellDef="let element">
-
-        <button mat-icon-button (click)="showAuthDialog(element)">
+       
+        <button mat-icon-button (click)="showEditUserDialog(element)">
           <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="auth">
+      <th mat-header-cell *matHeaderCellDef>  Permisije</th>
+      <td mat-cell *matCellDef="let element">
+        
+        <button mat-icon-button (click)="showAuthDialog(element)">
+          <mat-icon>settings</mat-icon>
         </button>
       </td>
     </ng-container>

@@ -16,13 +16,7 @@
       <input matInput  [(ngModel)]="newUserData.username" (change)="hasChanged()" name="newUsername">
     </mat-form-field>
   </form>
-  <p *ngIf="data.user.role!='ADMINISTRATOR'">Promena statusa korisnika</p>
-  <div  *ngIf="data.user.role!='ADMINISTRATOR'"fxLayout="row" fxLayoutAlign="space-around stretch">
-    <button mat-flat-button color="primary" [disabled]="data.user.status === 'ACTIVE'" (click)="activate(data.user.id)">
-      Aktiviraj korisnika </button>
-    <button mat-flat-button color="warn" [disabled]="data.user.status === 'BLOCK'"
-      (click)="block(data.user.id)">Blokiraj korisnika</button>
-  </div>
+
 </div>
 <mat-divider></mat-divider>
 <button  *ngIf="data.user.role!='ADMINISTRATOR'" mat-stroked-button color="warn" (click)="delete(data.user.id)" class="longBtn"> Obrisi korisnika iz sistema</button>

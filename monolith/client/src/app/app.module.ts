@@ -51,6 +51,7 @@ import { RequestTableComponent } from './requests/request-table/request-table.co
 import { MyRequestsComponent } from './requests/my-requests/my-requests.component';
 import { RequestsForMeComponent } from './requests/requests-for-me/requests-for-me.component';
 import { NewStatisticDataDialogComponent } from './requests/request-table/new-statistic-data-dialog/new-statistic-data-dialog.component';
+import { EditPermissionsDialogComponent } from './admin/user-config/edit-permissions-dialog/edit-permissions-dialog.component';
 
 @NgModule({
   declarations: [    
@@ -88,7 +89,8 @@ import { NewStatisticDataDialogComponent } from './requests/request-table/new-st
     RequestTableComponent,
     MyRequestsComponent,
     RequestsForMeComponent,
-    NewStatisticDataDialogComponent
+    NewStatisticDataDialogComponent,
+    EditPermissionsDialogComponent
   
   ],
   imports: [
@@ -123,7 +125,7 @@ import { NewStatisticDataDialogComponent } from './requests/request-table/new-st
     MatIconRegistry,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [NewStatisticDataDialogComponent,YesNoDialogComponent,DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
+  entryComponents: [EditPermissionsDialogComponent, NewStatisticDataDialogComponent,YesNoDialogComponent,DialogNewbonusComponent,EditUserDialogComponent,DialogOverviewComponent, DialogNewpricelistComponent,EditItemDialogComponent]
 })
 export class AppModule {
 }

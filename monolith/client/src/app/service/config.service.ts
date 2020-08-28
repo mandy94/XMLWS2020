@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
-
+ 
 
   private _api_gateway = "http://localhost:8180";
   private _users_and_agancy_ms = this._api_gateway + "/users-ms/api";
@@ -55,6 +55,16 @@ export class ConfigService {
     return this._change_password_url;
   }
 
+  get_user_permission_config(id):string{
+    return this.user_url +'/'+  id + '/permissions';
+  }
+  get_update_permisions(id):string{
+    return this.user_url +'/'+  id + '/update-permissions';
+  }
+  get_permission_to_post(id):string
+  {
+    return this.user_url +'/' + id + '/permissions';
+  }
   private _whoami_url = this._api_url + '/whoami';
 
   get whoami_url(): string {

@@ -16,9 +16,9 @@ export class AdvertComponent implements OnInit {
   constructor(
     private advertService: AdvertService,
     private userService: UserService,
-    private apiService:ApiService,
+    private apiService: ApiService,
     private config: ConfigService) { }
-    
+
   usersAdverts = [];
   // Formcontrols
   newAdvert = new AdvertDAO();
@@ -29,43 +29,46 @@ export class AdvertComponent implements OnInit {
   fuelsCtr = new FormControl('');
   gearsCtr = new FormControl('');
   cclassesCtr = new FormControl('');
-  pricelistCtr= new FormControl('');  
+  pricelistCtr = new FormControl('');
   milageCtr = new FormControl('');
-  limitMilageCtr= new FormControl('');
+  limitMilageCtr = new FormControl('');
   seatCtr = new FormControl('');
   cdwCtr = new FormControl('');
   // lists
-  manufacturersList : any;
+  manufacturersList: any;
   modelList: any;
   fuelList: any;
   gearList: any;
   cclassList: any;
-  priceList:any
- 
-
-
+  priceList: any
   // vals for radio buttons
-    isLimit:any;
-    isCDW;
-    isSeat:any    
+  isLimit: any;
+  isCDW;
+  isSeat: any
 
-    finished(){
-      if(this.descCtr.value != '')
-        return false;      
+  finished() {
+    if (this.descCtr.value != '')
+      return false;
 
-    }
+  }
   form: FormGroup;
   ngOnInit() {
-  
+
     this.showMyAdverts();
     this.loadResources();
-  
-  }
-  hasLimit(param){this.isLimit = param;}
-  hasCDW(param){this.isCDW = param}
-  hasBseat(param){this.isSeat = param;}
+    let id = this.userService.getMyId();
+    this.apiService.get(this.config.get_permission_to_post(id)).subscribe(data =>{this.postPermision = data.canPost} );
 
-  submitAddForm(){
+  }
+  postPermision;
+  havePermission(){
+    return this.postPermision;
+  }
+  hasLimit(param) { this.isLimit = param; }
+  hasCDW(param) { this.isCDW = param }
+  hasBseat(param) { this.isSeat = param; }
+
+  submitAddForm() {
     this.newAdvert.cclass = this.cclassesCtr.value.id;
     this.newAdvert.description = this.descCtr.value;
     this.newAdvert.fuel = this.fuelsCtr.value.id;
@@ -74,20 +77,19 @@ export class AdvertComponent implements OnInit {
     this.newAdvert.model = this.modelsCtr.value.title;
     this.newAdvert.priceList = this.pricelistCtr.value.id;
     this.newAdvert.milage = this.milageCtr.value;
-    this.newAdvert.limitMilage =  this.isLimit === true ? -1 :this.limitMilageCtr.value;
-    this.newAdvert.numberOfKidsSeat = this.isSeat === false? 0 : this.seatCtr.value;
+    this.newAdvert.limitMilage = this.isLimit === true ? -1 : this.limitMilageCtr.value;
+    this.newAdvert.numberOfKidsSeat = this.isSeat === false ? 0 : this.seatCtr.value;
     this.newAdvert.img = this.selectedFile.name;
-    this.newAdvert.CDW = this.isCDW === false? 0 : this.cdwCtr.value;
+    this.newAdvert.CDW = this.isCDW === false ? 0 : this.cdwCtr.value;
 
-  
-    
-    console.log(this.newAdvert);
+
     this.apiService.post(this.config.add_advert_url, this.newAdvert)
-                    .subscribe(data => {
-                      this.usersAdverts= data;
-                    })
+      .subscribe(data => {
+        this.usersAdverts = data;
+      })
 
   }
+
   //Prikaz svih oglasa od ulogovanog usera
   showMyAdverts() {
     this.advertService.getAdvertsFrom()
@@ -95,25 +97,25 @@ export class AdvertComponent implements OnInit {
         this.usersAdverts = data;
       });
   }
-  hasAds(){
-  
-    return this.usersAdverts.length === 0 ? false: true;
+  hasAds() {
+
+    return this.usersAdverts.length === 0 ? false : true;
   }
-  loadResources(){
-    
+  loadResources() {
+
     this.apiService.get(this.config.all_codebook_url)
-        .subscribe(data=>{
-          this.manufacturersList = data.manufacturers;      
-          this.modelList = data.models;
-          this.fuelList = data.fuels;
-          this.cclassList = data.cclass;
-          this.gearList = data.gearType;
-    });   
+      .subscribe(data => {
+        this.manufacturersList = data.manufacturers;
+        this.modelList = data.models;
+        this.fuelList = data.fuels;
+        this.cclassList = data.cclass;
+        this.gearList = data.gearType;
+      });
     this.apiService.get(this.config.my_pricelist_url)
-    .subscribe(data =>{      
-      this.priceList = data;
-    });
-   
+      .subscribe(data => {
+        this.priceList = data;
+      });
+
   }
   selectedFile: any;
   public onFileChanged(event) {
@@ -123,17 +125,17 @@ export class AdvertComponent implements OnInit {
   imgUrl;
   onUpload() {
     const that = this;
-    
+
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
     let headers = new HttpHeaders({
-      'Authorization' : localStorage.getItem("token"),
-      'Access-Control-Allow-Origin' : '*',  
-    });  
-    this.apiService.post(this.config.upload_img_url, uploadImageData, headers).subscribe(()=>{
-      that.imgUrl = this.config.get_img_url+this.selectedFile.name;
-      
+      'Authorization': localStorage.getItem("token"),
+      'Access-Control-Allow-Origin': '*',
+    });
+    this.apiService.post(this.config.upload_img_url, uploadImageData, headers).subscribe(() => {
+      that.imgUrl = this.config.get_img_url + this.selectedFile.name;
+
     });
   }
   retrieveResonse;
@@ -142,14 +144,14 @@ export class AdvertComponent implements OnInit {
 
 
   // getImage(imageName:string) {
-     
+
   //     this.apiService.get(this.config.get_img_url+imageName,null, true)
   //      .subscribe();
-      
+
   // }
-    
 
 
- 
+
+
 
 }

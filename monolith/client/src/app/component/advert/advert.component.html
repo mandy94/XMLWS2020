@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="start stretch">
 
   <div class="first">
-    <mat-card>
+    <mat-card  *ngIf="havePermission()">
       <mat-card-title>Dodaj oglas</mat-card-title>
       <mat-card-content>
         <form (ngSubmit)="(submitAddForm())" class="search-form">
