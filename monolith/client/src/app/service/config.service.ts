@@ -23,6 +23,7 @@ export class ConfigService {
     return this._requests_ms + "/new-request";
   } 
 
+
   get_pending_request(prefix: any): string {
     return this._requests_ms + '/' + prefix + "/pending/requests";
   }
@@ -143,7 +144,7 @@ export class ConfigService {
     return this._pricelist_url + '/new';
   }
   get advert_pricelist_url(): string {
-    return this._advert_ms + '/advert/';
+    return this._pricelist_url + '/advert';
   }
   get update_pricelist_url(): string {
     return this._pricelist_url + '/update';
@@ -182,7 +183,19 @@ get add_statistic_data():string{
   return this._requests_ms +"/statistic/add";
 }
 
-  get get_car_milages_stats():string{
+  get _car_milages_stats():string{
     return this._requests_ms + "/statistic/milage";
+  }
+  get _avg_milages_stats():string{
+    return this._requests_ms + "/statistic/avg-milage";
+  }
+  get _max_milage_ad(){
+    return this._requests_ms + "/statistic/max-milage";
+  }
+  get _most_popular_ad(){
+    return this._requests_ms + "/statistic/most-popular";
+  }
+  get _rent_number_ad(){
+    return this._requests_ms + "/statistic/rent-number";
   }
 }

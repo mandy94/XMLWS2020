@@ -1,2 +1,10 @@
+
 Statistike
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div fxLayout="row" fxLayoutAlign="space-around center" >
+<div id="byMilage" style="height: 370px; width: 29%;"></div>
+<div id="byRentNo" style="height: 370px; width: 29%;"></div>
+<div id="byAvg" style="height: 370px; width: 29%;"></div>
+</div>
+<div>Automobil sa najvise predjenih kilometara: {{maxMilageAdvert.advert_name}} sa prejdenim {{maxMilageAdvert.milage}}km </div>
+<div>Najpopularniji automobil: {{mostPopularAdvert.advert_name}} sa ukupno {{mostPopularAdvert.rentNumber}} zahteva</div>
+
