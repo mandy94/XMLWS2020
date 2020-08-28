@@ -9,7 +9,7 @@
 
 <table *ngIf="allPermisions">
   <tr>
-    <td> Da li korisnik sme da objavljuje oglase?</td>
+    <td> Da li korisnik sme da se logije?</td>
     <td>
       <mat-slide-toggle [(ngModel)]="allPermisions.canLog">{{allPermisions.canLog}}</mat-slide-toggle>
     </td>
@@ -23,5 +23,3 @@
 
   <button mat-button (click)="submit()">Sacuvaj izmene</button>
 </table>
-
-{{data | json}}

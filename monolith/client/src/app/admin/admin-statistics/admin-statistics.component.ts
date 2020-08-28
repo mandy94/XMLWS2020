@@ -18,7 +18,8 @@ export class AdminStatisticsComponent implements OnInit {
                private userService: UserService) { }
 
         
-  chartData : Array<DataFormat>;               
+  chartData : Array<DataFormat>;    
+          
   ngOnInit() {
     let chart;
     this.apiSevice.get(this.config.get_car_milages_stats)
@@ -28,7 +29,7 @@ export class AdminStatisticsComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: "Predjeni kilometri vasih vozila"
+          text: "Predjeni kilometri svih vozila"
         },
         data: [{
           type: "column",

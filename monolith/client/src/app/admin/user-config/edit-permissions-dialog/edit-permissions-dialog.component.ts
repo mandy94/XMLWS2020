@@ -36,12 +36,21 @@ export class EditPermissionsDialogComponent implements OnInit {
   //     width: '400px',
   //     data: { displayedText:"Da li ste sigurno da ovo zelite?"}
   //   });
-  
   //   dialogRef.afterClosed().subscribe(result => {    
-      
-      
   //   });
     this.apiSevice.put(this.config.get_update_permisions(this.data.user.id), this.allPermisions).subscribe();
-    
+    this.dialogRef.close();
   }
+  activate(id: number) {
+    this.apiSevice.put(this.config.user_url + "/activate", id).subscribe(() => {
+      this.data.user.status = 'ACTIVE';
+      // this.hasChanged();
+    });
+  }
+  block(id: number) {
+    this.apiSevice.put(this.config.user_url + "/block", id).subscribe(() => {
+      this.data.user.status = 'BLOCK';
+      // this.hasChanged()
+    });
+  } 
 }

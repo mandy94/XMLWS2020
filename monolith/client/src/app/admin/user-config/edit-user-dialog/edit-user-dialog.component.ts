@@ -34,18 +34,7 @@ export class EditUserDialogComponent {
     this.newUserData.id = this.data.user.id;
     this.apiSevice.put(this.config.update_user_url, this.newUserData).subscribe();
   }
-  activate(id: number) {
-    this.apiSevice.put(this.config.user_url + "/activate", id).subscribe(() => {
-      this.data.user.status = 'ACTIVE';
-      this.hasChanged();
-    });
-  }
-  block(id: number) {
-    this.apiSevice.put(this.config.user_url + "/block", id).subscribe(() => {
-      this.data.user.status = 'BLOCK';
-      this.hasChanged()
-    });
-  }
+  
   delete(id: number) {
    
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
