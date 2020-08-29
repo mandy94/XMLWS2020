@@ -9,10 +9,12 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment from 'moment';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { UserRequest } from '.';
+import { UserRequest, NewRentingRequest } from '.';
 import { ApiService, ConfigService, UserService } from 'app/service';
-import { Advert } from 'app/shared/models/advert';
+
 import { AdvertDTO } from 'app/component/advert-card';
+
+
 
 export const MY_FORMATS = {
   parse: {
@@ -44,8 +46,7 @@ const dateFormat = "DD.MM.YYYY";
   ],
 })
 export class AdvertDetailedComponent implements OnInit {
-  date = new FormControl(moment());
-  date1 = new FormControl(moment());
+
 
   constructor(private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -74,13 +75,14 @@ export class AdvertDetailedComponent implements OnInit {
     this.apiService.get(this.conf.cities_url).subscribe((data) => this.cityList = data);
     this.route.params
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((advert: AdvertDTO) => {
+      .subscribe((advert: any) => {
+        console.log(this.advert)
         this.advert = advert;
-        this.apiService.get(this.conf.user_url + '/' + advert.user_id).subscribe(data => that.owner_username = data.username);
-        that.imgUrl = this.conf.get_img_url + this.advert.img;
-        
+        // this.apiService.get(this.conf.user_url + '/' + advert.user.id).subscribe(data => that.owner_username = data.username);
+        that.imgUrl = this.conf.get_img_url + this.advert.imgmain;
+        this.loadPriceList();
       });
-  console.log(this.advert);
+  
 
  
   }
@@ -89,7 +91,7 @@ export class AdvertDetailedComponent implements OnInit {
   
   loadPriceList() {
 
-    this.apiService.get(this.conf.advert_pricelist_url + '/'+ this.advert.id)
+    this.apiService.get(this.conf.advert_pricelist_url + '/'+(this.advert.id).toString())
     .subscribe((data) => {
      this.dataSource = [data];
       console.log(data);
@@ -107,39 +109,59 @@ export class AdvertDetailedComponent implements OnInit {
 
 
 
-  newUserRequest = new UserRequest();
+  newUserRequest = new NewRentingRequest();
   selectedRentingTime: any;
   selectedReturnTime: any;
-  selectedReturnDate: any;
+  
+  selectedRentingDate = new FormControl(moment());
+  selectedReturningDate = new FormControl(moment());
   submit() {
-    this.userService.getMyInfo().subscribe(() => {
-
+   
+   
       this.newUserRequest.rentingTime = this.selectedRentingTime;
       this.newUserRequest.returningTime = this.selectedReturnTime;
-      this.newUserRequest.advert.id = Number(this.advert.id);
-      this.newUserRequest.client.id = Number(this.userService.currentUser.id);
+      this.newUserRequest.advertid = this.advert.id;      
+      this.newUserRequest.rentingDate = this.selectedRentingDate.value.format(dateFormat);
+      this.newUserRequest.returningDate = this.selectedReturningDate.value.format(dateFormat);
+      console.log(this.newUserRequest)
+      this.apiService.post(this.conf.new_request, this.newUserRequest).subscribe(() =>{
+         this.newUserRequest = new NewRentingRequest();
+         this.newUserRequest.rentingDate = null;
+         this.newUserRequest.returningDate = null;
+         this.selectedRentingTime = '';
+         this.selectedReturnTime = '';
+     
+        });
+  
 
-
-      this.apiService.post(this.conf.new_request, this.newUserRequest).subscribe(() => this.newUserRequest = new UserRequest());
-    }
-    );
 
   }
   whenReadyToSubmit() {
     if (this.newUserRequest.rentingDate != '' && this.newUserRequest.returningDate != '') {
       if (this.selectedRentingTime != null && this.selectedReturnTime != null)
-        return true;
+        if(this.validateRentDate() && this.validateReturnDate())
+          return true;
     }
     return false;
   }
-  updateDate(type: string, event: any) {
-
-    let formatedDate = moment(event.value).format(dateFormat);
-    if (type == "rent") {
-      this.newUserRequest.rentingDate = formatedDate;
-    } else if (type == "return") {
-      this.newUserRequest.returningDate = formatedDate;
+  errorMsg;
+  validateRentDate(){
+    this.errorMsg = null;
+    if(this.selectedRentingDate.value.isBefore(moment()))
+    {
+      this.errorMsg = "Datum iznajmljivanja mora biti u skladu sa fizikom - od sutra";
+      return false;
     }
-
+    return true;
+  }
+  validateReturnDate(){
+    this.errorMsg = null;
+    if(this.selectedRentingDate.value.isAfter(this.selectedReturningDate.value))
+    {
+      this.errorMsg = "Datum iznajmljivanja mora biti u skladu sa fizikom - pre datuma vracanja";
+      return false;
+    }
+    return true;
   }
 }
+

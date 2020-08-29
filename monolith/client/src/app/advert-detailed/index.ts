@@ -11,6 +11,15 @@ export class UserRequest{
     client = new UserDTO();
     
 }
+export class NewRentingRequest{
+    
+    rentingDate;
+	returningDate;
+	rentingTime;
+	returningTime;
+	advertid;	
+	
+}
 export class UserDTO{
  
     id:number;

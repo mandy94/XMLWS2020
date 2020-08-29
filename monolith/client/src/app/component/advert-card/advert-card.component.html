@@ -2,12 +2,12 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{advert.title}}</mat-card-title>
-    <mat-card-subtitle>{{advert.manufacturer.title}}</mat-card-subtitle>
+    <mat-card-subtitle>{{advert.manufacturer}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image *ngIf="imgUrl" [src]="imgUrl" alt="Photo of a Shiba Inu" class="image">
   <mat-card-content>
     <p>
-      {{advert.descrption}}
+      Cena: {{advert.pricePerKm}}.00din po kilometru
     </p>
   </mat-card-content>
   <mat-card-actions>

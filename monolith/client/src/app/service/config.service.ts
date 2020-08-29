@@ -104,6 +104,9 @@ export class ConfigService {
   }
   private _users_adverts_url = this._advert_ms + '/me';
 
+  get_advert_by_id(id){
+    return this._advert_ms + '/' + id;
+  }
   get users_adverts_url(): string {
 
     return this._users_adverts_url;
@@ -111,6 +114,9 @@ export class ConfigService {
   private _all_adverts = this._advert_ms + '/all';
   get all_adverts(): string {
     return this._all_adverts;
+  }
+  get all_adverts_with_pricelist(){
+    return  this._advert_ms + '/advert-card';
   }
   private _delete_advert_url = this._advert_ms + '/delete';
 

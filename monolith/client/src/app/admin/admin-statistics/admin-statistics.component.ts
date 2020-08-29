@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService, ApiService, UserService } from 'app/service';
 import * as CanvasJS from 'assets/Chart 2.3.2/canvasjs.min.js';
-import { runInThisContext } from 'vm';
+
 export interface DataFormat{
   y;
   label;

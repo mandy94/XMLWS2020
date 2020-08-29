@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center  stretch">
     <h1>{{advert.title}}</h1>
-    <h4>Vlasnik: {{owner_username}}</h4>
+    <!-- <h4>Vlasnik: {{owner_username}}</h4> -->
     <div fxLayout="row" fxLayoutAlign="space-around  center">
         <img [src]="imgUrl" height="300px">
         <div>
@@ -13,7 +13,7 @@
         <mat-list> Klasa automobila: <strong> {{advert.cclass}} </strong></mat-list>        
         <mat-list *ngIf="advert.kidsSeat"> Broj decijih sedista: <strong> {{advert.numberOfKidsSeat}}</strong></mat-list>
         <mat-list *ngIf="!advert.kidsSeat">Nema decijih sedista na raspolaganju. </mat-list>       
-        <mat-list> Da li postoji opvija CDW :<strong>  {{advert.CDW}} </strong></mat-list>
+        <mat-list> Da li postoji opvija CDW :<strong>  {{advert.cdwprotection}} </strong></mat-list>
         <mat-list> Presao do sad: <strong>{{ advert.milage }} km </strong></mat-list>
 
     </div>
@@ -66,22 +66,16 @@
 <div fxLayout="row" fxLayoutAlign="space-around  center">
     <h2> Rezervisi automobil.</h2>
 </div>
+
 <div fxLayout="row" fxLayoutAlign="space-around  center">
-    <p>{{submitMsg}}</p>
-    <mat-form-field>
-        <mat-label>Mesto preuzimanja</mat-label>
-        <mat-select [(value)]="selectedCity">
-            <mat-option *ngFor="let city of cityList" [value]="city.id">
-                {{city.code}} - {{city.title}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+
     <mat-form-field>       
-        <!-- <mdb-error *ngIf="date1.invalid && (date1.dirty || date1.touched)"> Nije dobar unos.</mdb-error> -->
-        <mat-label *ngIf="!date1.invalid ">Datum preuzimanja</mat-label>
-        <input matInput value=''[matDatepicker]="dp1" [formControl]="date1" (dateChange)="updateDate('rent', $event)" required >
-        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-        <mat-datepicker touchUi  #dp1></mat-datepicker>
+        
+        <mat-label >Datum preuzimanja</mat-label>
+        <input matInput value='' [matDatepicker]="rentingDate" [formControl]="selectedRentingDate" (dateChange)="validateRentDate()" required >
+        <mat-datepicker-toggle matSuffix [for]="rentingDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi  #rentingDate></mat-datepicker>
+        
     </mat-form-field>
 
     <mat-form-field>
@@ -95,9 +89,9 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Datum vracanja</mat-label>
-        <input matInput value='' [matDatepicker]="dp" [formControl]="date"  (dateChange)="updateDate('return', $event)" required >
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker touchUi  #dp></mat-datepicker>
+        <input matInput value='' [matDatepicker]="returningDate" [formControl]="selectedReturningDate"  (dateChange)="validateReturnDate()" required >
+        <mat-datepicker-toggle matSuffix [for]="returningDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi  #returningDate></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Vreme vracanja</mat-label>
@@ -110,5 +104,6 @@
 
 
     <button mat-raised-button (click)="submit()" *ngIf="!myAdvert()" [disabled]="!whenReadyToSubmit()">Pronadji vozilo</button>
-    <button (click)="loadPriceList()"> Majke ti</button>
-</div>
+    
+  </div>
+  <div class="error" *ngIf="errorMsg">{{errorMsg}}</div>

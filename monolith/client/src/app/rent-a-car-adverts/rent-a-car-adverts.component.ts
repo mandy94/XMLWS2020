@@ -23,24 +23,21 @@ export class RentACarAdvertsComponent implements OnInit {
 
 
   load(){
-    this.adservice.getAllAdverts().subscribe(data => {  this.advertList = data; this.finishedLoading = true;});
+    this.adservice.getAllAdvertsWithPriceList().subscribe(data => {  this.advertList = data; this.finishedLoading = true;});
   }
 
-private selected: any;
 private searchAttributes: SearchAttributes;
 
-selmanu=[];
-selmodel=[];
-selfuel=[];
-selgear=[];
-selcc=[];
-
-manuCtrl= new FormControl();
-modelCrtl= new FormControl();
-fuelCrtl= new FormControl();
-gearCrtl= new FormControl();
-cclassCrtl= new FormControl();
-cityList = new FormControl();
+manuCtrl= new FormControl([]);
+modelCrtl= new FormControl([]);
+fuelCrtl= new FormControl([]);
+gearCrtl= new FormControl([]);
+cclassCrtl= new FormControl([]);
+cityList = new FormControl([]);
+minPrice = new FormControl();
+maxPrice = new FormControl();
+kidsSeat = new FormControl();
+milage = new FormControl();
 
 codebook = [];
 
@@ -50,16 +47,22 @@ getData(){
 }
 submitSearchForm(){
   this.searchAttributes={
-    cclass : this.selcc,
-    models : this.selmodel,
-    manufacturers : this.selmanu,
-    gearType : this.selgear,
-    fuels :this.selfuel
+
+    cclass : this.cclassCrtl.value,
+    models : this.modelCrtl.value,
+    manufacturers : this.manuCtrl.value,
+    gearType : this.gearCrtl.value,
+    fuels :this.fuelCrtl.value,
+    minPrice: this.minPrice.value == undefined ? 0 : this.minPrice.value,
+    maxPrice: this.maxPrice.value == undefined ? -1 : this.maxPrice.value,
+    kidsSeat : this.kidsSeat.value==undefined ? 0 :this.kidsSeat.value,
+    milage : this.milage.value
+
   }
   console.log(this.searchAttributes);
   this.apiService.post(this.config.search_advert_url, this.searchAttributes)
   .subscribe(data => this.advertList = data);
- //  this.adservice.getFilteredAdverts(this.searchAttributes).subcribe();
+ 
 }
 
 }

@@ -32,7 +32,7 @@ imgUrl;
   }
 
   showMyAdverts() {
-    console.log("refreshed data")
+
     this.advertService.getAdvertsFrom()
       .subscribe(data => {
         this.usersAdverts = data;
@@ -50,12 +50,12 @@ imgUrl;
   }
 
 
-  gotoItemPage() {
-    
-    let advertDTO = new AdvertDTO(this.advert);
-    this.router.navigate(['/advert-page', advertDTO]);
-
-
+  gotoItemPage() {   
+    this.advertService.getById(this.advert.id)
+    .subscribe(
+      (data) =>  this.router.navigate(['/advert-page', data])
+    );
+   
   }
 
 

@@ -19,4 +19,8 @@ export class User{
     manufacturers:any,
     cclass:any,
     gearType:any
+    minPrice:any;
+    maxPrice:any;
+    milage:any;
+    kidsSeat:any;
   }

@@ -33,7 +33,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CodeBookComponent } from './code-book/code-book.component';
 import { RentACarAdvertsComponent } from './rent-a-car-adverts/rent-a-car-adverts.component';
-import { SearchAdvertsBarComponent } from './search-adverts-bar/search-adverts-bar.component';
+
 import { AdvertCardComponent } from './component/advert-card/advert-card.component';
 import { AdvertDetailedComponent } from './advert-detailed/advert-detailed.component';
 import { RequestsComponent } from './requests/requests.component';
@@ -73,7 +73,6 @@ import { EditPermissionsDialogComponent } from './admin/user-config/edit-permiss
     UserProfileComponent,
     CodeBookComponent,
     RentACarAdvertsComponent,
-    SearchAdvertsBarComponent,
     AdvertCardComponent,
     AdvertDetailedComponent,
     RequestsComponent,

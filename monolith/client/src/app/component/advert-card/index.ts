@@ -11,7 +11,7 @@ export class AdvertDTO{
         this.manufacturer = data.manufacturer.title;
         this.gear = data.gear.title;
         this.fuel = data.fuel.title;
-        this.img = data.imgmain;
+        this.imgmain = data.imgmain;
         this.CDW= data.cdwprotection;
         this.numberOfKidsSeat =  data.numberOfKidsSeat;
         this.kidsSeat=  data.kidsSeat;
@@ -31,7 +31,7 @@ export class AdvertDTO{
     model: string;
     fuel: string;
     gear: string;
-    img:string;
+    imgmain:string;
     cclass:string;    
     user_id: number;
     manufacturer:string;
