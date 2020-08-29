@@ -27,3 +27,9 @@
   .mat-grid-list{
     margin-top: 10px ;
   }
+  .full-width{
+    width:  100%;
+  }
+  button{
+    margin-top : 15px;
+  }

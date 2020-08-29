@@ -27,7 +27,7 @@ export class RentACarAdvertsComponent implements OnInit {
   }
 
 private searchAttributes: SearchAttributes;
-
+orderByCtr = new FormControl({prop: undefined});
 manuCtrl= new FormControl([]);
 modelCrtl= new FormControl([]);
 fuelCrtl= new FormControl([]);
@@ -38,9 +38,31 @@ minPrice = new FormControl();
 maxPrice = new FormControl();
 kidsSeat = new FormControl();
 milage = new FormControl();
+CDWProtecton = new FormControl();
 
 codebook = [];
+orderOptions= [ {prop:"pricePerKm" , order:"up", text: "Po ceni opadajuce"},
+                {prop:"pricePerKm", order:"down",text: "Po ceni rastuce"},
+                {prop:"title", text: "Po nazivu"}  ];
 
+onOrderChanged(){ 
+  console.log(this.orderByCtr.value.prop);  
+  this.sortedAdvertList();
+
+}
+sortedAdvertList(){
+  let prop = this.orderByCtr.value.prop;
+  let criteria = this.orderByCtr.value.order;
+  if(prop != undefined){
+    if(criteria == "up")
+      this.advertList = this.advertList.sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+    if(criteria == "down")
+    this.advertList = this.advertList.sort((a, b) => a[prop] < b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+
+  }
+  return this.advertList;
+
+}
 getData(){
   
   this.apiService.get(this.config.all_codebook_url).subscribe(data => this.codebook = data);
@@ -55,11 +77,12 @@ submitSearchForm(){
     fuels :this.fuelCrtl.value,
     minPrice: this.minPrice.value == undefined ? 0 : this.minPrice.value,
     maxPrice: this.maxPrice.value == undefined ? -1 : this.maxPrice.value,
-    kidsSeat : this.kidsSeat.value==undefined ? 0 :this.kidsSeat.value,
-    milage : this.milage.value
+    kidsSeat : this.kidsSeat.value == undefined ? -1 :this.kidsSeat.value,
+    milage : this.milage.value,
+    cdw : this.CDWProtecton.value,
 
   }
-  console.log(this.searchAttributes);
+  
   this.apiService.post(this.config.search_advert_url, this.searchAttributes)
   .subscribe(data => this.advertList = data);
  

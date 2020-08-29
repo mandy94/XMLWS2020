@@ -23,4 +23,5 @@ export class User{
     maxPrice:any;
     milage:any;
     kidsSeat:any;
+    cdw:any;
   }
