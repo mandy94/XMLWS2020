@@ -56,6 +56,7 @@ export class AdvertDetailedComponent implements OnInit {
     private userService: UserService
   ) { }
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  context = "Pronadji vozilo";
   selectedFile: File;
   selectedCity: string;
   retrievedImage: any;
@@ -78,6 +79,7 @@ export class AdvertDetailedComponent implements OnInit {
       .subscribe((advert: any) => {
         console.log(this.advert)
         this.advert = advert;
+        this.context = "Pronadji vozilo";
         // this.apiService.get(this.conf.user_url + '/' + advert.user.id).subscribe(data => that.owner_username = data.username);
         that.imgUrl = this.conf.get_img_url + this.advert.imgmain;
         this.loadPriceList();
@@ -130,9 +132,9 @@ export class AdvertDetailedComponent implements OnInit {
          this.newUserRequest.returningDate = null;
          this.selectedRentingTime = '';
          this.selectedReturnTime = '';
-     
+        
         });
-  
+  this.context ="Vozilo rezervisano";
 
 
   }

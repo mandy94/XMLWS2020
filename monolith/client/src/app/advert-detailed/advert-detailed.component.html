@@ -103,7 +103,7 @@
     </mat-form-field>
 
 
-    <button mat-raised-button (click)="submit()" *ngIf="!myAdvert()" [disabled]="!whenReadyToSubmit()">Pronadji vozilo</button>
+    <button mat-raised-button (click)="submit()" *ngIf="!myAdvert()" [disabled]="!whenReadyToSubmit()">{{context}}</button>
     
   </div>
   <div class="error" *ngIf="errorMsg">{{errorMsg}}</div>

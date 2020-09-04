@@ -17,7 +17,7 @@ export class NewStatisticDataDialogComponent{
 
     submitReport(){
       this.data.milage = this.dataFormControl.value;
-      this.dialogRef.close();
+      this.dialogRef.close(this.dataFormControl.value);
     }
   
  

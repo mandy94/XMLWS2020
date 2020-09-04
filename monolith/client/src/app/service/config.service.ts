@@ -33,7 +33,16 @@ export class ConfigService {
   get_reserved_request(prefix: any): string {
     return this._requests_ms + '/' + prefix + "/reserved/requests";
   }
-
+  
+  get_request_for_payment(prefix: any): string {
+    return this._requests_ms + '/' + prefix + "/for-payment/requests";
+  }
+  get_paid_requests(prefix: any): string {
+    return this._requests_ms + '/' + prefix + "/paid/requests";
+  }
+get request_for_payment(){
+  return this._requests_ms + '/for-payment';
+}
   get delete_request(): string {
     return this._requests_ms + "/delete-request";
   }
@@ -135,6 +144,9 @@ export class ConfigService {
 
   get get_img_url(): string {
     return this._advert_ms + '/get-image/';
+  }
+  get_generate_invoice(id,days,milage):string{
+    return this._advert_ms + '/' + id + '/generate-bill/' + days + '/milage/' + milage;
   }
   // PRICELIST PART
   private _pricelist_url = this._advert_ms + '/pricelist';

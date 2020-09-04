@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { ApiService, ConfigService, UserService } from 'app/service';
 import { timeout } from 'rxjs/operators';
 import { NewStatisticDataDialogComponent } from './new-statistic-data-dialog/new-statistic-data-dialog.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-request-table',
@@ -17,34 +18,34 @@ export class RequestTableComponent implements OnInit {
   @Input() title: any;
   @Input() subtitle: any;
   @Input() serverUrl: string;
-  @Input() reqStatus: string;  
+  @Input() reqStatus: string;
   @Input() reqType: string;
 
   displayedColumns: string[];
-  
+
   imgUrl: string;
   constructor(private apiService: ApiService,
-              private config: ConfigService,
-              public dialog: MatDialog,
-              public userService:UserService) { }
+    private config: ConfigService,
+    public dialog: MatDialog,
+    public userService: UserService) { }
   hasRequests() {
     if (this.data === undefined || this.data === null)
       return false;
-    if( this.data.length === 0)
+    if (this.data.length === 0)
       return false;
     else
       return true;
   }
   ngOnInit() {
     this.imgUrl = this.serverUrl;
-    
+
     this.displayedColumns = ['title', 'img', 'renta', 'returning', 'status', 'actions'];
-    
-    
+
+
   }
   dialogMsg: DialogMessage;
   accept(item): void {
-    if(item.conflict === undefined) item.conflict = [];
+    if (item.conflict === undefined) item.conflict = [];
     if (item.conflict.length > 0) {
       let itemString = [];
       item.conflict.forEach(function (el) {
@@ -61,7 +62,7 @@ export class RequestTableComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-         this.saveAccept(item);
+          this.saveAccept(item);
         }
       });
     } else {
@@ -69,17 +70,17 @@ export class RequestTableComponent implements OnInit {
     }
   }
 
-  saveAccept(item){
+  saveAccept(item) {
     this.apiService.put(this.config.requests_url + '/accept-request', item)
-    .subscribe(() => {
-      item.status = "RESERVED";
-      this.data = this.data.filter(obj => obj.id != item.id);
-    
-      item.conflict.forEach(function (el) {
-        el.status = "CANCELED";
+      .subscribe(() => {
+        item.status = "RESERVED";
+        this.data = this.data.filter(obj => obj.id != item.id);
+
+        item.conflict.forEach(function (el) {
+          el.status = "CANCELED";
+        });
+
       });
-      
-    });
   }
   decline(item) {
 
@@ -87,24 +88,45 @@ export class RequestTableComponent implements OnInit {
       item.status = "CENCELED";
     });
   }
-  
-  addRentingAnalyze(item):void {
+
+  inputMilage = 0;
+  addRentingAnalyze(item): void {
+
+    item.finishedRenting = false;
     let statisticData = {
-      item : item,
-      advertId : item.advert.id,
+      item: item,
+      advertId: item.advert.id,
       ownerId: this.userService.getMyId(),
       milage: 0
     };
-      const dialogRef = this.dialog.open(NewStatisticDataDialogComponent, {
-        width: '550px',
-        data: statisticData
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        
-        this.apiService.post(this.config.add_statistic_data, statisticData).subscribe();
-      });
-    }
-  
-  
+    const dialogRef = this.dialog.open(NewStatisticDataDialogComponent, {
+      width: '550px',
+      data: statisticData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.reqType = 'statsCommit';
+      this.inputMilage = result;
+      this.apiService.post(this.config.add_statistic_data, statisticData).subscribe(() => this.makeInvoice(item));
+
+    });
+  }
+  invoice;
+  makeInvoice(item) {
+    let from = moment(item.rentingDate, "DD.MM.YYYY");
+    let to = moment(item.returningDate, "DD.MM.YYYY");
+    let days = to.diff(from, "days") + 1;
+    console.log(days)
+
+    this.apiService.get(this.config.get_generate_invoice(item.id, days, this.inputMilage)).subscribe(data => {
+
+      this.invoice = data;
+      item.finishedRenting = true;
+      this.invoice["advert"] = item.advert;
+      this.invoice["dates"] = { "from": item.rentingDate, "to": item.returningDate }
+    });
+
+  }
+
+
 }
